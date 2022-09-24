@@ -29,5 +29,5 @@ USER sagadmin
 	ADD --chown=sagadmin ./packages/CustomerManagement /opt/softwareag/IntegrationServer/packages/CustomerManagement
 	ADD --chown=sagadmin ./packages/WmJDBCAdapter /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter
 	ADD --chown=sagadmin ./lib/jars/dd-cjdbc.jar /opt/softwareag/common/lib/ext/dd-cjdbc.jar
-	ADD --chown=sagadmin ./properties/msr.properties /opt/softwareag/IntegrationServer/properties/msr.properties
+	ADD --chown=sagadmin ./application.properties /opt/softwareag/IntegrationServer/application.properties
 
