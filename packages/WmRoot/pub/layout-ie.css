@@ -1,0 +1,10 @@
+html, body, * {
+  -ms-overflow-style:none ; 
+}
+
+.bottom {
+}
+
+.contentframe {
+  width: calc(100% - 250px);
+}

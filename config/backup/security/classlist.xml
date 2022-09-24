@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+    <array name="classlist" type="value" depth="1">
+      <value>org.apache.commons.beanutils.BeanComparator</value>
+      <value>org.apache.commons.collections.Transformer</value>
+      <value>org.apache.commons.collections.functors.InvokerTransformer</value>
+      <value>org.apache.commons.collections.functors.ChainedTransformer</value>
+      <value>org.apache.commons.collections.functors.ConstantTransformer</value>
+      <value>org.apache.commons.collections.functors.InstantiateTransformer</value>
+      <value>org.apache.commons.collections4.functors.InvokerTransformer</value>
+      <value>org.apache.commons.collections4.functors.ChainedTransformer</value>
+      <value>org.apache.commons.collections4.functors.ConstantTransformer</value>
+      <value>org.apache.commons.collections4.functors.InstantiateTransformer</value>
+      <value>org.apache.commons.collections4.comparators.TransformingComparator</value>
+      <value>org.apache.commons.collections4.functors.InvokerTransformer</value>
+      <value>org.apache.commons.collections4.functors.ChainedTransformer</value>
+      <value>org.apache.commons.collections4.functors.ConstantTransformer</value>
+      <value>org.apache.commons.collections4.functors.InstantiateTransformer</value>
+      <value>org.apache.commons.collections4.comparators.TransformingComparator</value>
+      <value>org.apache.commons.fileupload.disk.DiskFileItem</value>
+      <value>org.apache.wicket.util.upload.DiskFileItem</value>
+      <value>org.codehaus.groovy.runtime.ConvertedClosure</value>
+      <value>org.codehaus.groovy.runtime.MethodClosure</value>
+      <value>org.hibernate.engine.spi.TypedValue</value>
+      <value>org.hibernate.tuple.component.AbstractComponentTuplizer</value>
+      <value>org.hibernate.tuple.component.PojoComponentTuplizer</value>
+      <value>org.hibernate.type.AbstractType</value>
+      <value>org.hibernate.type.ComponentType</value>
+      <value>org.hibernate.type.Type</value>
+      <value>com.sun.rowset.JdbcRowSetImpl</value>
+      <value>java.rmi.registry.Registry</value>
+      <value>java.rmi.server.ObjID</value>
+      <value>java.rmi.server.RemoteObjectInvocationHandler</value>
+      <value>javax.xml.transform.Templates</value>
+      <value>org.apache.myfaces.context.servlet.FacesContextImpl</value>
+      <value>org.apache.myfaces.context.servlet.FacesContextImplBase</value>
+      <value>org.apache.myfaces.el.CompositeELResolver</value>
+      <value>org.apache.myfaces.el.unified.FacesELContext</value>
+      <value>org.apache.myfaces.view.facelets.el.ValueExpressionMethodExpression</value>
+      <value>com.sun.syndication.feed.impl.ObjectBean</value>
+      <value>org.springframework.beans.factory.ObjectFactory</value>
+      <value>org.springframework.core.SerializableTypeWrapper$MethodInvokeTypeProvider</value>
+      <value>org.springframework.aop.framework.AdvisedSupport</value>
+      <value>org.springframework.aop.target.SingletonTargetSource</value>
+      <value>org.springframework.aop.framework.JdkDynamicAopProxy</value>
+      <value>org.springframework.core.SerializableTypeWrapper$TypeProvider</value>
+      <value>java.util.PriorityQueue</value>
+      <value>java.lang.reflect.Proxy</value>
+      <value>java.util.Comparator</value>
+      <value>org.reflections.Reflections</value>
+    </array>
+  </record>
+</IDataXMLCoder>

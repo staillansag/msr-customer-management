@@ -1,0 +1,52 @@
+<Policy xmlns="http://www.webmethods.com/2007/07/policy" Id="Provider policy for Username, Signature, Encryption">
+
+	<SecurityPolicy xmlns="http://www.webmethods.com/2007/01/policy/security">
+
+		<InboundSecurity>
+
+			<Timestamp
+				EnforceExpiration="true"/>
+
+			<UsernameToken
+				Usage="Required"
+				PasswordType="Text"/>
+
+			<!-- This assertion is added with the usage as Ignored to make sure
+			     that this token is not processed if present in the request header -->
+			<X509Authentication 
+				Usage="Ignored"/>
+				
+			<Signature 
+				Usage="Required"
+				AllowExpiredCerts="false"
+				AuthenticateWithSigningCert="false"
+				RequireSignedBody="true"
+				ValidateSigningCert="true"/>
+
+			<Encryption 
+				Usage="Required"
+				RequireEncryptedBody="true"/>
+				
+		</InboundSecurity>
+		
+		
+		<OutboundSecurity>
+		
+			<Timestamp
+				TimeToLiveInSeconds="300"
+				IncludeMilliseconds="True"/>
+
+			<Signature 
+				TokenReferenceType="Direct" 
+				IncludeCertPath="true"/>
+			
+			<Encryption
+				TokenReferenceType="Direct"
+			      	EncryptionAlgorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"
+			      	KeyWrappingAlgorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+			      	
+		</OutboundSecurity>
+		
+	</SecurityPolicy>
+
+</Policy>

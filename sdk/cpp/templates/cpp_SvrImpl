@@ -1,0 +1,113 @@
+/*
+ * %value svcName%Impl.cpp:  Generated Service for "%value literalFullSvcName%".
+ *
+ */
+
+#include "WmGlobal.h"
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+JNIEXPORT jobject JNICALL
+Java_%value jniIfcName%_cpp%value jniSvcName%(JNIEnv *, jclass, jobject);
+
+#ifdef __cplusplus
+}
+#endif
+
+
+WmString getString(WmIData idata, char* key){
+	WmIDataHashCursor idhc = idata->getHashCursor();
+	idhc->first(key);
+	return (WmString)idhc->getValue();
+}
+
+WmStringArray getStringArray(WmIData idata, char* key){
+	WmIDataHashCursor idhc = idata->getHashCursor();
+	idhc->first(key);
+	return (WmStringArray)idhc->getValue();
+}
+
+WmStringTable getStringTable(WmIData idata, char* key){
+	WmIDataHashCursor idhc = idata->getHashCursor();
+	idhc->first(key);
+	return (WmStringTable)idhc->getValue();
+}
+
+WmIData getIData(WmIData idata, char* key){
+	WmIDataHashCursor idhc = idata->getHashCursor();
+	idhc->first(key);
+	return (WmIData)idhc->getValue();
+}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+JNIEXPORT jobject JNICALL
+Java_%value jniIfcName%_cpp%value jniSvcName%(JNIEnv *env, jclass jClass, jobject In)
+{
+
+    WmIDataFactory::initializeJEnv(env);
+    WmGlobal::initVars(env);
+    WmGlobal::initClientJVM(env);
+%ifvar inputRec%    WmIData Input = (WmIData)WmGlobal::createWmObject(env, In, 1);%endif%
+%nl%
+
+%ifvar outputRec%    WmIData Output = WmIDataFactory::create();%endif%
+%nl%
+    /***************************************************/
+    /********** Declare your variables here ************/
+    /***************************************************/
+
+    /* [default implementation for demo purposes only] */
+%loop inputRec%
+%loop fields%%switch fieldType%
+%case str%    WmString input_%value name% = getString(Input, "%value name%");
+%case strarray%
+    WmStringArray input_%value name% = getStringArray(Input, "%value name%");
+%case strtable%
+    WmStringTable input_%value name% = getStringTable(Input, "%value name%");
+%case rec%    WmIData input_%value name% = getIData(Input, "%value name%");
+%case recarray%    WmIData input_%value name% = getIData(Input, "%value name%");
+%end%%endloop%%endloop%
+
+%loop outputRec%
+%loop fields%%switch fieldType%
+%case str%   WmString output_%value name% = NULL;
+%case strarray%    WmStringArray output_%value name%=NULL;
+%case strtable%    WmStringTable output_%value name%=NULL;
+%case rec%    WmIData output_%value name%=NULL;
+%case recarray%    WmIData output_%value name%=NULL;
+%end%%endloop%%endloop%
+    
+    /***************************************************/
+    /****** Add your custom service logic here *********/
+    /***************************************************/
+
+
+
+    /***************************************************/
+    /****** End of custom service logic ****************/
+    /***************************************************/
+
+    WmIDataCursor idc  = Output->getCursor();   // for (values) return
+    WmIDataCursor idic = Input ->getCursor();   // pipeline
+
+%loop outputRec%
+%loop fields%
+    idc->last(); idic->last();
+    if(output_%value name%==NULL){
+        output_%value name% = %switch fieldType%%case str%new _WmString(env, "");%case strarray%new _WmStringArray(env, 0);%case strtable%new _WmStringTable(env, 0, 0);%case record%WmIDataFactory::create();%case recordlist%WmIDataFactory::create();%%endswitch +nl%
+    }
+    idc ->insertAfter("%value name%", output_%value name%);
+    idic->insertAfter("%value name%", output_%value name%);
+%endloop%%endloop%
+
+    return Output->getJavaObject(); 
+
+}
+
+#ifdef __cplusplus
+}
+#endif

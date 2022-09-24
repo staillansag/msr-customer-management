@@ -1,0 +1,49 @@
+<HTML>
+  <HEAD>
+    <TITLE>Directory of (%value directory%)</TITLE>
+    <LINK REL="stylesheet" TYPE="text/css" HREF="/WmRoot/webMethods.css">
+    <SCRIPT src="/WmRoot/webMethods.js"></SCRIPT>
+  </HEAD>
+  <BODY>
+    <TABLE WIDTH="100%">
+      <TR>
+        <TD colspan="2" class="menusection-Action">
+          %value $host% &gt;
+          %value directory% &gt;
+          Listing
+        </TD>
+      </TR>
+      <TR>
+        <TD><IMG SRC="/WmRoot/images/blank.gif" height="10" width="10 border="0"></TD>
+        <TD><IMG SRC="/WmRoot/images/blank.gif" height="10" width="10 border="0">
+          <TABLE class="tableView">
+            <TR>
+              <TD class="heading" colspan=4>Listing of %value directory%</TD>
+            </TR>
+            <TR>
+              <TD class="oddcol">Type</TD>
+              <TD class="oddcol">Filename</TD>
+              <TD class="oddcol">Modified</TD>
+              <TD class="oddcol">Size</TD>
+            </TR>
+            <TR>
+              <TD class="evenrowdata"><img src="/WmRoot/icons/dir.gif"></TD>
+              <TD class="evenrowdata-l"><a href="%value parent%"><i>(parent)</i></a></TD>
+              <TD class="evenrowdata">&nbsp;</TD>
+              <TD class="evenrowdata">&nbsp;</TD>
+            </TR>
+          %loop files%
+            <script>swapRows();</script>
+            <TR>
+              <script>writeTD("rowdata");</script><img src="/WmRoot/icons/%value type%.gif"></TD>
+              <script>writeTD("rowdata-l");</script><NOBR><a href="%value name%">%value name%</a></NOBR></TD>
+              <script>writeTD("rowdata");</script>%value date%</TD>
+              <script>writeTD("rowdata");</script>%value size%</TD>
+            </TR>
+          %endloop%
+          </TABLE>
+        </TD>
+      </TR>
+    </TABLE>
+  </BODY>
+</HTML>

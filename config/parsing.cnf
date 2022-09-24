@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="maximumBigMemoryBytes">200m</value>
+  <value name="useCache">false</value>
+  <value name="useBigMemory">false</value>
+  <value name="maximumHeapBytes">40%</value>
+  <value name="maximumDocBytes">20%</value>
+  <value name="defaultPartitionBytes">20k</value>
+  <Boolean name="usingEhcacheV3">false</Boolean>
+  <value name="offheapTitle">BigMemory</value>
+</Values>

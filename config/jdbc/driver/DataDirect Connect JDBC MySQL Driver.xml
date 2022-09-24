@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.app.jdbc.JDBCBasicData">
+    <value name="alias">DataDirect Connect JDBC MySQL Driver</value>
+    <value name="jdbcDriver">com.wm.dd.jdbc.mysql.MySQLDriver</value>
+    <number name="maxConns" type="java.lang.Integer">1</number>
+    <value name="description">webMethods DataDirect Connect JDBC MySQL driver</value>
+  </record>
+</IDataXMLCoder>

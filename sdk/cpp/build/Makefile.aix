@@ -1,0 +1,82 @@
+# To build the shared libraries with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 24 to reflect the location of your 
+#     JDK 1.1 VM
+# (2) Change INCLUDES on line 25 to reflect the location of the
+#     required webMethods and JDK header files
+# (3) Change THRDIR on line 26 to reflect the location of the
+#     required JDK shared libaries. For JDK 1.1, the name
+#     of the JDK library is libjava.a. For JDK 1.2, the name was
+#     changed to libjvm.a. So you need to change the line 70 
+#     to link with libjava.a under JDK 1.1
+#      
+# Also remember to comment line 7 in the source of WmGlobal.cpp
+# to not define JAVA2 before compiling
+
+APP_ROOT = ..
+SRC_ROOT = $(APP_ROOT)/src
+INC_ROOT = $(APP_ROOT)/include
+
+VPATH = $(SRC_ROOT):$(INC_ROOT)
+
+COPT = -g
+LOPT = -p2000 
+JDKDIR = /usr/java6
+INCLUDES = -I$(JDKDIR)/include -I$(JDKDIR)/include/aix -I$(INC_ROOT)
+THRDIR = $(JDKDIR)/jre/lib/ppc
+CC = xlC_r
+LD = makeC++SharedLib_r
+
+CPPFLAGS = $(COPT) $(INCLUDES)
+
+APP_SRC = WmContext.cpp\
+	WmBaseContext.cpp\
+	WmUser.cpp\
+	WmDate.cpp\
+	WmGroup.cpp\
+	WmTContext.cpp\
+	WmIDataCodable.cpp\
+	WmUtil.cpp\
+	WmIData.cpp\
+	WmIDataArray.cpp\
+	WmIDataCursor.cpp\
+	WmIDataFactory.cpp\
+	WmIDataIndexCursor.cpp\
+	WmIDataTreeCursor.cpp\
+	WmIDataUtil.cpp\
+	WmIDataHashCursor.cpp\
+	WmException.cpp\
+	WmGlobal.cpp\
+	WmObject.cpp\
+	WmObjectArray.cpp\
+	WmObjectArrayT.cpp\
+	WmString.cpp\
+	WmStringArray.cpp\
+	WmStringTable.cpp\
+	WmValues.cpp\
+	WmValuesArray.cpp\
+	WmTable.cpp\
+	WmBinCoder.cpp\
+	WmInvokeThread.cpp\
+	WmVector.cpp
+
+APP_OBJS = $(APP_SRC:.cpp=.o)
+
+all: wmJNI_lib
+
+wmJNI_lib: $(APP_OBJS)
+	ar -r libwmjni.a $(APP_OBJS)
+	$(LD) $(LOPT) -o libwmjni.so libwmjni.a \
+	-L$(THRDIR)/classic -ljvm -lc
+	ar -r libwmjni.so.a libwmjni.so
+	cp libwmjni.a libwmjni.so ../lib
+
+clean:
+	rm -f $(APP_OBJS) core *.a *.so
+
+.SUFFIXES: .cpp .o
+
+.cpp.o:
+
+	$(CC) $(CPPFLAGS) -c $< -o $*.o 
+

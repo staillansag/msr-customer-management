@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+    <array name="Configuration" type="record" depth="1">
+      <record javaclass="com.wm.data.ISMemDataImpl">
+        <value name="aliasName">IS_UM_CONNECTION</value>
+        <value name="description">system generated Universal Messaging connection alias</value>
+        <value name="CLIENTPREFIX">J_jRQtEolDEurgAVIwwwADXaZQs_</value>
+        <null name="user"/>
+        <value name="enabled">false</value>
+        <value name="csqSize">-1</value>
+        <value name="csqDrainInOrder">true</value>
+        <value name="type">UM</value>
+        <value name="aliasTypeDisplay">Universal Messaging</value>
+        <value name="transactionType">NONE</value>
+        <value name="systemGenerated">true</value>
+        <jboolean name="isClientPrefixShared">false</jboolean>
+        <value name="useCSQ">true</value>
+        <value name="_state">STOPPED</value>
+        <value name="um_rname">nsp://localhost:9000</value>
+        <value name="um_tryAgainMaxAttempts">5</value>
+        <value name="um_publishWaitTime">30000</value>
+        <jboolean name="um_followTheMasterForPublish">true</jboolean>
+        <jboolean name="um_followTheMasterForSubscribe">true</jboolean>
+        <number name="um_loggingOutput" type="java.lang.Integer">0</number>
+        <jboolean name="um_producerMessageTracking">false</jboolean>
+        <jboolean name="um_consumerMessageTracking">false</jboolean>
+        <null name="um_producerIncludedStrings"/>
+        <null name="um_consumerIncludedStrings"/>
+        <jboolean name="enableRequestReply">true</jboolean>
+        <value name="clientAuthType">none</value>
+        <null name="trustStoreAlias"/>
+      </record>
+      <record javaclass="com.wm.data.ISMemDataImpl">
+        <value name="aliasName">IS_LOCAL_CONNECTION</value>
+        <value name="description">system generated local connection alias</value>
+        <value name="enabled">true</value>
+        <value name="type">LOCAL</value>
+        <value name="aliasTypeDisplay">Local</value>
+        <value name="systemGenerated">true</value>
+      </record>
+    </array>
+    <value name="defaultAlias">IS_UM_CONNECTION</value>
+  </record>
+</IDataXMLCoder>

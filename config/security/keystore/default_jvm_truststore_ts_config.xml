@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="securityConfigParams">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;webm_security_store_management&gt;
+&lt;truststore desc="Default JVM truststore alias for Integration Server." handle="wm.security.truststore.DEFAULT_JVM_TRUSTSTORE" location="../jvm/jvm/lib/security/cacerts" name="DEFAULT_JVM_TRUSTSTORE" storeProviderName="SUN" type="JKS"/&gt;
+&lt;/webm_security_store_management&gt;
+</value>
+  <value name="isHsm">false</value>
+  <value name="keyStoreProviderClass">sun.security.provider.Sun</value>
+</Values>

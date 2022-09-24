@@ -1,0 +1,57 @@
+IS_Transport 
+{
+	/*
+	com.wm.app.b2b.server.auth.jaas.X509ValidatorModule requisite;
+	*/
+	
+	com.wm.app.b2b.server.auth.jaas.X509LoginModule requisite;
+	com.wm.app.b2b.server.auth.jaas.BasicLoginModule requisite;
+	com.wm.app.b2b.server.auth.jaas.SamlOSGiLoginModule requisite;
+	
+	/*
+	* The DefaultLoginModule contains logic that provide special
+	* default handling for Software AG products so please leave 
+	* this module as the last module of this login context.
+	*/
+	com.wm.app.b2b.server.auth.jaas.DefaultLoginModule requisite;
+};
+
+/*
+ * Login context, used in common Platform for management channel .
+ */
+PlatformManagement {
+	// SSOS login module for SAML 1.1 signed assertion validation
+	// used for delegated out only for JMX
+	com.softwareag.security.idp.saml.lm.JMXDelegatedAuthLoginModule sufficient;
+	
+	// Internal repository login module (java based)
+	//com.softwareag.security.jaas.login.internal.InternalLoginModule required
+        //template_section=INTERNAL
+        //logCallback=true
+        //internalRepository="../../../common/conf/users.txt"; 
+        
+        //IS login module - switching from internal repository to IS user repository
+        com.wm.app.b2b.server.auth.jaas.BasicLoginModule required;
+	
+	// Role repository login module
+	com.softwareag.security.authz.store.jaas.login.RoleLoginModule optional
+        storage_location="../../../common/conf/roles.txt";  
+}; 
+
+WSS_Message_IS 
+{
+	/*
+	* Please do not rearrange the following SoftwareAG 
+	* login modules; add your login modules before or after 
+	* these three modules
+	*/
+	com.wm.app.b2b.server.auth.jaas.SamlAssertLoginModule requisite;
+	com.wm.app.b2b.server.auth.jaas.X509LoginModule requisite;
+	com.wm.app.b2b.server.auth.jaas.BasicLoginModule requisite;
+};
+
+WSS_Transport_IS 
+{
+	com.wm.app.b2b.server.auth.jaas.X509LoginModule requisite;
+	com.wm.app.b2b.server.auth.jaas.BasicLoginModule requisite;
+};

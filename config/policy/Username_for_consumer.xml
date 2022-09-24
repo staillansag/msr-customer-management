@@ -1,0 +1,18 @@
+<Policy xmlns="http://www.webmethods.com/2007/07/policy" Id="Consumer policy for Username">
+
+	<SecurityPolicy xmlns="http://www.webmethods.com/2007/01/policy/security">
+
+		<OutboundSecurity>
+		
+			<Timestamp
+				TimeToLiveInSeconds="300"
+				IncludeMilliseconds="True"/>
+
+			<UsernameToken
+				PasswordType="Text"/>
+				
+		</OutboundSecurity>
+		
+	</SecurityPolicy>
+
+</Policy>

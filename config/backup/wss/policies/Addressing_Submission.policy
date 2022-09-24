@@ -1,0 +1,13 @@
+  <!--
+    This WS-Addressing policy expects messages to confirm to WS-Addressing Submission specification 
+  -->
+
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" Name="Addressing Submission" wsu:Id="Addressing_Submission">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <wsa:UsingAddressing xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" wsdl:required="true"/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>

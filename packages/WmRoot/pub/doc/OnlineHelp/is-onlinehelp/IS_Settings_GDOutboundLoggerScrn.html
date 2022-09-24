@@ -1,0 +1,167 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>View guaranteed delivery outbound logger details</title><link rel="Prev" href="IS_Settings_EditGDInboundLoggerScrn.html" title="Previous" /><link rel="Next" href="IS_Settings_EditGDOutboundLoggerScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Settings_GDOutboundLoggerScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="pGgxjHv_002bg00HCzSObPzrmUg" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Settings_GDOutboundLoggerScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_Logs.html#wwconnect_header">Logs</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/IS_Settings_LoggingScrn.html#wwconnect_header">Logging configuration</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">View guaranteed delivery outbound logger details</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0EVE2Q" class="Heading_2">View guaranteed delivery outbound logger details</div><div id="wwID0E2F2Q" class="Body">Use this page to view settings for the guaranteed delivery outbound logger.</div><div id="wwID0EEG2Q" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Edit Guaranteed Delivery Outbound Logger</span> to change the settings for the guaranteed delivery outbound logger.</div><div id="wwID0ECH2Q" class="Section_Title">Audit Logger Configuration</div><div id="wwID0EPH2Q" class="Definition_Term">Name</div><div id="wwID0EZH2Q" class="Definition_Description">The name of this logger, <span class="uicontrol">Guaranteed Delivery Outbound Logger</span>.</div><div id="wwID0EJI2Q" class="Definition_Term">Enabled</div><div id="wwID0ETI2Q" class="Definition_Description">Whether the logger is to write entries to the guaranteed delivery outbound log. The default is <span class="uicontrol">Yes.</span></div><div id="wwID0EDJ2Q" class="Definition_Term">Mode</div><div id="wwID0ENJ2Q" class="Definition_Description">Mode for writing log entries. The default is <span class="uicontrol">Synchronous</span>.</div><div class="ww_skin_page_overflow"><table class="norules1" cellspacing="4" summary=""><tr><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 22.9%"><div id="wwID0E2K2Q" class="Table_Cell_Head">Option</div></td><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 77%"><div id="wwID0EBL2Q" class="Table_Cell_Head">Description</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EQL2Q" class="Table_Cell"><span class="uicontrol">Synchronous</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EBM2Q" class="Table_Cell">The logger writes log entries directly to the destination.</div><div id="wwID0EGM2Q" class="Table_Cell">You might use synchronous logging when you have an application that requires some type of auditing to succeed, and you do not want to proceed without knowing that the auditing occurred.</div><div id="wwID0ELM2Q" class="Table_Cell">If synchronous logging for an entry fails (for example, because the destination is unavailable), the logger switches to asynchronous logging for that entry (see below).</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EWM2Q" class="Table_Cell"><span class="uicontrol">Asynchronous</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EHN2Q" class="Table_Cell">The logger writes log entries to a queue, and the queue later writes the entries to the destination.</div></td></tr></table></div><div id="wwID0EXN2Q" class="Definition_Term">Guaranteed</div><div id="wwID0EBO2Q" class="Definition_Description">How <span class="ph">Integration Server</span> is to maintain the internal queue when the logger is logging asynchronously. The default is <span class="uicontrol">No</span>.</div><div class="ww_skin_page_overflow"><table class="norules1" cellspacing="4" summary=""><tr><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 22.9%"><div id="wwID0ETP2Q" class="Table_Cell_Head">Option</div></td><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 77%"><div id="wwID0EZP2Q" class="Table_Cell_Head">Description</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EIQ2Q" class="Table_Cell"><span class="uicontrol">No</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0ETQ2Q" class="Table_Cell"><span class="ph">Integration Server</span> maintains the queue in memory. This option provides better logging performance. However, if <span class="ph">Integration Server</span> shuts down abnormally, the log entries in the queue will be lost.</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EHR2Q" class="Table_Cell"><span class="uicontrol">Yes</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0ESR2Q" class="Table_Cell"><span class="ph">Integration Server</span> persists the queue on disk. This option is safer but can adversely affect logging performance.</div></td></tr></table></div><div id="wwID0EBS2Q" class="Note_1"><span class="Bold">Note:<br /></span>The logger writes to the internal, light-weight queue when <span class="uicontrol">Queue Provider</span> is set to <span class="uicontrol">Internal</span>. The logger also writes to the internal queue when the <span class="uicontrol">Queue Provider</span> is set to <span class="uicontrol">Universal Messaging</span> but the logger is running in queue fail-fast mode because <span class="ph">Universal Messaging</span> is not available.</div><div id="wwID0ERT2Q" class="Definition_Term">Destination</div><div id="wwID0E2T2Q" class="Definition_Description">Destination for log entries.</div><div class="ww_skin_page_overflow"><table class="norules1" cellspacing="4" summary=""><tr><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 22.9%"><div id="wwID0EEV2Q" class="Table_Cell_Head">Option</div></td><td class="Table_Cell_Head" style="border-bottom-color: #0899CC; border-bottom-style: solid; border-bottom-width: thin; padding-left: 2pt; padding-right: 2pt; width: 77%"><div id="wwID0EKV2Q" class="Table_Cell_Head">Description</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EZV2Q" class="Table_Cell"><span class="uicontrol">Database</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EKW2Q" class="Table_Cell">The logger writes log entries to an external RDBMS. You must also set the <span class="uicontrol">Maximum Retries</span> and <span class="uicontrol">Wait Between Retries</span> fields.</div><div id="wwID0EYW2Q" class="Table_Cell">This value is available when the IS Core Audit Log connects to an external RDBMS at <span class="ph">Integration Server</span> startup.</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EIX2Q" class="Table_Cell"><span class="uicontrol">File</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0ETX2Q" class="Table_Cell">The logger writes log entries to file.</div></td></tr></table></div><div id="wwID0EDY2Q" class="Definition_Term">Maximum Queue Size</div><div id="wwID0ENY2Q" class="Definition_Description">For asynchronous logging, maximum number of log entries the queue can hold. The default is 100000. Specify numerals only; for example, do not include commas or periods.</div><div id="wwID0ESY2Q" class="Definition_Description">Choose a value that accommodates your system's average volume for log entries. If your logging volume has sudden spikes, the queue can usually catch up by writing the pending entries during lulls. Make sure the <span class="ph">Integration Server</span> host machine has enough disk space or memory to accommodate the largest possible size of the queue as specified in this field, as well as the requirements of other applications the <span class="ph">Integration Server</span> is hosting. If the logger is writing to a database, the queue's insertion of logged data into the database is constrained by the database's availability and connections limit.</div><div id="wwID0EAZ2Q" class="Definition_Description">If the queue reaches its maximum, the logger writes the log entries to a file called FailedAudit_<span class="varname">yyyymmdd_hhmmss</span>.log in the <span class="ph"> </span><span class="ph_002c_emphasis">Integration&nbsp;Server_directory</span><span class="ph"> </span>/instances/<span class="varname">instance_name</span>/logs directory. You can scan the file to find events that not logged.</div><div id="wwID0EB12Q" class="Definition_Term">Queue Provider</div><div id="wwID0EL12Q" class="Definition_Description">Whether the logger uses an internal, light-weight queue or a <span class="ph">Universal Messaging</span> queue as the audit logging queue.</div><div class="ww_skin_page_overflow"><table class="NoRules1" cellspacing="0" summary=""><tr><td class="Table_Cell_Head" style="padding-left: 2pt; padding-right: 2pt; width: 112.536pt"><div id="wwID0EZ22Q" class="Table_Cell_Head">Option</div></td><td class="Table_Cell_Head" style="padding-left: 2pt; padding-right: 2pt; width: 318.024pt"><div id="wwID0E622Q" class="Table_Cell_Head">Description</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EO32Q" class="Table_Cell"><span class="uicontrol">Internal</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EZ32Q" class="Table_Cell">The logger uses the internal, light-weight queue as the audit logging queue. This is the default.</div></td></tr><tr><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EE42Q" class="Table_Cell"><span class="uicontrol">Universal Messaging</span></div></td><td class="Table_Cell" style="padding-left: 2pt; padding-right: 2pt; vertical-align: top"><div id="wwID0EP42Q" class="Table_Cell">The logger uses a queue on <span class="ph">Universal Messaging</span> as the audit logging queue.</div></td></tr></table></div><div id="wwID0EE52Q" class="Definition_Term">Connection Alias</div><div id="wwID0EJ52Q" class="Definition_Description"><span class="ph">Universal Messaging</span> connection alias that the logger uses to write audit logging data to the audit logging queue on <span class="ph">Universal Messaging</span>. You need to specify a <span class="ph">Universal Messaging</span> connection alias when <span class="uicontrol">Queue Provider</span> is set to <span class="uicontrol">Universal Messaging</span>.</div><div id="wwID0EI62Q" class="Definition_Term">Maximum Retries</div><div id="wwID0ES62Q" class="Definition_Description">If the destination is set to <span class="uicontrol">Database</span>, number of times the logger (synchronous) or queue (asynchronous) should try to connect to the database. The default is 3 retries.</div><div id="wwID0E362Q" class="Definition_Description">For synchronous logging, the logger tries to write each log entry up to the number of times specified, then switches to asynchronous logging.</div><div id="wwID0EBA3Q" class="Definition_Description">For asynchronous logging, the queue tries to write each log entry up to the number of times specified, then writes the entry to a file called FailedAudit_<span class="varname">yyyymmdd_hhmmss</span>.log in the <span class="ph"> </span><span class="ph_002c_emphasis">Integration&nbsp;Server_directory</span><span class="ph"> </span>/instances/<span class="varname">instance_name</span>/logs directory. You can scan the file to find events that not logged.</div><div id="wwID0ECB3Q" class="Definition_Term">Wait Between Retries</div><div id="wwID0EMB3Q" class="Definition_Description">If the destination is set to <span class="uicontrol">Database</span>, number of seconds the logger should wait between tries to connect to the RDBMS. The default is 10 seconds.</div><div id="wwID0EBC3Q" class="Section_Title">Audit Logger Reader Configuration</div><div id="wwID0EOC3Q" class="Definition_Term">Number of Readers</div><div id="wwID0ETC3Q" class="Definition_Description">Specifies the number of threads that <span class="ph">Integration Server</span> uses to retrieve log entries from the <span class="ph">Universal Messaging</span> queue and then write the log entries to the audit logger destination. The default is 1.</div><div id="wwID0END3Q" class="title">Related Topics</div><div id="wwID0ERD3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_LoggingScrn.html#wwID0EKBTQ"
+   
+     title="Logging configuration"
+    ><span class="Link_Text">Logging configuration</span></a></div><div id="wwID0E4D3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_DocumentLoggerScrn.html#wwID0ED2TQ"
+   
+     title="View document logger details"
+    ><span class="Link_Text">View document logger details</span></a></div><div id="wwID0EJE3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditDocumentLoggerScrn.html#wwID0EBEVQ"
+   
+     title="Edit document logger details"
+    ><span class="Link_Text">Edit document logger details</span></a></div><div id="wwID0EVE3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_ErrorLoggerScrn.html#wwID0EIIWQ"
+   
+     title="View error logger details"
+    ><span class="Link_Text">View error logger details</span></a></div><div id="wwID0EBF3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditErrorLoggerScrn.html#wwID0EXPXQ"
+   
+     title="Edit error logger details"
+    ><span class="Link_Text">Edit error logger details</span></a></div><div id="wwID0ENF3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_GDInboundLoggerScrn.html#wwID0EMWYQ"
+   
+     title="View guaranteed delivery inbound logger details"
+    ><span class="Link_Text">View guaranteed delivery inbound logger details</span></a></div><div id="wwID0EZF3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditGDInboundLoggerScrn.html#wwID0E24ZQ"
+   
+     title="Edit guaranteed delivery inbound logger details"
+    ><span class="Link_Text">Edit guaranteed delivery inbound logger details</span></a></div><div id="wwID0EFG3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditGDOutboundLoggerScrn.html#wwID0EEM3Q"
+   
+     title="Edit guaranteed delivery outbound logger details"
+    ><span class="Link_Text">Edit guaranteed delivery outbound logger details</span></a></div><div id="wwID0ERG3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_MessagingLoggerScrn.html#wwID0E4S4Q"
+   
+     title="View messaging logger details"
+    ><span class="Link_Text">View messaging logger details</span></a></div><div id="wwID0E4G3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditMessagingLoggerScrn.html#wwID0E3W5Q"
+   
+     title="Edit messaging logger details"
+    ><span class="Link_Text">Edit messaging logger details</span></a></div><div id="wwID0EJH3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_MediatorTransactionLoggerScrn.html#wwID0EYZ6Q"
+   
+     title="View API Gateway transaction logger details"
+    ><span class="Link_Text">View API Gateway transaction logger details</span></a></div><div id="wwID0EVH3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditMediatorTransactionLoggerScrn.html#wwID0EUDBR"
+   
+     title="Edit API Gateway transaction logger details"
+    ><span class="Link_Text">Edit API Gateway transaction logger details</span></a></div><div id="wwID0EBI3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_SecurityLoggerScrn.html#wwID0ERLCR"
+   
+     title="View security logger details"
+    ><span class="Link_Text">View security logger details</span></a></div><div id="wwID0ENI3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditSecurityLoggerScrn.html#wwID0EVWDR"
+   
+     title="Edit security logger details"
+    ><span class="Link_Text">Edit security logger details</span></a></div><div id="wwID0EZI3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_ServerLoggerScrn.html#wwID0E6AFR"
+   
+     title="View server logger details"
+    ><span class="Link_Text">View server logger details</span></a></div><div id="wwID0EFJ3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditServerLoggerScrn.html#wwID0ESYFR"
+   
+     title="Edit server logger details"
+    ><span class="Link_Text">Edit server logger details</span></a></div><div id="wwID0ERJ3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_ServiceLoggerScrn.html#wwID0EVPGR"
+   
+     title="View service logger details"
+    ><span class="Link_Text">View service logger details</span></a></div><div id="wwID0E4J3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditServiceLoggerScrn.html#wwID0EY3HR"
+   
+     title="Edit service logger details"
+    ><span class="Link_Text">Edit service logger details</span></a></div><div id="wwID0EJK3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_SessionsLoggerScrn.html#wwID0EBJJR"
+   
+     title="View session logger details"
+    ><span class="Link_Text">View session logger details</span></a></div><div id="wwID0EVK3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditSessionsLoggerScrn.html#wwID0EQQKR"
+   
+     title="Edit session logger details"
+    ><span class="Link_Text">Edit session logger details</span></a></div><div id="wwID0EBL3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_UMClientLoggerScrn.html#wwID0EEXLR"
+   
+     title="View UM client logger details"
+    ><span class="Link_Text">View UM client logger details</span></a></div><div id="wwID0ENL3Q" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditUMClientLoggerScrn.html#wwID0E4MMR"
+   
+     title="Edit UM client logger details"
+    ><span class="Link_Text">Edit UM client logger details</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>

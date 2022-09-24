@@ -1,0 +1,56 @@
+# To build this test example with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 23 to reflect the location of your 
+#     JDK 1.1 VM
+# (2) Change THRDIR on line 24 to reflect the location of the
+#     required JDK shared libraries. 
+#     For JDK 1.1, the name of the JDK library is libjava.sl 
+#     and resides on
+#       $(JDKDIR)/lib/PA_RISC/native_threads
+#     For JDK 1.2, the name was changed to libjvm.so and resides
+#     on
+#       $(JDKDIR)/jre/lib/PA_RISC/classic
+#     So make appropriate changes when you link the required JDK
+#     libraries on line 40 to:
+#	-L$(JDKDIR)/lib/PA_RISC/native_threads -ljava -lpthread
+
+APP_ROOT = ..
+INC_ROOT = $(APP_ROOT)/include
+LIB_ROOT = $(APP_ROOT)/lib
+
+COPT = -g -c -D_HPUX  -Dunix -Dhpux -AA -ext -mt
+JOPT = -DNATIVE -D_POSIX_C_SOURCE=199506L
+JDKDIR = /opt/java1.5
+THRDIR = $(JDKDIR)/jre/lib/PA_RISC2.0
+CC = aCC
+WMDIR = /opt/softwareag/webMethods8
+
+C++FLAGS = $(COPT) $(JOPT) -I$(JDKDIR)/include \
+	-I$(JDKDIR)/include/hp-ux \
+	-I$(INC_ROOT)
+
+all: test
+
+runtest:
+	SHLIB_PATH=.:$(THRDIR):$(THRDIR)/classic:$(LIB_ROOT):$(SHLIB_PATH) \
+	CLASSPATH=$(CLASSPATH).:$(JDKDIR)/jre/lib/rt.jar:$(JDKDIR)/lib/tools.jar:$(WMDIR)/common/lib/wm-isclient.jar:$(WMDIR)/common/lib/glassfish/gf.javax.mail.jar:$(WMDIR)/IntegrationServer/lib/wm-isserver.jar ./examples
+
+
+
+
+test: test.o
+	$(CC) -g -o examples test.o \
+	-L$(THRDIR)/server -ljvm -lstd_v2 -lCsup_v2 -lrt -lpthread -llwp  \
+	-L$(LIB_ROOT) -L$(THRDIR)/native_threads -lhpi -lwmjni
+
+clean:
+	rm -f *.o core examples
+
+C++SUFFIX = cpp
+
+.$(C++SUFFIX).o:
+	$(CC) $(C++FLAGS) -c $<
+
+test.o: test.cpp
+
+

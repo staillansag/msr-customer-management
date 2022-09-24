@@ -1,0 +1,74 @@
+# To build the shared libraries with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 20 to reflect the location of your 
+#     JDK 1.1 VM
+# (2) Change INCLUDES on line 21 to reflect the location of the
+#     required webMethods and JDK header files
+#
+# Also remember to comment line 7 in the source of WmGlobal.cpp
+# to not define JAVA2 before compiling
+
+APP_ROOT = ..
+SRC_ROOT = $(APP_ROOT)/src
+INC_ROOT = $(APP_ROOT)/include
+
+VPATH = $(SRC_ROOT):$(INC_ROOT)
+
+COPT =  -Dunix -Dhpux -AA +Z -mt
+JOPT = -DNATIVE -D_POSIX_C_SOURCE=199506L
+LOPT = -AA -b +s 
+JDKDIR = /opt/java1.5
+INCLUDES = -I$(JDKDIR)/include -I$(JDKDIR)/include/hp-ux -I$(INC_ROOT)
+CC = aCC
+LD = ld
+
+CPPFLAGS = $(COPT) $(JOPT) $(INCLUDES)
+
+APP_SRC = WmContext.cpp\
+	WmBaseContext.cpp\
+	WmUser.cpp\
+	WmDate.cpp\
+	WmGroup.cpp\
+	WmTContext.cpp\
+	WmIDataCodable.cpp\
+	WmUtil.cpp\
+	WmIData.cpp\
+	WmIDataArray.cpp\
+	WmIDataCursor.cpp\
+	WmIDataFactory.cpp\
+	WmIDataIndexCursor.cpp\
+	WmIDataTreeCursor.cpp\
+	WmIDataUtil.cpp\
+	WmIDataHashCursor.cpp\
+	WmException.cpp\
+	WmGlobal.cpp\
+	WmObject.cpp\
+	WmObjectArray.cpp\
+	WmObjectArrayT.cpp\
+	WmString.cpp\
+	WmStringArray.cpp\
+	WmStringTable.cpp\
+	WmValues.cpp\
+	WmValuesArray.cpp\
+	WmTable.cpp\
+	WmBinCoder.cpp\
+	WmInvokeThread.cpp\
+	WmVector.cpp
+
+APP_OBJS = ${APP_SRC:.cpp=.o}
+
+all: wmJNI_lib
+
+wmJNI_lib: $(APP_OBJS)
+	ar r libwmjni.a $(APP_OBJS)
+	$(CC) -AA -b -o libwmjni.sl $(APP_OBJS) -lstd_v2 -lCsup_v2 -lrt -lpthread -llwp
+	cp libwmjni.a libwmjni.sl ../lib
+
+clean:
+	rm -f $(APP_OBJS) core *.a *.sl
+
+CPPSUFFIX = cpp
+
+.$(CPPSUFFIX).o:
+	$(CC) $(CPPFLAGS) -c $<
+

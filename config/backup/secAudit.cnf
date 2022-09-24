@@ -1,0 +1,5 @@
+#Integration Server Security Auditing settings
+#Fri Sep 23 22:33:24 CEST 2022
+AUDIT_STARTUP=false
+CATEGORIES=Authentication,Authorization,Certificates,Configuration,CSRFGuard,Custom,Enterprise Gateway,JDBC Pools,Keystore,Packages,Passwords,Ports,Proxy Servers,Remote Servers,Services,SSL,Web Services
+RESULT=Success or Failure

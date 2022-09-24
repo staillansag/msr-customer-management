@@ -1,0 +1,42 @@
+# To build the shared libaries with Java 1.1 VM, you will have
+# to make following changes:
+#
+# (1) Set line 14 to be:
+#     	JAVA2 = false
+# (2) Change the JDKDIR on line 22 to reflect the location of your
+#     Java 1.1 VM.
+# (3) Comment out statement
+#         #define JAVA2
+#     in wmJNIc.c on line 92
+#
+
+COPT = /debug
+JAVA2 = true
+
+!IF "$(JAVA2)" == "true"
+JAVALIB = jvm.lib
+!ELSE 
+JAVALIB = javai.lib
+!ENDIF 
+
+JDKDIR = C:\Progra~1\Java\jdk1.5.0_12
+INCLUDES = -I$(JDKDIR)\include -I$(JDKDIR)\include\win32 -I.
+#WINCLUDES = -Ic:\Program Files\Microsoft Visual Studio\VC98\include
+
+all: wmJNIlib wmJNIclib
+
+wmJNI.obj: ..\src\wmJNI.c ..\src\wmJNI.h ..\src\wmUtil.h
+	cl -DWIN32 $(INCLUDES) /Zi /c ..\src\wmJNI.c
+
+wmJNIlib: wmJNI.obj
+	cl /LD wmJNI.obj /MT /o wmJNI 
+
+wmJNIc.obj: ..\src\wmJNIc.c ..\src\wmJNIc.h ..\src\wmJNI.h ..\src\wmUtil.h
+	cl -DWIN32 $(INCLUDES) /Zi /c ..\src\wmJNIc.c
+
+wmJNIclib: wmJNIc.obj
+	cl /LD wmJNIc.obj /MT /o wmJNIc /link /libpath:"$(JDKDIR)\lib" wmJNI.lib $(JAVALIB)
+	
+clean:
+	del *.pdb *.lib *.dll *.obj *.exp *.exe
+

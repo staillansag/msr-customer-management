@@ -1,0 +1,412 @@
+   webMethods C++ Software Development Kit
+   _____________________________________
+
+   The webMethods C++/SDK makes it possible to use and port the webMethods C++ 
+   libraries to a wide variety of standard platforms.  The C++ API is 
+   implemented via JNI wrappers and therefore requires that a JDK be available 
+   for the target platform.
+   
+   The C++/SDK includes the source for the webMethods C++ libraries, Makefiles 
+   for the supported platforms, a test program to validate the build, and this 
+   building instructional file.  
+
+   Full C++ support for a given platform includes the following:
+
+      1. C++ API headers and libraries - built and validated.
+
+      2. Code generation for clients and services - update templates and 
+      configuration.  
+
+   Building the C++ API libraries
+   ----------------------------
+
+   Follow these general steps to build the C++ libraries for a new platform:
+
+      1. Ensure that all criteria for a platform to receive support is met: 
+      
+             *  Must have access to a kernel-threaded version of the Java JDK 
+	        (JDK 1.6.0)
+             *  The Operating System must provide support for kernel threads.
+
+      2. Pick a prefix - commonly 3 characters - for your platform so that the 
+      new libraries can be distinguished from libraries for other platforms 
+      (e.g. for Unixware use uxw).This prefix may also be used as the 
+	'gen-type' when setting up code generation for the new platform. 
+      
+      3. Update the API Makefile in build\ and the tester Makefile in test\,
+      to correctly build the libraries for your platform. 
+      Start with one of the supported Makefiles for a platform similar to yours;
+      modify the target prefix for all the generated files.  Make sure to set 
+      the Makefile's JDKDIR to the one installed in your system other than
+      <wM>\jvm, but at the same major level, and other platform-specific path
+      settings to match your installation.  
+
+      4. Modify all appropriate environment variables:
+	    * Add the JDK library directory and the webMethods library
+              directory to the LD_LIBRARY_PATH environment variable
+	    * Add the JDKDIR jre/rt.jar and lib/tools.jar to the CLASSPATH 
+              environment variable. Also make sure that 
+              <wm>/common/lib/wm-isclient.jar, <wm>/common/lib/glassfish/gf.javax.mail.jar,
+              <wm>/IntegrationServer/lib/wm-isserver.jar are in the CLASSPATH
+            * Modify the CC and LD variables to reflect the preferred C++
+              compiler and linker on the machine.
+
+          For example, if the JDKDIR is /usr/java, the machines architecture
+          is i386, and the webMethods directory is
+          /usr/local/webmethods, the following environment variables would
+          be set accordingly while testing:
+ 
+          LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/java/jre/lib/i386/
+          :<wm>/IntegrationServer/sdk/cpp/lib:/usr/lib:/usr/local/lib
+
+          CLASSPATH=/usr/java/jre/lib/rt.jar:/usr/java/lib/tools.jar
+          :<wm>/common/lib/wm-isclient.jar:<wm>/common/lib/glassfish/gf.javax.mail.jar
+          :<wm>/IntegrationServer/lib/wm-isserver.jar: 
+
+	Naming convention of dynamic link variable varies with platform; look in
+	to your platform manual. 
+
+      5.  Make sure that all paths are correctly specified in the
+      Makefiles, then build the libraries and run the tester by issuing the 
+      command, in the build directory: 
+
+	 If running a Windows-based platform: 
+	    % nmake -f Makefile.win 
+
+	 If running a Unix-like platform:
+	    % make -f Makefile.myplatform 
+	         (e.g. if running linux Makefile.lnx)
+	    
+      The above command will attempt to build the C++ libraries.  If successful,
+      enter into the test directory and build the tester with the appropriate 
+      makefile. 
+
+      If the tester works correctly, an output after the library build output 
+      will be produced, with identical IData objects being sent and received by
+      the client.
+
+      Please note that the tester program is setup to use a Server located at
+      localhost:5555.  If the Server is located at any other location, change
+      test.cpp appropriately, and rebuild.  Also, make sure all environment
+      variables are set appropriately using the above.  
+
+      6. Once validated, copy created library into <wm>/IntegrationServer/lib.
+      As an example for Solaris, you may have created a libwmjni.so while using
+      the build directory makefiles.
+      
+      Note: Tested configuration
+      Operating System	Version					Architecture	Compiler version		Java version
+      Microsoft Windows	W2k3 SP2 R2 Standard edition(32 bit)	-		Microsoft Visual Studio 2008	jdk1.6.0
+      Sun Solaris	SunOS  5.9 sparc SUNW,Sun-Fire-V240 	SPARC		gcc version 3.4.6		jdk1.6.0
+      HP-UX		HP-UX 11.11 (11i v1)			HP PA-RISC      HP aC++ Compiler (S800) 	jdk1.6.0
+      Linux		Red Hat Enterprise Linux Server release 5.2 x86_64 	GNU/Linux gcc version 4.1.2 	jdk1.6.0_x 64bit
+      AIX		AIX 5.2L 64bit	PPC 		IBM pSeries 7029-6C3  	XL C/C++ V8.0			jdk1.6.0
+      
+	 
+
+   Extending code generation
+   -------------------------
+
+      In order to support code generation for the target platform, templates 
+      must be supplied for all generated client and service files, and the 
+      new platform must be included in the codegen configuration file 
+      [<ServerDir>\config\codegen.cnf].  The codegen configuration file
+      is not automatically packaged with the Server; to create the
+      <ServerDir>\config\codegen.cnf file and directory, one must not only
+      run the Server once, but also run the Developer with the Server, and
+      try to generate some sample client code.  See the Developer's
+      reference manual for further details on this process.  This file is
+      used to store all of the information on platform name, shorthand
+      name, and template location.  (NOTE: in this configuration file, the 
+      template file is assumed to be located in
+      <PackageDir>\WmRoot\templates\code, so if you want to make a
+      separate template file that is not located in that directory,
+      specify it's path relative to the above directory).  It is
+      recommended that one follows the existing model for specifying
+      system configuration, basically copying the configuration settings
+      for one platform, but remembering to change the appropriate
+      system-type and template-file locations.  For a visual reference,
+      see below for an example codegen.cnf file with the DEC platform.
+
+      C++ client code generation extension
+      ----------------------------------
+
+      For C++ clients there are 3 template files in the template dir,
+      at <wm>/IntegrationServer/sdk/cpp/templates, and they 
+      generate a generic README file, a service-specific makefile, and a
+      service-specific source file. Service-specific means that the
+      generated file varies from service to service, whereas the
+      generic README is the same for all services. One should modify the 
+      template files to suite their needs, and install in 
+      <PackageDir>/WmRoot/templates/code.  Unless there are
+      any odd C++ caveats for the platform, the template for makefile
+      generation, (cpp_ClientMake), should be the only template file that
+      needs editing, as the C++ client source is generic for every
+      platform, and the README is not a building necessity.
+
+      The standard c++-client template files need to be placed in
+      (<PackageDir>/WmRoot/templates/code):
+
+          - cpp_ClientMain   : client source
+          - cpp_ClientReadme : client readme
+          - cpp_ClientMake   : client makefile
+
+      The basic steps for extending C++ client codegen are as follows:
+  
+          - Modify the codegen.cnf file, as mentioned above
+          - Modify the cpp_ClientMake template file to add a new code
+	    generation case for your platform.  For DEC, one would add:
+ 
+              %case dec%
+              CC=dec_c++
+              ...
+          
+          - Start the Developer  
+          - Select a service for which a client is desired
+          - Generate a client from which to call the Server, implemented
+            in C++ for your new platform
+          - 3 file will have been generated: CPPReadme.txt, foo.cpp, foo.mak
+            (if the service is called foo)
+          - Follow the CPPReadme.txt and compile the client.  Enjoy!  
+
+      C++ service code generation extension
+      -----------------------------------  
+
+      For C++ services there is a makefile, a source file, and three 
+      java files for declaring the service as a native C++ method, loading
+      the service, and calling the service in java.  The five template
+      files for the above files are named as follows:
+
+          - cpp_SvrImpl      : service implementation
+          - cpp_SvrLoad      : java file for loading the service lib
+          - cpp_SvrMake      : service makefile
+          - cpp_SvrNative    : java file for the java declaration of the
+                             wrapped c++-service
+          - cpp_SvrSvc       : java file for the actual service, which
+                             simply calls the wrapped c++-service
+       
+      For most, the only template file that will need modification is the
+      cpp_SvrMake template file, as that creates the Makefile in a switch
+      statement based on platform type.  As described above for cpp_client
+      code generation, add the platform case following the model set by
+      the other default platforms.  Again, one can choose to create their
+      own template files that serve the purposes outlined above, but it is
+      recommended simply to add ones platform to those templates that need
+      modification.  If one chooses to create their own template files,
+      one must make sure to note that in the codegen.cnf file.
+      
+      Though C++-service generation is covered in the Developer docs, here
+      is a quick overview of the things one must do to create a C++-service:
+      
+           - Start the Integration Server
+           - Start the Developer
+           - Add a new package that will contain all of your C++-services.
+             This is important because problems arise when C++-services are
+             added to packages that also contain purely java services.
+           - In the new package, create a new interface
+           - Under this new interface, create a new service specification,
+             making sure to have inputs and outputs, as NULL inputs and
+             outputs will cause a service exception!  Make sure to save
+             the specification before going on to the next step
+           - Create a new C++-service in the interface, generating for the
+             new platform to which the C++ libraries have already been
+             ported, and of which the template files and code generation
+             configuration files have been correctly modified.
+      
+      If the above steps have been followed correctly, a C++-service
+      has been generated from the template files.  The generated files
+      have been placed in <PackageDir>\MyPackage\code\source, if MyPackage
+      was created above.  However, there are a few more steps to bring
+      the C++-service to a usable state:
+
+           - Edit the newly generated makefile, modifying the Server
+             directory and the JDK directory, if needed.  Save the
+             makefile, whether modified or not, to MyInterface.mak, if
+             MyInterface is the interface created above.  Saving it to
+             this new name ensures that future code generation will not
+             replace already modified files.
+           - Edit the newly generated c++-file, adding any extra needed
+             logic to the file, and saving the file, whether modified or
+             not, to MyServiceImpl.cpp, if MyService is the name of the
+             service created above. This new name is for the reason
+             described above.
+           - Create a directory above the current directory, in
+             <PackageDir>\MyPackage\code, called libs.  This is for
+             compilation output, and is where the Server expects to find
+             the generated library.
+           - Make the c++-service using the above makefile.  Usually this
+             requires the option of -f MyInterface.mak.  Make sure the
+             location of the ported C++ libraries is in the LD_LIBRARY_PATH
+             environment variable.
+           
+      If the above steps have been followed correctly, and all environment
+      settings are correct, a new c++-service will have been built, and a
+      library will have been placed in <PackageDir>\MyPackage\code\libs.
+      It is necessary to restart the Server now, which will allow the
+      Server to natively load the generated library, and the service to be
+      "in service".
+
+      Though it is covered in the Developer manual, as the instructions
+      above are, here is a quick explanation of calling c++-services from
+      other c++-services, and services in general.  A c++-service is not
+      recognized by any other service as such; the c++-service is wrapped to
+      make it have a java interface, and make it appear to be an java
+      service to any other service.  Thus, to call it, one needs to call
+      it as one calls a java service.  In regards to calling it from a
+      c++-service, it is best not to attempt to call it from the C++
+      implementation file, because it is excessively cumbersome. Instead,
+      in the Developer, one can highlight the c++-service from which one 
+      desires to call another c++-service, click on the "Source" tab, and
+      add a quick line of java code to call the service.  
+
+      While all above descriptions of template modification and
+      utilization will be sufficient for most, templates are much more
+      extensible than they appear to be when viewed in their default form. 
+      When writing templates, the following inputs are available for use
+      with the template processor:
+     
+      For each service:
+        svcName - service name
+        jniSvcName - service name mangled for JNI c-signature
+        ifcName - interface name
+        literalIfcName - unmapped interface name
+        jniIfcName - interface name mangled for JNI c-signature
+        ifcNodeName - last element of interface name
+        fullSvcName - complete NSName for service
+        pkgName - package name
+        inputRec - input record
+        inputRecName - input record name
+        literalInputRecName - unmapped input record name
+        outputRec - output record
+        outputRecName - output record name
+        literalOutputRecName - unmapped output record name
+        records - all records used for input or output
+        svrHomeDir - Server home directory
+      
+      For each record:
+        name - record name
+        literalName - unmapped record name
+        fields - all of the record's contained fields
+      
+      For each field:
+        name - field name
+        literalName - unmapped field name
+        fieldType - {str, strarray, strtable, rec, recarray, obj}
+      
+      For each 'rec' field:
+        bindToRec - name of record that defines field
+        literalBindToRec - unmapped name of record that defines field
+    
+      Note that, unlike the per-service files, the auxiliary (aux) files are 
+      only processed once, and not for each service.  Therefore, only global 
+      information is available when processing the template. This includes 
+      'platform' {win,hpx,sol,lnx} and serverHost and ServerPort which indicate
+      the address of the Server which is generating the code and presumably the
+      target of the invocation when generating client code.
+	 
+      Also note that svcNames are presumed to be valid as the system prevents 
+      the creation of interface or service node names that contain invalid 
+      characters or reserved words.  Other variables that may contain illegal 
+      names or characters (from the point of view of the local file system or 
+      target languages) have a 'literal' variant where the non-literal instance
+      is mapped to a 'safe' version of the literal value.
+      
+      Further documentation on template tags is located in 
+      <DeveloperDir>/doc/onlinehelp/REF_Template*, and in 
+      <ServerDir>/packages/WmRoot/pub/doc/OnlineHelp/REF_Template*. 
+
+      Once the template files are brought to satisfactory completion, the 
+      new platform and its associated template files needs to be specified in
+      <ServerDir>/config/codegen.cnf.  For example, to add support for platform
+      'DEC' with the template files in the templates directory of 'MyPkg', add
+      the following information to the sections as indicated:
+
+        In the "clientTypes" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="type_key">cpp_DEC</value>
+            <value name="type_description">C++ for DEC</value>
+            <value name="type_platform">DEC</value>
+          </record>
+
+        In the "imTypes" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="type_key">cpp_DEC</value>
+            <value name="type_description">C++ for DEC</value>
+            <value name="type_platform">DEC</value>
+          </record>
+
+        In the "client_templates" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_src">	
+            	/packages/MyPkg/templates/MyClientTemplate_Main
+            </value>
+            <value name="template_dest">%service%.cpp</value>
+            <value name="template_per_svc_flag">true</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/MyClientTemplate_Readme
+            </value>
+            <value name="template_dest">CPPReadme.txt</value>
+            <value name="template_per_svc_flag">false</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/MyClientTemplate_Make
+            </value>
+            <value name="template_dest">%service%.mak</value>
+            <value name="template_per_svc_flag">true</value>
+          </record>
+
+        In the "im_templates" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_subtype">java_svc</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/cpp_SvrSvc_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_subtype">java_shared</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/cpp_SvrLoad_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_subtype">java_shared</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/cpp_SvrNative_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_subtype">native</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/cpp_SvrMake_DEC
+            </value>
+            <value name="template_dest">%service%.mak</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">cpp_DEC</value>
+            <value name="template_subtype">native</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/cpp_SvrImpl_DEC
+            </value>
+            <value name="template_dest">%service%.cpp</value>
+          </record>  
+     
+	  Note that for Service code generation, the Developer will attempt to
+          highlight the selection for the actual server platform.  This requires
+          that the type_description string matches "C++ for <platform>" where
+          <platform> is the os.name property for the platform.  
+
+          Restart the Server to use the new configuration information and test 
+	  the generated files to validate the correctness of your templates.

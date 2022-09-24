@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseConfiguration dbVendor="Hana">
+<typeMapping>
+</typeMapping>
+<columnTypeMapping>
+	<columnType nativeSqlType="VARBINARY" jdbcTypeName="VARBINARY"/>
+	
+	<columnType nativeSqlType="BOOLEAN" jdbcTypeName="BOOLEAN" includeColumnSize="false"/>
+	
+	<columnType nativeSqlType="VARCHAR" jdbcTypeName="VARCHAR"/>
+	<columnType nativeSqlType="NVARCHAR" jdbcTypeName="NVARCHAR"/>
+	<columnType nativeSqlType="ALPHANUM" jdbcTypeName="NVARCHAR"/>
+	<columnType nativeSqlType="SHORTTEXT" jdbcTypeName="LONGVARCHAR"/>
+	
+	<columnType nativeSqlType="DATE" jdbcTypeName="DATE" includeColumnSize="false"/>
+	<columnType nativeSqlType="TIME" jdbcTypeName="TIME" includeColumnSize="false"/>
+	<columnType nativeSqlType="SECONDDATE" jdbcTypeName="TIMESTAMP" includeColumnSize="false"/>
+	<columnType nativeSqlType="TIMESTAMP" jdbcTypeName="TIMESTAMP" includeColumnSize="false"/>
+	
+	<columnType nativeSqlType="BLOB" jdbcTypeName="BLOB" includeColumnSize="false"/>
+	<columnType nativeSqlType="CLOB" jdbcTypeName="CLOB" includeColumnSize="false"/>
+	<columnType nativeSqlType="NCLOB" jdbcTypeName="CLOB" includeColumnSize="false"/>
+	<columnType nativeSqlType="TEXT" jdbcTypeName="LONGVARCHAR" includeColumnSize="false"/>
+	<columnType nativeSqlType="BINTEXT" jdbcTypeName="LONGVARCHAR" includeColumnSize="false"/>
+	
+	<columnType nativeSqlType="TINYINT" jdbcTypeName="TINYINT" includeColumnSize="false"/>
+	<columnType nativeSqlType="SMALLINT" jdbcTypeName="SMALLINT" includeColumnSize="false"/>
+	<columnType nativeSqlType="INTEGER" jdbcTypeName="INTEGER" includeColumnSize="false"/>
+	<columnType nativeSqlType="BIGINT" jdbcTypeName="BIGINT" includeColumnSize="false"/>
+	<columnType nativeSqlType="DECIMAL" jdbcTypeName="DECIMAL"  includePrecision="true"/>
+	<columnType nativeSqlType="SMALLDECIMAL" jdbcTypeName="DECIMAL"  includeColumnSize="false"/>
+	<columnType nativeSqlType="REAL" jdbcTypeName="REAL" includeColumnSize="false"/>
+	<columnType nativeSqlType="DOUBLE" jdbcTypeName="DOUBLE" includeColumnSize="false"/>
+	
+	<columnType nativeSqlType="ST_POINT" jdbcTypeName="OTHER" includeColumnSize="false"/>
+	<columnType nativeSqlType="ST_GEOMETRY" jdbcTypeName="OTHER" includeColumnSize="false"/>
+
+</columnTypeMapping>
+</databaseConfiguration>

@@ -1,0 +1,33 @@
+adapterName : JDBCAdapter
+adapterId : com.wm.adapter.wmjdbc.JDBCAdapter
+adapterPackage : WmJDBCAdapter
+adapterImpl : com.wm.adapter.wmjdbc.JDBCAdapter
+adapterVersion : 10.3
+adapterResourceBundleName :  com.wm.adapter.wmjdbc.DatabaseAppResourceBundle
+adapterJCAVersion : 1.0
+adapterMajorCode : 1
+connectionTypes :
+ 
+  -  
+      factory : com.wm.adapter.wmjdbc.connection.ExtendedJDBCConnectionFactory
+      services : 
+        - com.wm.adapter.wmjdbc.services.Select
+        - com.wm.adapter.wmjdbc.services.CustomSQL
+        - com.wm.adapter.wmjdbc.services.Update
+        - com.wm.adapter.wmjdbc.services.Insert
+        - com.wm.adapter.wmjdbc.services.Delete
+        - com.wm.adapter.wmjdbc.services.StoredProcedureWithSignature
+        - com.wm.adapter.wmjdbc.services.BatchInsert
+        - com.wm.adapter.wmjdbc.services.BatchUpdate
+        - com.wm.adapter.wmjdbc.services.DynamicSQL
+           
+
+notificationTypes :
+ - com.wm.adapter.wmjdbc.notifications.InsertNotification
+ - com.wm.adapter.wmjdbc.notifications.UpdateNotification
+ - com.wm.adapter.wmjdbc.notifications.DeleteNotification      
+ - com.wm.adapter.wmjdbc.notifications.BasicNotification
+ - com.wm.adapter.wmjdbc.notifications.OrderedNotification
+ - com.wm.adapter.wmjdbc.notifications.ProcedureNotificationWithSignature  
+        
+     

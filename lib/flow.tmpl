@@ -1,0 +1,78 @@
+%ifvar isroot%<?xml version="1.0" encoding="UTF-8"?>
+
+%endif%
+<%switch type%%case ROOT%FLOW%case%%value none type%%endswitch%
+%ifvar label       % NAME="%value encode(xmlattr) label%"%endif%
+%ifvar scope       % SCOPE="%value encode(xmlattr) scope%"%endif%
+%ifvar version     % VERSION="%value encode(xmlattr) version%"%endif%
+%ifvar cleanup     % CLEANUP="%value encode(xmlattr) cleanup%"%endif%
+%ifvar timeout     % TIMEOUT="%value encode(xmlattr) timeout%"%endif%
+%ifvar service     % SERVICE="%value encode(xmlattr) service%"%endif%
+%ifvar as-user     % AS-USER="%value encode(xmlattr) as-user%"%endif%
+%ifvar validate-in  % VALIDATE-IN="%value encode(xmlattr) validate-in%"%endif%
+%ifvar validate-out % VALIDATE-OUT="%value encode(xmlattr) validate-out%"%endif%
+%ifvar count       % COUNT="%value encode(xmlattr) count%"%endif%
+%ifvar backoff     % BACK-OFF="%value encode(xmlattr) backoff%"%endif%
+%ifvar repeat-on   % LOOP-ON="%value encode(xmlattr) repeat-on%"%endif%
+%ifvar exit-on     % EXIT-ON="%value encode(xmlattr) exit-on%"%endif%
+%ifvar switch      % SWITCH="%value encode(xmlattr) switch%"%endif%
+%ifvar adorns      % ADORNS="%value encode(xmlattr) adorns%"%endif%
+%ifvar from        % FROM="%value encode(xmlattr) from%"%endif%
+%ifvar to          % TO="%value encode(xmlattr) to%"%endif%
+%ifvar drop        % DROP="%value encode(xmlattr) drop%"%endif%
+%ifvar overwrite   % OVERWRITE="%value encode(xmlattr) overwrite%"%endif%
+%ifvar variables   % VARIABLES="%value encode(xmlattr) variables%"%endif%
+%ifvar globalVariables   % GLOBALVARIABLES="%value encode(xmlattr) globalVariables%"%endif%
+%ifvar cardinality   % CARDINALITY="%value encode(xmlattr) cardinality%"%endif%
+%ifvar copyMode   % COPYMODE="%value encode(xmlattr) copyMode%"%endif%
+%ifvar className   % OBJECTCLASSNAME="%value encode(xmlattr) className%"%endif%
+%ifvar fieldPosition% FIELDPOSITION="%value encode(xmlattr) fieldPosition%"%endif%
+%ifvar field       % FIELD="%value encode(xmlattr) field%"%endif%
+%ifvar mode        % MODE="%value encode(xmlattr) mode%"%endif%
+%ifvar in-array    % IN-ARRAY="%value encode(xmlattr) in-array%"%endif%
+%ifvar out-array   % OUT-ARRAY="%value encode(xmlattr) out-array%"%endif%
+%ifvar signal      % SIGNAL="%value encode(xmlattr) signal%"%endif%
+%ifvar disabled    % DISABLED="%value encode(xmlattr) disabled%"%endif%
+%ifvar invisible   % INVISIBLE="%value encode(xmlattr) invisible%"%endif%
+%ifvar x-pos       % X-POS="%value encode(xmlattr) x-pos%"%endif%
+%ifvar y-pos       % Y-POS="%value encode(xmlattr) y-pos%"%endif%
+%ifvar x-tail      % X-TAIL="%value encode(xmlattr) x-tail%"%endif%
+%ifvar y-tail      % Y-TAIL="%value encode(xmlattr) y-tail%"%endif%
+%ifvar start-x     % START-X="%value encode(xmlattr) start-x%"%endif%
+%ifvar start-y     % START-Y="%value encode(xmlattr) start-y%"%endif%
+%ifvar end-x       % END-X="%value encode(xmlattr) end-x%"%endif%
+%ifvar end-y       % END-Y="%value encode(xmlattr) end-y%"%endif%
+%ifvar zoom        % ZOOM="%value encode(xmlattr) zoom%"%endif%
+%ifvar invoke-order % INVOKE-ORDER="%value encode(xmlattr) invoke-order%"%endif%
+%ifvar condition   % CONDITION="%value encode(xmlattr) condition%"%endif%
+%ifvar condition-disabled  % CONDITION-DISABLED="%value encode(xmlattr) condition-disabled%"%endif%
+%ifvar persistable  % PERSISTABLE="%value encode(xmlattr) persistable%"%endif%
+%ifvar evaluate-labels % LABELEXPRESSIONS="%value encode(xmlattr) evaluate-labels%"%endif%
+%ifvar failure-message% FAILURE-MESSAGE="%value encode(xmlattr) failure-message%"%endif%
+%ifvar failure-name% FAILURE-NAME="%value encode(xmlattr) failure-name%"%endif%
+%ifvar failure-instance% FAILURE-INSTANCE="%value encode(xmlattr) failure-instance%"%endif%
+%ifvar failures% FAILURES="%value encode(xmlattr) failures%"%endif%
+%ifvar select% SELECT="%value encode(xmlattr) select%"%endif%
+%ifvar form% FORM="%value encode(xmlattr) form%"%endif%
+>
+%ifvar comment     %  <COMMENT>%value encode(xml) comment%</COMMENT>%nl%%endif%
+%ifvar target      %  <MAPTARGET>%value none target%</MAPTARGET>%nl%%endif%
+%ifvar source      %  <MAPSOURCE>%value none source%</MAPSOURCE>%nl%%endif%
+%ifvar data        %  <DATA ENCODING="%value encode(xmlattr) d_enc%" I18N="%value encode(xmlattr) mapseti18n%">%value none data%</DATA>%nl%%endif%
+%ifvar nodes%
+  <!-- nodes -->
+%loop nodes%
+%include flow.tmpl%
+%endloop%
+%endif%
+%ifvar input_map%
+%loop input_map%
+%include flow.tmpl%
+%endloop%
+%endif%
+%ifvar output_map%
+%loop output_map%
+%include flow.tmpl%
+%endloop%
+%endif%
+</%switch type%%case ROOT%FLOW%case%%value none type%%endswitch%>

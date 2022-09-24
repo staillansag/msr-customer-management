@@ -1,0 +1,50 @@
+  <!--
+    This WS-SecurityPolicy has the following constraints: 
+    1. Uses Transport Binding
+    2. One SignedSupportingToken with UsernameToken assertion is required (Username token signed by Transport)
+    3. No request/response Signature and Encryption is enforced
+    4. Timestamp is requested (Timestamp token signed by transport) 
+  -->
+
+<wsp:Policy wsu:Id="Username_Over_Transport" Name="Username Over Transport"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    
+    <wsp:ExactlyOne>
+        <wsp:All>
+            <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                <wsp:Policy>
+                    <sp:TransportToken>
+                        <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                        </wsp:Policy>
+                    </sp:TransportToken>
+                    
+                    <sp:AlgorithmSuite>
+                        <wsp:Policy>
+                            <sp:Basic256/>
+                        </wsp:Policy>
+                    </sp:AlgorithmSuite>
+                    
+                    <sp:Layout>
+                        <wsp:Policy>
+                            <sp:Strict/>
+                        </wsp:Policy>
+                    </sp:Layout>
+                    
+                    <sp:IncludeTimestamp/>
+                    
+                </wsp:Policy>
+            </sp:TransportBinding>
+            
+            <sp:SignedSupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                <wsp:Policy>
+                    <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient" />
+                </wsp:Policy>
+            </sp:SignedSupportingTokens>
+            
+        </wsp:All>
+    </wsp:ExactlyOne>
+</wsp:Policy>
+
+

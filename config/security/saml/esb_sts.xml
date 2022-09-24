@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This configuration file is used to configure the IntegrationServer token issuer that generates the SAML Sender Vouches token for Mediator outbound requests -->
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+
+	<!-- IssuerName - will be used as the IssuerName for each SAML token issued by this Service; the default value is ESB_STS -->
+    <value name="IssuerName">ESB_STS</value>
+	
+	<!-- IssuerKeystoreAlias - specify an Integration Server Keystore Alias that contains the private keys that can be used to sign the generated SAML Assertion -->
+    <value name="IssuerKeystoreAlias"></value>
+	
+	<!-- IssuerKeyAlias - the name of the key alias within the IssuerKeystoreAlias that points to the private key files -->
+    <value name="IssuerKeyAlias"></value>
+	
+	<!-- TimeToLiveSeconds - how long in seconds the generated token should be valid? 
+	     the default is 300 seconds (i.e. 5 minutes) from the time of token creation -->
+    <number name="TimeToLiveSeconds" type="java.lang.Integer">300</number>
+
+	</record>
+</IDataXMLCoder>

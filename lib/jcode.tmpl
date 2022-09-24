@@ -1,0 +1,62 @@
+%ifvar package%package %value none package%;%endif +nl%
+
+// -----( IS Java Code Template v1.2
+
+import com.wm.data.*;
+import com.wm.util.Values;
+import com.wm.app.b2b.server.Service;
+import com.wm.app.b2b.server.ServiceException;
+// --- <<IS-START-IMPORTS>> ---
+%loop -eol imports%import %value%;
+// --- <<IS-END-IMPORTS>> ---
+
+public final class %value none class%
+%ifvar -notempty extends%%nl%	extends %value none extends%
+%endif%
+%ifvar -notempty implements%%nl%	implements %loop -eol implements%%value%%loopsep ', '%
+%endif%
+
+{
+	// ---( internal utility methods )---
+
+	final static %value none class% _instance = new %value none class%();
+
+	static %value none class% _newInstance() { return new %value none class%(); }
+
+	static %value none class% _cast(Object o) { return (%value none class%)o; }
+
+	// ---( server methods )---
+
+%loop methods%
+%ifvar name%
+%ifvar equals('java 3.5') sigtype%
+	public static final void %value none name% (IData pipeline)
+        throws ServiceException
+	{
+%else%
+    public static final Values %value none name% (Values in)
+    {
+        Values out = in;
+%endif%
+		// --- <<IS-START(%value none name%)>> ---
+%ifvar spec%		// @specification %value none spec%%nl%%endif%
+%ifvar subtype%		// @subtype %value none subtype%%nl%%endif%
+%ifvar sigtype%		// @sigtype %value none sigtype%%nl%%endif%
+%ifvar stateless equals(yes)%		// @stateless%nl%%endif%
+%loop sig%		// %value encode(none)%%nl%%endloop%
+%value body decode(b64utf8)%
+		// --- <<IS-END>> ---
+%ifvar equals('java 3.5') sigtype%
+%else%
+        return out;
+%endif%                
+	}
+%endif%
+%endloop%
+%ifvar shared%
+	// --- <<IS-START-SHARED>> ---
+%value shared decode(b64utf8)%
+	// --- <<IS-END-SHARED>> ---
+%endif%
+}
+

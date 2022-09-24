@@ -1,0 +1,107 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>Service</title><link rel="Prev" href="IS_Logs_MessagingScrn.html" title="Previous" /><link rel="Next" href="IS_Logs_SessionScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Logs_AuditScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="polcz3b_002f6L1fVyeWkpDEDyA" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Logs_AuditScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_Logs.html#wwconnect_header">Logs</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">Service</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0ED1RQ" class="Heading_1">Service</div><div id="wwID0EE4RQ" class="Body">Use the Service page to view the most recent Service Log (WMSERVICE_<span class="varname">yyyymmdd_hhmmss</span>.log) entries. The Service Log maintains an audit trail for all services that the server executes. Depending on the Audit property settings you specified for the service in <span class="ph">Software AG Designer</span>, the server can add records to the log at various times, such as when the service starts and again when it ends, or only when there is an error. For more information about collecting auditing information about services, see <span class="ph"> </span><span class="ph_002c_Citation">webMethods Service Development Help</span>. For information about changing the display of this log, see <span class="ph"> </span><span class="ph_002c_Citation">webMethods Audit Logging Guide</span>.</div><div id="wwID0EH5RQ" class="Note"><span class="Bold">Note:<br /></span>For security purposes, you should regularly check your audit logs for security breaches. In addition, you should back them up regularly in case the machine where the logs are stored becomes unavailable.</div><div id="wwID0EF6RQ" class="Section_Title">Service log columns</div><div class="ww_skin_page_overflow"><div id="wwID0EK6RQ" class="Note"><span class="Bold">Note:<br /></span>The Service page might not display all of the columns listed below. Click <img class="Default" src="../is-onlinehelp/images/dashboard_table_settings.png" width="100%" style="display: inline; float: none; left: 0pt; max-height: 18px; max-width: 17px; top: 0pt" alt="" /> &gt; <span class="uicontrol">Show columns </span>to hide or display columns for the service log.</div></div><div id="wwID0EWASQ" class="Definition_Term">Date/Time</div><div id="wwID0E2ASQ" class="Definition_Description">Date and time the audit record was written to the database or file system.</div><div id="wwID0EFBSQ" class="Definition_Term">Audit time stamp</div><div id="wwID0EKBSQ" class="Definition_Description">Date and time the entry was written to the log.</div><div id="wwID0EUBSQ" class="Definition_Term">Service name</div><div id="wwID0EZBSQ" class="Definition_Description">Name of the service that generated the audit event.</div><div id="wwID0EDCSQ" class="Definition_Term">Status</div><div id="wwID0EICSQ" class="Definition_Description">Status of service execution. The status can be either STARTED, ENDED or FAILED.</div><div id="wwID0ESCSQ" class="Definition_Term">Duration</div><div id="wwID0EXCSQ" class="Definition_Description">How long the service ran (in milliseconds) before the error occurred.</div><div id="wwID0EBDSQ" class="Definition_Term">Error Message</div><div id="wwID0EGDSQ" class="Definition_Description">Optional error message, describing the type of error.</div><div id="wwID0EQDSQ" class="Definition_Term">Server ID</div><div id="wwID0EVDSQ" class="Definition_Description">IP address or host name of the server on which the <span class="ph">Integration Server</span> that generated the audit event is running. This is necessary information when <span class="ph">Integration Server</span>s are clustered and writing to a shared RDBMS. The ID can be <span class="varname">DNSname:port</span> or <span class="varname">IPaddress:port</span>.</div><div id="wwID0EMESQ" class="Note_1"><span class="Bold">Note:<br /></span>The <span class="varname">port</span> is always the <span class="ph">Integration Server</span>’s primary port, even if the event occurred on a different (non‑primary) <span class="ph">Integration Server</span> port.</div><div id="wwID0EVFSQ" class="Definition_Term">User ID</div><div id="wwID0E1FSQ" class="Definition_Description">Identity of the user that invoked the service that generated the audit event.</div><div id="wwID0EEGSQ" class="Definition_Term">Resubmittable</div><div id="wwID0EJGSQ" class="Definition_Description">Whether or not <span class="ph">webMethods Monitor</span> can resubmit the service. A service is resubmittable only if it is a top-level service and the pipeline was included.</div><div id="wwID0EYGSQ" class="Definition_Term">Client ID</div><div id="wwID0E4GSQ" class="Definition_Description">IP address of the host from which the request originated.</div><div id="wwID0EHHSQ" class="Definition_Term">Pipeline flag</div><div id="wwID0EMHSQ" class="Definition_Description">Whether the service log includes a copy of the input pipeline.</div><div id="wwID0EWHSQ" class="Definition_Term">System data flag</div><div id="wwID0E2HSQ" class="Definition_Description">Whether system data is available.</div><div id="wwID0EFISQ" class="Definition_Term">Audited parent ID</div><div id="wwID0EKISQ" class="Definition_Description">Context ID of the next higher service in the call stack that was audited.</div><div id="wwID0EUISQ" class="Definition_Term">Client application</div><div id="wwID0EZISQ" class="Definition_Description">Client application accessing the server. If this is an OAuth related request and the request has an access_token, this holds the client_id to which the token was issued.</div><div id="wwID0EDJSQ" class="Definition_Term">Root context</div><div id="wwID0EIJSQ" class="Definition_Description">Context information that provides a consistent, interpretable audit trail of activity that the <span class="ph">webMethods Monitor</span> can use to relate entries within the log.</div><div id="wwID0EXJSQ" class="Definition_Term">Parent context</div><div id="wwID0E3JSQ" class="Definition_Description">Context information that provides a consistent, interpretable audit trail of activity that the <span class="ph">webMethods Monitor</span> can use to relate entries within the log</div><div id="wwID0ELKSQ" class="Definition_Term">Current context</div><div id="wwID0EQKSQ" class="Definition_Description">Context information that provides a consistent, interpretable audit trail of activity that the <span class="ph">webMethods Monitor</span> can use to relate entries within the log</div><div id="wwID0E6KSQ" class="Definition_Term">Custom context</div><div id="wwID0EELSQ" class="Definition_Description">Arbitrary value that users can attach to a transaction. All services that get audited for that transaction will have the same custom context. Alternatively, a custom context is passed in a messaging envelope.</div><div id="wwID0EVLSQ" class="title">Related Topics</div><div id="wwID0EZLSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_ErrorScrn.html#wwID0ESFPQ"
+   
+     title="Error"
+    ><span class="Link_Text">Error</span></a></div><div id="wwID0EFMSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_GDInboundLogScrn.html#wwID0ETIQQ"
+   
+     title="Guaranteed delivery - Inbound"
+    ><span class="Link_Text">Guaranteed delivery - Inbound</span></a></div><div id="wwID0ERMSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_GDOutboundLogScrn.html#wwID0ELYQQ"
+   
+     title="Guaranteed delivery - Outbound"
+    ><span class="Link_Text">Guaranteed delivery - Outbound</span></a></div><div id="wwID0E4MSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_MessagingScrn.html#wwID0ETHRQ"
+   
+     title="Messaging"
+    ><span class="Link_Text">Messaging</span></a></div><div id="wwID0EJNSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_SecurityScrn.html#wwID0EGWPQ"
+   
+     title="Security"
+    ><span class="Link_Text">Security</span></a></div><div id="wwID0EVNSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_ServerScrn.html#wwID0EKSOQ"
+   
+     title="Server"
+    ><span class="Link_Text">Server</span></a></div><div id="wwID0EBOSQ" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Logs_SessionScrn.html#wwID0EWOSQ"
+   
+     title="Session"
+    ><span class="Link_Text">Session</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>

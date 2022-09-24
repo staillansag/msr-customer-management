@@ -1,0 +1,34 @@
+.label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
+.cbstyle {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+}
+
+.imgStyle{
+	 vertical-align: bottom;
+	 position: relative;
+}
+
+.cloud-table-cell {
+    white-space: nowrap;
+    column-span: none;
+}
+
+
+li.ui-tabs-active {
+  display: block;
+  /* tab text is chopped in-half without this */
+  height: auto;
+  padding: 0px;
+}

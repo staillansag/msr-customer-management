@@ -1,0 +1,45 @@
+# To build this test example with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 17 to reflect the location of your 
+#     JDK 1.1 VM
+# (2) Change THRDIR on line 18 to reflect the location of the
+#     required JDK shared libaries. For JDK 1.1, the name
+#     of the JDK library is libjava.a. For JDK 1.2, the name was
+#     changed to libjvm.a. So you need to change the line 29 
+#     to link with libjava.a under JDK 1.1
+
+APP_ROOT = ..
+INC_ROOT = $(APP_ROOT)/include
+LIB_ROOT = $(APP_ROOT)/lib
+WMDIR = /opt/softwareag/webMethods8
+
+COPT = -g
+JOPT = 
+JDKDIR = /usr/java6
+THRDIR = $(JDKDIR)/jre/lib/ppc
+CC = xlC_r
+
+CPPFLAGS = $(COPT) $(JOPT) -I$(JDKDIR)/include \
+	-I$(JDKDIR)/include/aix \
+	-I$(INC_ROOT)
+
+all: test
+
+test: test.o
+	$(CC) -o examples test.o \
+	-L$(THRDIR)/classic -ljvm \
+	-L$(LIB_ROOT) \
+	-lwmjni \
+	-lc
+
+clean:
+	rm -f *.o core examples
+
+#.SUFFIXES: .cpp .o
+
+test.o: test.cpp
+	$(CC) $(CPPFLAGS) -c test.cpp -o test.o
+
+runtest:
+	LIBPATH=.:$(JDKDIR)/jre/bin:$(JDKDIR)/jre/lib/ppc/classic:../lib \
+	CLASSPATH=.:$(JDKDIR)/jre/lib/rt.jar:$(JDKDIR)/lib/tools.jar:$(WMDIR)/common/lib/wm-isclient.jar:$(WMDIR)/common/lib/glassfish/gf.javax.mail.jar:$(WMDIR)/IntegrationServer/lib/wm-isserver.jar ./examples

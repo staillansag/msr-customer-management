@@ -1,0 +1,78 @@
+  <!--
+    This WS-SecurityPolicy has the following constraints: 
+    1. No request/response Signature or Encryption is enforced 
+    2. Timestamp is requested (Timestamp token needs to be signed) 
+    
+    Note: Property MustSupportRefKeyIdentifier will only work if the incoming cert is
+    X509v3 (according to ws-security x509 1.1 profile; so don't use a cert
+    generated using JDK keytool - it only generates v1 certs)
+  -->
+  
+<wsp:Policy wsu:Id="X509Authentication" Name="X509 Authentication"
+  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+
+  <wsp:ExactlyOne>
+    <wsp:All>
+      <sp:AsymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+        <wsp:Policy>
+          <sp:InitiatorToken>
+            <wsp:Policy>
+              <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                <wsp:Policy>
+                  <sp:WssX509V3Token10 />
+                  <sp:WssX509PkiPathV1Token10 />
+                </wsp:Policy>
+              </sp:X509Token>
+            </wsp:Policy>
+          </sp:InitiatorToken>
+          <sp:RecipientToken>
+            <wsp:Policy>
+              <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                <wsp:Policy>
+                  <sp:WssX509V3Token10 />
+                  <sp:WssX509PkiPathV1Token10 />
+                </wsp:Policy>
+              </sp:X509Token>
+            </wsp:Policy>
+          </sp:RecipientToken>
+          
+          <sp:AlgorithmSuite>
+            <wsp:Policy>
+              <sp:TripleDesRsa15 />
+            </wsp:Policy>
+          </sp:AlgorithmSuite>
+          
+          <sp:Layout>
+            <wsp:Policy>
+              <sp:Strict />
+            </wsp:Policy>
+          </sp:Layout>
+
+          <sp:IncludeTimestamp />
+
+          <sp:ProtectTokens />
+          
+          <sp:OnlySignEntireHeadersAndBody />
+          
+        </wsp:Policy>
+      </sp:AsymmetricBinding>
+
+      <sp:Wss11 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+              <!-- sp:MustSupportRefKeyIdentifier/ -->
+              <sp:MustSupportRefIssuerSerial/>
+              <sp:MustSupportRefThumbprint/>
+              <sp:RequireSignatureConfirmation/>
+          </wsp:Policy>
+      </sp:Wss11>
+      <sp:Wss10 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+              <!-- sp:MustSupportRefKeyIdentifier/ -->
+              <sp:MustSupportRefIssuerSerial/>
+          </wsp:Policy>
+      </sp:Wss10>
+
+    </wsp:All>
+  </wsp:ExactlyOne>
+</wsp:Policy>

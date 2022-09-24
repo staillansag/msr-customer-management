@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>    
+<StorageConfig>
+    <database>
+        <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+        <pool>jdbc:derby:LWQ_DB_MESSAGING_CSQ;create=true</pool>
+        <storeid>ISStore</storeid>
+        <queue-table>IS_QUEUES</queue-table>
+    </database>  
+    <Monitor>
+        <NumberOfMessagesSinceStartup>off</NumberOfMessagesSinceStartup>
+        <NumberOfRedeliveryMessagesSinceStartup>off</NumberOfRedeliveryMessagesSinceStartup>
+        <AverageDeliveryCount>off</AverageDeliveryCount>
+        <MessageAverageLifeSpan>off</MessageAverageLifeSpan>
+        <LastEnqueueTimestamp>off</LastEnqueueTimestamp>
+        <LastDequeueTimestamp>off</LastDequeueTimestamp>
+    </Monitor>
+</StorageConfig>

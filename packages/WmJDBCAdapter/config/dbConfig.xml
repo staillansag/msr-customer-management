@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="dbConfig.xsd">
+
+	<databaseInfo>
+		<id>ORACLE</id>
+		<name>Oracle</name>
+		<displayName>Oracle</displayName>
+		<classPathExntDir>code/dbImpl/oracle</classPathExntDir>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.OracleMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>oracle.jdbc.pool.OracleDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>oracle.jdbc.pool.OracleDataSource</class>
+			</localTransaction>
+		</datasources>
+		<driverConfig>
+			<driver>
+				<name>Progress® DataDirect®</name>
+				<urlPath></urlPath>
+				<datasources>
+					<noTransaction>
+						<class>com.wm.dd.jdbcx.oracle.OracleDataSource</class>
+					</noTransaction>
+					<localTransaction>
+						<class>com.wm.dd.jdbcx.oracle.OracleDataSource</class>
+					</localTransaction>
+				</datasources>
+				<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.DataDirectDriverHandler</driverHandlerClass>
+			</driver>
+		</driverConfig>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.OJDBCDriverHandler</driverHandlerClass>
+	</databaseInfo>
+
+	<databaseInfo>
+		<id>MSSQL</id>
+		<name>Microsoft SQL Server</name>
+		<displayName>Microsoft SQL Server</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MSSQLMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.microsoft.sqlserver.jdbc.SQLServerDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.microsoft.sqlserver.jdbc.SQLServerDataSource</class>
+			</localTransaction>
+		</datasources>
+		<driverConfig>
+			<driver>
+				<name>Progress® DataDirect®</name>
+				<urlPath></urlPath>
+				<datasources>
+					<noTransaction>
+						<class>com.wm.dd.jdbcx.sqlserver.SQLServerDataSource</class>
+					</noTransaction>
+					<localTransaction>
+						<class>com.wm.dd.jdbcx.sqlserver.SQLServerDataSource</class>
+					</localTransaction>
+				</datasources>
+				<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.DataDirectDriverHandler</driverHandlerClass>
+			</driver>
+			<driver>
+				<name>Microsoft JDBC Driver for SQL Server</name>
+				<urlPath></urlPath>
+				<datasources>
+					<noTransaction>
+						<class>com.microsoft.sqlserver.jdbc.SQLServerDataSource</class>
+					</noTransaction>
+					<localTransaction>
+						<class>com.microsoft.sqlserver.jdbc.SQLServerDataSource</class>
+					</localTransaction>
+				</datasources>
+				<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.SQLJDBCDriverHandler</driverHandlerClass>
+			</driver>
+		</driverConfig>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.SQLJDBCDriverHandler</driverHandlerClass>
+	</databaseInfo>
+
+	<databaseInfo>
+		<id>MySQL</id>
+		<name>MySQL</name>
+		<displayName>MySQL</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MYSQLMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.mysql.cj.jdbc.MysqlDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.mysql.cj.jdbc.MysqlDataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.MYSQLConnectorJ</driverHandlerClass>
+	</databaseInfo>
+
+	<databaseInfo>
+		<id>POSTGRESQL</id>
+		<name>postgresql</name>
+		<displayName>PostgreSQL</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.POSTGRESQLDirectMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>org.postgresql.ds.PGSimpleDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>org.postgresql.ds.PGSimpleDataSource</class>
+			</localTransaction>
+		</datasources>
+		<driverConfig>
+			<driver>
+				<name>PostgreSQL JDBC Driver</name>
+				<urlPath></urlPath>
+				<datasources>
+					<noTransaction>
+						<class>org.postgresql.ds.PGSimpleDataSource</class>
+					</noTransaction>
+					<localTransaction>
+						<class>org.postgresql.ds.PGSimpleDataSource</class>
+					</localTransaction>
+				</datasources>
+				<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.PostgreSQLJDBCDriverHandler</driverHandlerClass>
+			</driver>
+		</driverConfig>
+		<services supportedAll="true" />
+		<notifications supportedAll="false" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.PostgreSQLJDBCDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>MariaDB</id>
+		<name>MariaDB</name>
+		<displayName>MariaDB</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MYSQLMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>org.mariadb.jdbc.MariaDbDataSource</class>
+				<class>org.mariadb.jdbc.MySQLDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>org.mariadb.jdbc.MariaDbDataSource</class>
+				<class>org.mariadb.jdbc.MySQLDataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.MYSQLConnectorJ</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>Tibero</id>
+		<name>Tibero</name>
+		<displayName>Tibero</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.TiberoMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.tmax.tibero.jdbc.ext.TbConnectionPoolDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.tmax.tibero.jdbc.ext.TbConnectionPoolDataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.OJDBCDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>SAPHANA</id>
+		<name>SAPHANA</name>
+		<displayName>SAP HANA</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.sap.db.jdbcext.DataSourceSAP</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.sap.db.jdbcext.DataSourceSAP</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.SAPHANADriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>Snowflake</id>
+		<name>Snowflake</name>
+		<displayName>Snowflake</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>net.snowflake.client.jdbc.SnowflakeBasicDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>net.snowflake.client.jdbc.SnowflakeBasicDataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.OJDBCDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>AmazonRedshift</id>
+		<name>AmazonRedshift</name>
+		<displayName>Amazon Redshift</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.amazon.redshift.jdbc.DataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.amazon.redshift.jdbc.DataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.AmazonRedshiftDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>Vertica</id>
+		<name>Vertica</name>
+		<displayName>Vertica</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.MetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.vertica.jdbc.DataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.vertica.jdbc.DataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.VerticaDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+	<databaseInfo>
+		<id>Teradata</id>
+		<name>Teradata</name>
+		<displayName>Teradata Vantage</displayName>
+		<metadataClass>com.wm.adapter.wmjdbc.connection.metadata.TeradataMetadataProvider</metadataClass>
+		<datasources>
+			<noTransaction>
+				<class>com.teradata.jdbc.TeraDataSource</class>
+			</noTransaction>
+			<localTransaction>
+				<class>com.teradata.jdbc.TeraDataSource</class>
+			</localTransaction>
+		</datasources>
+		<services supportedAll="true" />
+		<notifications supportedAll="true" />
+		<driverHandlerClass>com.wm.adapter.wmjdbc.connection.driver.handlers.TeradataDriverHandler</driverHandlerClass>
+	</databaseInfo>
+	
+</databaseConfig>
+

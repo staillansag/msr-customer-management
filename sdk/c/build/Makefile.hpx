@@ -1,0 +1,42 @@
+# To build the shared libaries with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 14 to reflect the location of your 
+#     JDK 1.1 VM
+# (2) Change INCLUDES on line 15 to reflect the location of the
+#     required JDK header files
+# (3) Comment out statement
+#         #define JAVA2 
+#     in wmJNIc.c on line 92      
+
+COPT = -g +z +DAportable +DS2.0 
+JOPT = -Ae +u4 -DNATIVE -D_POSIX_C_SOURCE=199506L
+LOPT = -b +s 
+JDKDIR = /usr/local/java/1.2
+INCLUDES = -I$(JDKDIR)/include -I$(JDKDIR)/include/hp-ux
+THRDIR = $(JDKDIR)/jre/lib/PA_RISC
+CC = cc
+LD = ld 
+SRCDIR= ../src/
+
+all: clean hpx_wmJNIlib hpx_wmJNIclib
+
+libwmJNI.obj:  $(SRCDIR)wmJNI.c $(SRCDIR)wmJNI.h
+	$(CC) $(COPT) $(JOPT) $(INCLUDES) \
+		-c $(SRCDIR)wmJNI.c -o libwmJNI.obj
+
+hpx_wmJNIlib:  libwmJNI.obj
+	ar r libwmJNI.a libwmJNI.obj;
+	$(LD) $(LOPT) libwmJNI.obj -o libwmJNI.sl
+
+libwmJNIc.obj: $(SRCDIR)wmJNIc.c $(SRCDIR)wmJNIc.h $(SRCDIR)wmJNI.h $(SRCDIR)wmUtil.h
+	$(CC) $(COPT) $(JOPT) $(INCLUDES) \
+		-c $(SRCDIR)wmJNIc.c -o libwmJNIc.obj
+		
+hpx_wmJNIclib:	libwmJNIc.obj
+	ar r libwmJNIc.a libwmJNIc.obj;
+	$(LD) $(LOPT) libwmJNIc.obj -o libwmJNIc.sl
+
+
+clean:
+	rm -f lib* core 
+

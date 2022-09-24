@@ -1,0 +1,36 @@
+  <!--
+    This WS-SecurityPolicy has the following constraints: 
+    1. One SupportingToken with IssuedToken assertion is required 
+    2. No request/response Signature and Encryption is enforced
+  -->
+
+<wsp:Policy wsu:Id="SAMLAuthentication" Name="SAML Authentication"
+  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+
+  <wsp:ExactlyOne>
+    <wsp:All>
+      <sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+        <wsp:Policy>
+          <sp:IssuedToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+            <sp:RequestSecurityTokenTemplate>
+              <wst:TokenType xmlns:wst="http://schemas.xmlsoap.org/ws/2005/02/trust">http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV1.1</wst:TokenType>
+              <wst:KeyType xmlns:wst="http://schemas.xmlsoap.org/ws/2005/02/trust">http://schemas.xmlsoap.org/ws/2005/02/trust/PublicKey</wst:KeyType>
+            </sp:RequestSecurityTokenTemplate>
+            <wsp:Policy>
+              <sp:RequireInternalReference />
+            </wsp:Policy>
+            <Issuer xmlns="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+            
+              <!--********************************************************************-->
+              <!--* Fill in the Endpoint reference of the Secure Token Service (STS) *-->
+              <!--********************************************************************-->
+              <Address xmlns="http://www.w3.org/2005/08/addressing">http://???</Address>
+              
+            </Issuer>
+          </sp:IssuedToken>
+        </wsp:Policy>
+      </sp:SupportingTokens>
+    </wsp:All>
+  </wsp:ExactlyOne>
+</wsp:Policy>

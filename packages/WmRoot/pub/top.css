@@ -1,0 +1,87 @@
+@import url("css/sag-delite.css");
+.tdmasthead {
+    background-color: #1776BF;
+	height: 50px;
+}
+.toptittlerow {
+    background-color: #1776BF;
+    vertical-align: middle;
+}
+.topbar {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border: none;
+    height: 50px;
+    max-height: 50px;
+    min-height: 50px;
+    width: 100%;
+}
+
+.toptitle {
+    font-family: 'Roboto',Arial,Sans-serif;
+    text-align: left;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 1x;
+    vertical-align: middle;
+    background-color: #1776BF;
+    height: 50px;
+}
+
+.saglogo {
+    padding-left: 30px;
+    padding-right: 60px;
+    vertical-align: middle;
+    background-color: #1776BF;
+    height: 50px;
+}
+
+.topmenu {
+    text-align: right;
+    color: #2D3F59;
+    vertical-align: middle;
+    background-color: #1776BF;
+    padding-right: 30px;
+    height: 50px;
+}
+
+.topmenu a { 
+    color: #fff; 
+    text-decoration: none;
+}
+
+.topmenu a:hover { 
+    color: #B4C3DA;
+}
+
+.topmenu a:focus { 
+	border-left: 2px dotted #ffffff;
+    border-right: 2px dotted #ffffff;
+    border-top: 2px dotted #ffffff;
+    border-bottom: 2px dotted #ffffff;
+}
+
+.topmessage {
+    font-weight: bold;
+    background-color: #F0F0E0;
+    color: #000000;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.Centered
+{
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.Centerer
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}

@@ -1,0 +1,1154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Integration Server or Microservices Runtime Image Creation for Docker" default="help" basedir=".">
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+    <!-- This script is meant to reside in IntegrationServer/instances and the following
+         paths are derived from that directory. -->
+    <property name="source.is.dir" value="${basedir}/.." />
+    <property name="common.is.dir" value="${source.is.dir}" />
+    <property name="sag.home.dir" value="${common.is.dir}/.." />
+    <property name="instances.dir" value="${common.is.dir}/instances" />
+    <property name="default.instance.dir" value="${instances.dir}/default" />
+
+    <if><not>
+            <isset property="instance.name"/>
+        </not>
+        <then>
+            <property name="instance.name" value="default" />
+        </then>
+    </if>
+
+	<if><not>
+            <isset property="javac.exe"/>
+        </not>
+        <then>
+            <property name="javac.exe" value="${sag.home.dir}/jvm/jvm/bin/javac" />
+        </then>
+    </if>
+	
+    <target name="help">
+        <echo>
+		
+	Integration Server or Microservices Runtime image creation script for use with Docker containers. 
+	
+	To create a Docker image for Integration Server or Microservices Runtime, follow the steps below.
+	  
+	1.	Create a Dockerfile that will be used to create the Integration Server or Microservices Runtime image by executing the is_container script with createDockerfile or createLeanDockerfile as the command line argument.
+	2.	Create a base image for Integration Server or Microservices Runtime by executing the is_container script with build as the command line argument. 
+	3.	Optionally, Specify a list of packages to include in the Integration Server or Microservices Runtime image by executing the is_container script with createPackageDockerfile as the command line argument. 
+	4.	Optionally, Create an Integration Server or Microservices Runtime image that contains the specific set of package(s) by executing the is_container script with buildPackage as the command line argument.
+	
+	Optionally, based on your environmental requirements, execute is_container script with one or more of the following command line arguments:
+
+		saveImage to save an Integration Server or Microservices Runtime image to a file.
+		loadImage to load an Integration Server or Microservices Runtime image to a Docker registry.
+		pushImage to push an Integration Server image created for the on-premise Integration Server to the webMethods Integration Cloud or a Docker registry.
+
+
+  Usage:
+
+    createDockerfile - Creates a Dockerfile for a base Integration Server instance or Microservices Runtime, including "Default" and "Wm" packages only.
+      -Dimage.name={name of base image upon which this image should be built - optional, default is centos:8}
+      -Dinstance.name={name of Integration Server instance for which to create an image - optional, default is the instance named default. Not applicable for Microservices Runtime}
+      -Dport.list={comma-separated list of ports that need to be exposed in a Docker container - default value for primary, diagnostic and secure port is obtained from server configuration file}
+      -Dpackage.list={comma-separated list of packages beginning with Wm to include in the image - optional, default is all, 
+                     which indicates that the image will include the Default package and all packages on the instance that begin with Wm}
+      -Dinclude.jdk={Indicates if JDK or JRE should be included in the image; true includes JDK, false includes JRE, none excludes JDK and JRE - optional, default is true}
+      -Dfile.name={filename for the generated Dockerfile - optional, default is Dockerfile_IS. Dockerfile is created under the root Integration Server or Microservices Runtime installation directory}
+      -Dtarget.configuration={Target configuration for which Dockerfile is created - optional; wmcloud will create Dockerfile to use for Lift and Shift, localdev will create Dockerfile to use for Local Version Control Integration, OpenShift will create Dockerfile to use for OpenShift}
+      -Dimage.createUser={Indicates if user sagadmin should be created for this image - optional; default is true}
+      -Dexclude.components=List of Optional components eg. WebServices. This param is only used while creating IS Microservices Runtime docker script. The components will then be excluded from IS MSR Docker image. 
+
+    createLeanDockerfile - Creates a Dockerfile for a base Integration Server instance or Microservices Runtime, including the "Default" package and the "Wm" packages that are required for core Integration Server or Microservices Runtime such as WmRoot, WmPublic, WmCloud and WmAdmin.
+      -Dimage.name={name of base image upon which this image should be built - optional, default is centos:8}
+      -Dinstance.name={name of Integration Server instance for which to create an image - optional, default is the instance named default. Not applicable for Microservices Runtime}
+      -Dport.list={comma-separated list of ports that need to be exposed in a Docker container - default value for primary, diagnostic and secure port is obtained from server configuration file}
+      -Dinclude.jdk={Indicates if JDK or JRE should be included in the image; true includes JDK, false includes JRE, none excludes JDK and JRE - optional, default is false}	  
+      -Dfile.name={filename for the generated Dockerfile- optional, default is Dockerfile_IS. Dockerfile is created under the root Integration Server or Microservices Runtime installation directory}
+      -Dtarget.configuration={Target configuration for which Dockerfile is created - optional; wmcloud will create Dockerfile to use for Lift and Shift, localdev will create Dockerfile to use for Local Version Control Integration, OpenShift will create Dockerfile to use for OpenShift}
+      -Dimage.createUser={Indicates if user sagadmin should be created for this image - optional; default is true}
+      -Dexclude.components=List of Optional components eg. WebServices. This param is only used while creating IS Microservices Runtime docker script. The components will then be excluded from IS MSR Docker image. 
+              
+    createPackageDockerfile - Creates a Dockerfile for custom packages. 
+      -Dinstance.name={name of Integration Server instance that contains the custom packages - optional, default is the instance named default. Not applicable for Microservices Runtime}
+      -Dimage.name={name of base Integration Server or Microservices Runtime image upon which this image should be built - optional, default is is:micro}
+      -Dpackage.list={comma-separated list of custom packages to include in the image - optional, default is all, 
+                    which indicates that the image will include all the packages on the instance that do not begin with Wm and Default}
+      -Dfile.name={filename for the generated Dockerfile - optional, default is Dockerfile_IS_Pkg. 
+                    File is created under packages directory of specified instance for Integration Server, specifically: Integration Server_directory/instances/instanceName/packages/
+					File is created under packages directory of Microservices Runtime, specifically: Integration Server_directory/packages/}
+	  -Dtarget.configuration={Target configuration for which Dockerfile is created - optional; OpenShift will create Dockerfile to use for OpenShift}
+      -Dimage.createUser={Indicates if user sagadmin should be created for this image - optional; default is true}
+
+    build - Executes Docker build using the provided Dockerfile to build a base image of Integration Server or Microservices Runtime. 
+      -Dfile.name={filename of the Dockerfile for build - optional, default is Dockerfile_IS. 
+                    Docker build expects the file to be located under root of the Integration Server or Microservices Runtime installation directory}
+      -Dimage.name={name for the generated base image - optional, default is is:micro}
+            
+    buildPackage - Executes Docker build to using the provided Dockerfile to build an image of Integration Server or Microservices Runtime that contains custom packages. You can use this image to run inside a Docker Container. 
+      -Dinstance.name={name of Integration Server instance that contains the custom packages - optional, default is the instance named default. Not applicable for Microservices Runtime}
+      -Dfile.name={filename of the Dockerfile for build - optional, default is Dockerfile_IS_Pkg. 
+                    Docker build uses the file located in the packages directory of specified instance for Integration Server, specifically: Integration Server_directory/instances/instanceName/packages/
+					Docker build uses the file located in the packages directory of Microservices Runtime, specifically: Integration Server_directory/packages/}
+      -Dimage.name={name for the generated image that contains the custom packages - optional, default is is:microPkg}
+
+    saveImage - Saves the image from the local Docker registry into a tar file specified by the file.path parameter.
+      -Dimage.name={image that needs to be saved - required}
+      -Dfile.path={file path for saved image, including directory and file name - optional, default file path is  IntegrationServer/docker/images/imageName.tar}
+
+    loadImage - Loads the image specified in the file.path parameter into a Docker registry. 
+      -Dfile.path={file path, including directory and file name, from where image will be loaded - required}
+
+    pushImage - Pushes Integration Server or Microservices Runtime image created for the on-premise Integration Server into the webMethods Integration Cloud or Docker registry for Integration Server or Microservices Runtime. 
+      -Duser={Username to access webMethods Integration Cloud - required}
+      -Dpassword={Password associated with the username - optional, user will be prompted for password if it is not provided}
+      -Dserver={URL for webMethods Integration Cloud registry or Docker registry - required, example {domainName}.webmethodscloud.com or docker.io}
+      -Dstage.name={Stage to which to push image - required if registry is pointing to webMethods Integration Cloud. Valid values are: development, test, prelive, live}
+      -Dsubdomain.name={Subdomain used for accessing webmethodscloud.com - required if registry is pointing to webMethods Integration Cloud}
+      -Drepository.name={Repository into which to push image - optional if not using webmethodscloud.com. For webmethodscloud.com, repository.name is derived automatically from stage.name and subdomain.name}
+      -Dimage.name={name of Integration Server or Microservices Runtime image to push}
+              
+    help - Displays this usage information.
+	
+        </echo>
+    </target>
+
+	<taskdef name="auditConfig" classname="com.wm.ant.DockerAuditConfigUtil"
+	         classpath="${common.is.dir}/lib/wm-is-osgi-profile.jar"/>
+	
+	<target name="initEnv" depends="getOS" if="is.windows">
+		<property name="image.createUser" value="false"/>
+		<if><not>
+            <isset property="target.OS"/>
+        </not>
+        <then>
+            <property name="target.OS" value="windows"/>
+			
+			<if><not>
+				<isset property="product.rootDir"/>
+			</not>
+				<then>
+					<property name="product.rootDir" value="c:/SoftwareAG"/>
+				</then>
+			</if>
+			
+			<if><not>
+					<isset property="image.name"/>
+				</not>
+				<then>
+					<fail message="A Dockerfile cannot be created because the -Dimage.name parameter was not specified. To create a Dockerfile for an Integration Server that runs on Windows, the createDockerfile command must specify the -Dimage.name=mcr.microsoft.com/windows/servercore:YourOsImageTag where YourOsImageTag is the tag for the Windows image created for your OS version on which Integration Server runs. Consult the following location to find the tag for your Windows OS version that Integration Server uses: https://hub.docker.com/_/microsoft-windows-servercore"/>
+				</then>
+			</if>
+        </then>
+		<else>
+			<if><not>
+				<isset property="image.name"/>
+			</not>
+			<then>
+				<property name="image.name" value="centos:8"/>
+			</then>
+			</if>
+			
+			<if><not>
+				<isset property="product.rootDir"/>
+			</not>
+				<then>
+					<property name="product.rootDir" value="/opt/softwareag"/>
+				</then>
+			</if>
+			
+		</else>
+		</if>
+	</target>
+
+	<target name="createLeanDockerfileIS">
+	
+		<echo>
+			   Creating Dockerfile ${sag.home.dir}/${file.name}
+		</echo>		
+
+		<copy file="${sag.home.dir}/profiles/IS_${instance.name}/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info" 
+				tofile="${sag.home.dir}/profiles/IS_${instance.name}/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info.fixes"/>
+		
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="baseIS"/>
+			 <arg value="--instance"/>
+			 <arg value="${instance.name}"/>
+			 <arg value="--ports"/>
+			 <arg value="${port.list}"/>
+			 <arg value="--packages"/>
+			 <arg value="Default,WmRoot,WmPublic,WmCloud,WmAdmin"/>
+			 <arg value="--file"/>
+			 <arg value="${sag.home.dir}/${file.name}"/>			 
+			 <arg value="-jdk"/>
+			 <arg value="false"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>			 
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>			 
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>	
+             <sysproperty key="packages.dir" value="${instances.dir}/${instance.name}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+		<antcall target="createDockerIgnoreIS"/>
+	</target>
+
+	<target name="createLeanDockerfileMSR">
+	
+		<echo>
+			   Creating Dockerfile ${sag.home.dir}/${file.name}
+		</echo>		
+
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="baseMSR"/>
+			 <arg value="--ports"/>
+			 <arg value="${port.list}"/>
+			 <arg value="--packages"/>
+			 <arg value="Default,WmRoot,WmPublic,WmCloud,WmAdmin"/>
+			 <arg value="--file"/>
+			 <arg value="${sag.home.dir}/${file.name}"/>			 
+			 <arg value="-jdk"/>
+			 <arg value="false"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>			 
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>			 
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>	
+		 	 <arg value="--excludeComponents"/>
+		 	 <arg value="${exclude.components}"/>	
+             <sysproperty key="packages.dir" value="${common.is.dir}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+		<antcall target="createDockerIgnoreMSR"/>
+	</target>
+	
+	<target name="createLeanDockerfile" depends="initEnv,checkMicroservicesRuntime">
+	
+	    <if><not>
+            <isset property="port.list"/>
+        </not>
+        <then>
+            <property name="port.list" value=" "/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="file.name"/>
+        </not>
+        <then>
+            <property name="file.name" value="Dockerfile_IS"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="target.configuration"/>
+        </not>
+        <then>
+            <property name="target.configuration" value=""/>
+        </then>
+		</if>
+		
+		<if><not>
+			<isset property="product.rootDir"/>
+		</not>
+			<then>
+				<property name="product.rootDir" value="/opt/softwareag"/>
+			</then>
+		</if>
+
+		<if><not>
+			<isset property="image.name"/>
+		</not>
+		<then>
+			<property name="image.name" value="centos:8"/>
+		</then>
+		</if>
+		
+		<if><not>
+			<isset property="image.createUser"/>
+		</not>
+		<then>
+			<property name="image.createUser" value="true"/>
+		</then>
+		</if>
+
+	    <if><not>
+            <isset property="include.jdk"/>
+        </not>
+        <then>
+            <property name="include.jdk" value="false"/>
+        </then>
+		</if>
+		
+        <property name="image.lean" value="true" />
+
+		<if>
+			<and>
+				<isset property="isMicroservicesRuntime"/>
+			</and>
+		<then>
+			<antcall target="createLeanDockerfileMSR"/>
+		</then>
+			<else>
+				<antcall target="createLeanDockerfileIS"/>
+			</else>
+	    </if>
+		
+	</target>
+
+	<target name="createDockerfileIS" depends="initEnv">
+	
+		<echo>
+			   Creating Dockerfile ${sag.home.dir}/${file.name}
+		</echo>		
+
+		<copy file="${sag.home.dir}/profiles/IS_${instance.name}/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info" 
+				tofile="${sag.home.dir}/profiles/IS_${instance.name}/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info.fixes"
+				failonerror="false" quiet="true"/>
+		
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="baseIS"/>
+			 <arg value="--instance"/>
+			 <arg value="${instance.name}"/>
+			 <arg value="--ports"/>
+			 <arg value="${port.list}"/>
+			 <arg value="--packages"/>
+			 <arg value="${package.list}"/>
+			 <arg value="--file"/>
+			 <arg value="${sag.home.dir}/${file.name}"/>			 
+			 <arg value="-jdk"/>
+			 <arg value="${include.jdk}"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>	
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>			 
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>	
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>	
+                         <sysproperty key="packages.dir" value="${instances.dir}/${instance.name}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+
+		<antcall target="createDockerIgnoreIS"/>
+
+	</target>
+
+	<target name="createDockerfileMSR" depends="initEnv">
+	
+		<echo>
+			   Creating Dockerfile ${sag.home.dir}/${file.name}
+		</echo>		
+
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="baseMSR"/>
+			 <arg value="--ports"/>
+			 <arg value="${port.list}"/>
+			 <arg value="--packages"/>
+			 <arg value="${package.list}"/>
+			 <arg value="--file"/>
+			 <arg value="${sag.home.dir}/${file.name}"/>			 
+			 <arg value="-jdk"/>
+			 <arg value="${include.jdk}"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>	
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>			 
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>	
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>
+		 	 <arg value="--excludeComponents"/>
+		 	 <arg value="${exclude.components}"/>	
+             <sysproperty key="packages.dir" value="${common.is.dir}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+
+		<antcall target="createDockerIgnoreMSR"/>
+
+	</target>
+	
+	
+	<target name="createDockerfile" depends="initEnv,checkMicroservicesRuntime">
+	
+	    <if><not>
+            <isset property="package.list"/>
+        </not>
+        <then>
+            <property name="package.list" value="all"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="port.list"/>
+        </not>
+        <then>
+            <property name="port.list" value=" "/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="include.jdk"/>
+        </not>
+        <then>
+            <property name="include.jdk" value="true"/>
+        </then>
+		</if>
+		
+	    <if><not>
+            <isset property="file.name"/>
+        </not>
+        <then>
+            <property name="file.name" value="Dockerfile_IS"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="target.configuration"/>
+        </not>
+        <then>
+            <property name="target.configuration" value=""/>
+        </then>
+		</if>
+
+		<if><not>
+			<isset property="product.rootDir"/>
+		</not>
+			<then>
+				<property name="product.rootDir" value="/opt/softwareag"/>
+			</then>
+		</if>
+
+		<if><not>
+			<isset property="image.name"/>
+		</not>
+		<then>
+			<property name="image.name" value="centos:8"/>
+		</then>
+		</if>
+		
+		<if><not>
+			<isset property="image.createUser"/>
+		</not>
+		<then>
+			<property name="image.createUser" value="true"/>
+		</then>
+		</if>
+
+		<if>
+			<and>
+				<isset property="isMicroservicesRuntime"/>
+			</and>
+		<then>
+			<antcall target="createDockerfileMSR"/>
+		</then>
+			<else>
+				<antcall target="createDockerfileIS"/>
+			</else>
+	    </if>
+
+	</target>
+
+	<target name="initImageName">
+	    <if><not>
+            <isset property="image.name"/>
+        </not>
+        <then>
+            <property name="image.name" value="is:micro"/>
+        </then>
+		</if>
+	</target>
+
+	<target name="createPackageDockerfileIS">
+	
+		<echo>
+			   Creating Dockerfile ${instances.dir}/${instance.name}/packages/${file.name}
+		</echo>		
+
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="packageIS"/>
+			 <arg value="--instance"/>
+			 <arg value="${instance.name}"/>
+			 <arg value="--packages"/>
+			 <arg value="${package.list}"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>			 
+			 <arg value="--file"/>
+			 <arg value="${instances.dir}/${instance.name}/packages/${file.name}"/>			 
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>	
+             <sysproperty key="packages.dir" value="${instances.dir}/${instance.name}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+
+	</target>
+
+	<target name="createPackageDockerfileMSR">
+	
+		<echo>
+			   Creating Dockerfile ${common.is.dir}/packages/${file.name}
+		</echo>		
+
+		<path id="run.classpath">
+			 <fileset dir="${common.is.dir}/docker">
+				<include name="updates/*.jar"/>
+ 			 </fileset>			 
+			 <fileset dir="${common.is.dir}">
+				 <include name="lib/wm-isserver.jar" />
+			 </fileset>
+		 </path>
+
+		 <java classpathref="run.classpath" classname="com.softwareag.is.docker.DockerfileMaker" failonerror="true" fork="true" >
+			 <arg value="packageMSR"/>
+			 <arg value="--packages"/>
+			 <arg value="${package.list}"/>
+			 <arg value="--from"/>
+			 <arg value="${image.name}"/>			 
+			 <arg value="--file"/>
+			 <arg value="${common.is.dir}/packages/${file.name}"/>			 
+			 <arg value="--rootDir"/>
+			 <arg value="${product.rootDir}"/>
+			 <arg value="--target"/>
+			 <arg value="${target.configuration}"/>
+			 <arg value="--targetOS"/>
+			 <arg value="${target.OS}"/>	
+			 <arg value="--createUser"/>
+			 <arg value="${image.createUser}"/>	
+            <sysproperty key="packages.dir" value="${common.is.dir}/packages"/>
+			 <sysproperty key="sag.home.dir" value="${sag.home.dir}"/>
+		</java>
+
+	</target>
+	
+	<target name="createPackageDockerfile" depends="initImageName, initEnv, checkMicroservicesRuntime">
+	
+	    <if><not>
+            <isset property="package.list"/>
+        </not>
+        <then>
+            <property name="package.list" value="all"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="file.name"/>
+        </not>
+        <then>
+            <property name="file.name" value="Dockerfile_IS_Pkg"/>
+        </then>
+		</if>
+		
+		<if><not>
+			<isset property="image.createUser"/>
+		</not>
+		<then>
+			<property name="image.createUser" value="true"/>
+		</then>
+		</if>
+
+		<if><not>
+			<isset property="product.rootDir"/>
+		</not>
+			<then>
+				<property name="product.rootDir" value="/opt/softwareag"/>
+			</then>
+		</if>
+		
+		<if>
+			<and>
+				<isset property="isMicroservicesRuntime"/>
+			</and>
+		<then>
+			<antcall target="createPackageDockerfileMSR"/>
+		</then>
+			<else>
+				<antcall target="createPackageDockerfileIS"/>
+			</else>
+	    </if>
+
+	</target>
+
+    <target name="createDockerIgnoreIS">
+        <echo file="${sag.home.dir}/.dockerignore" append="false">**/org.eclipse.osgi
+Developer
+Designer
+Broker
+UniversalMessaging
+MWS
+IntegrationServer/packages
+profiles/SPM
+profiles/InfraDC
+profiles/MWS_default
+profiles/CTP
+IntegrationServer/instances/template.zip
+IntegrationServer/instances/${instance.name}/config/backup
+IntegrationServer/instances/${instance.name}/config/repository4.cnf
+IntegrationServer/instances/${instance.name}/config/work
+IntegrationServer/instances/${instance.name}/WmRepository4
+IntegrationServer/instances/${instance.name}/DocumentStore
+IntegrationServer/instances/${instance.name}/XAStore
+IntegrationServer/instances/${instance.name}/logs
+IntegrationServer/instances/${instance.name}/packages/WmRoot/pub/doc
+IntegrationServer/instances/${instance.name}/packages/WmAssetPublisher/pub/doc
+IntegrationServer/instances/${instance.name}/replicate/archive
+common/lib/tw-3.5.25
+common/lib/tw-3.5.29
+common/lib/tw-3.5.32
+common/lib/diagnostic-tool
+common/lib/migrate
+common/lib/spm-metering-validator.jar
+common/lib/wm-jmsadmin.jar
+common/lib/umTransport.jar
+common/lib/umStorage.jar
+common/lib/nPlugin.jar
+common/lib/wm-trang.jar
+common/lib/uddi-client.jar
+common/lib/cds/jetty-io.jar
+common/lib/glassfish/gf.jersey-json.jar
+common/lib/glassfish/gf.jaxm-api.jar
+common/lib/glassfish/gf.javax.servlet.jsp.jar
+common/lib/glassfish/gf.javax.servlet.jsp-api.jar
+common/lib/glassfish/gf.javax.persistence.jar
+common/lib/glassfish/gf.javax.el-api.jar
+common/lib/glassfish/gf.javax.ejb.jar
+common/lib/glassfish/gf.javax.annotation.jar
+common/lib/glassfish/gf.jackson-jaxrs.jar
+common/lib/glassfish/gf.asm.jar
+common/lib/ext/slf4j-jdk14.jar
+common/lib/ext/not-yet-commons-ssl.jar
+common/lib/ext/castor-xml.jar
+common/lib/ext/castor-xml-schema.jar
+common/lib/ext/castor-xml-schema-extension.jar
+common/lib/ext/castor-core.jar
+common/lib/ext/servlet-api.jar
+common/lib/ext/jsf-impl.jar
+common/lib/ext/concurrent.jar
+common/bin/wrapper-3.5.25
+common/bin/wrapper-3.5.29
+common/bin/wrapper-3.5.32
+common/runtime/bundles/platform-test
+common/runtime/bundles/broker-shared
+common/runtime/bundles/is-shared
+common/runtime/bundles/cc-shared
+common/runtime/bundles/cmp-api
+common/runtime/bundles/cmp-is
+common/runtime/bundles/sd
+common/runtime/bundles/spm
+common/runtime/bundles/spm-is
+common/runtime/bundles/sum-cc
+profiles/IS_${instance.name}/configuration/org.eclipse.osgi
+profiles/IS_${instance.name}/logs
+install/logs
+install/fix
+_documentation
+Apama
+ApamaCapitalMarketsFoundation
+Applinx
+CentraSite
+CloudStreamsAnalytics
+CommandCentral
+CSP Light
+EntireX
+InfrastructureDC
+MashZoneNG
+Solutions
+Terracotta
+TerracottaDB
+Zementis
+</echo>
+
+         <if>
+            <and>
+                <isset property="image.lean"/>
+                <equals arg1="${image.lean}" arg2="true"/>
+            </and>
+         <then>  
+           <echo file="${sag.home.dir}/.dockerignore" append="true">IntegrationServer/instances/${instance.name}/packages/WmART
+IntegrationServer/instances/${instance.name}/packages/WmARTExtDC
+IntegrationServer/instances/${instance.name}/packages/WmFlatFile
+IntegrationServer/instances/${instance.name}/packages/WmISExtDC
+IntegrationServer/instances/${instance.name}/packages/WmVCS
+IntegrationServer/instances/${instance.name}/packages/WmXSLT
+</echo>
+         </then>
+         </if>
+
+         <if>
+            <and>
+                <isset property="include.jdk"/>
+                <equals arg1="${include.jdk}" arg2="false"/>
+            </and>
+         <then>  
+           <echo file="${sag.home.dir}/.dockerignore" append="true">jvm/jvm/db
+jvm/jvm/man
+</echo>
+         </then>
+         </if>
+    </target>
+
+    <target name="createDockerIgnoreMSR">
+        <echo file="${sag.home.dir}/.dockerignore" append="false">Developer
+Designer
+Broker
+UniversalMessaging
+MWS
+profiles/SPM
+profiles/InfraDC
+profiles/MWS_default
+profiles/CTP
+IntegrationServer/instances
+IntegrationServer/config/backup
+IntegrationServer/config/repository4.cnf
+IntegrationServer/config/work
+IntegrationServer/WmRepository4
+IntegrationServer/DocumentStore
+IntegrationServer/XAStore
+IntegrationServer/logs
+IntegrationServer/bin/.lock
+IntegrationServer/bin/.shutdown
+IntegrationServer/packages/WmRoot/pub/doc
+IntegrationServer/packages/WmAssetPublisher/pub/doc
+IntegrationServer/replicate/archive
+common/lib/tw-3.5.25
+common/lib/tw-3.5.29
+common/lib/tw-3.5.32
+common/lib/diagnostic-tool
+common/lib/migrate
+common/lib/spm-metering-validator.jar
+common/lib/wm-jmsadmin.jar
+common/lib/umTransport.jar
+common/lib/umStorage.jar
+common/lib/nPlugin.jar
+common/lib/wm-trang.jar
+common/lib/uddi-client.jar
+common/lib/cds/jetty-io.jar
+common/lib/glassfish/gf.jersey-json.jar
+common/lib/glassfish/gf.jaxm-api.jar
+common/lib/glassfish/gf.javax.servlet.jsp.jar
+common/lib/glassfish/gf.javax.servlet.jsp-api.jar
+common/lib/glassfish/gf.javax.persistence.jar
+common/lib/glassfish/gf.javax.el-api.jar
+common/lib/glassfish/gf.javax.ejb.jar
+common/lib/glassfish/gf.javax.annotation.jar
+common/lib/glassfish/gf.jackson-jaxrs.jar
+common/lib/glassfish/gf.asm.jar
+common/lib/ext/slf4j-jdk14.jar
+common/lib/ext/not-yet-commons-ssl.jar
+common/lib/ext/castor-xml.jar
+common/lib/ext/castor-xml-schema.jar
+common/lib/ext/castor-xml-schema-extension.jar
+common/lib/ext/castor-core.jar
+common/lib/ext/servlet-api.jar
+common/lib/ext/jsf-impl.jar
+common/lib/ext/concurrent.jar
+common/bin/wrapper-3.5.25
+common/bin/wrapper-3.5.29
+common/bin/wrapper-3.5.32
+common/runtime
+install/bms
+install/configurations
+install/dbparams
+install/etc
+install/history
+install/jars
+install/logs
+install/fix
+install/portparams
+install/repo
+_documentation
+Apama
+ApamaCapitalMarketsFoundation
+Applinx
+CentraSite
+CloudStreamsAnalytics
+CommandCentral
+CSP Light
+EntireX
+InfrastructureDC
+MashZoneNG
+Solutions
+Terracotta
+TerracottaDB
+Zementis
+</echo>
+
+         <if>
+            <and>
+                <isset property="image.lean"/>
+                <equals arg1="${image.lean}" arg2="true"/>
+            </and>
+         <then>  
+           <echo file="${sag.home.dir}/.dockerignore" append="true">IntegrationServer/packages/WmART
+IntegrationServer/packages/WmARTExtDC
+IntegrationServer/packages/WmFlatFile
+IntegrationServer/packages/WmISExtDC
+IntegrationServer/packages/WmVCS
+IntegrationServer/packages/WmXSLT
+common/lib/terracotta-toolkit-runtime-ee.jar
+</echo>
+         </then>
+         </if>
+
+         <if>
+            <and>
+                <isset property="include.jdk"/>
+                <equals arg1="${include.jdk}" arg2="false"/>
+            </and>
+         <then>  
+           <echo file="${sag.home.dir}/.dockerignore" append="true">jvm/jvm/db
+jvm/jvm/man
+</echo>
+         </then>
+         </if>
+    </target>
+	
+	<target name="build">
+	
+	    <if><not>
+            <isset property="image.name"/>
+        </not>
+        <then>
+            <property name="image.name" value="is:micro"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="file.name"/>
+        </not>
+        <then>
+            <property name="file.name" value="Dockerfile_IS"/>
+        </then>
+		</if>
+		
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="build"/>
+			<arg value="-t"/>
+			<arg value="${image.name}"/>
+			<arg value="-f"/>
+			<arg value="${file.name}"/>
+			<arg value="."/>
+		</exec>
+
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="image"/>
+			<arg value="prune"/>
+			<arg value="--filter"/>
+			<arg value="label=com.softwareag.product=IntegrationServerOpenShiftBase"/>
+			<arg value="-f"/>
+		</exec>
+
+	</target>
+	
+	<target name="buildPackage" depends="checkMicroservicesRuntime">
+	
+	    <if><not>
+            <isset property="image.name"/>
+        </not>
+        <then>
+            <property name="image.name" value="is:microPkg"/>
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="file.name"/>
+        </not>
+        <then>
+            <property name="file.name" value="Dockerfile_IS_Pkg"/>
+        </then>
+		</if>
+
+		<if>
+			<and>
+				<isset property="isMicroservicesRuntime"/>
+			</and>
+		<then>
+			<property name="exec.dir" value="${common.is.dir}/packages"/>
+		</then>
+			<else>
+				<property name="exec.dir" value="${instances.dir}/${instance.name}/packages"/>
+			</else>
+	    </if>
+		
+		<exec dir="${exec.dir}" executable="docker">
+			<arg value="build"/>
+			<arg value="-t"/>
+			<arg value="${image.name}"/>
+			<arg value="-f"/>
+			<arg value="${file.name}"/>
+			<arg value="."/>
+		</exec>
+	</target>
+	
+	<target name="saveImage" depends="getOS">
+	
+	    <if><not>
+            <isset property="image.name"/>
+        </not>
+        <then>
+            <fail message="Required property 'image.name' is not set." />
+        </then>
+		</if>
+	
+	    <if><not>
+            <isset property="file.path"/>
+        </not>
+        <then>
+			<if>
+				<equals arg1="${is.windows}" arg2="true"/>
+				<then>
+					<propertyregex property="file.name" input="${image.name}" global="true" regexp=":" replace="_"/>            
+					<property name="file.path" value="${basedir}/images/${file.name}.tar"/>				
+				</then>
+				<else>
+					<property name="file.path" value="${basedir}/images/${image.name}.tar"/>				
+				</else>
+			</if>
+			
+        </then>
+		</if>
+		
+		<mkdir dir="${basedir}/images"/>
+		
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="save"/>
+			<arg value="-o"/>
+			<arg value="${file.path}"/>
+			<arg value="${image.name}"/>
+		</exec>
+		
+	</target>
+	
+	<target name="loadImage">
+
+	    <if><not>
+            <isset property="file.path"/>
+        </not>
+        <then>
+            <fail message="Required property 'file.path' is not set." />
+        </then>
+		</if>
+
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="load"/>
+			<arg value="-i"/>
+			<arg value="${file.path}"/>
+		</exec>
+		
+	</target>
+
+	<target name="pushImage">
+
+	    <if><not>
+            <isset property="user"/>
+        </not>
+        <then>
+            <fail message="Required property 'user' is not set." />
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="password"/>
+        </not>
+        <then>
+			<input message="Password: " addproperty="password">
+				<handler classname="org.apache.tools.ant.input.SecureInputHandler" />
+			</input>
+        </then>
+		</if>
+		
+	    <if><not>
+            <isset property="server"/>
+        </not>
+        <then>
+            <fail message="Required property 'server' is not set." />
+        </then>
+		</if>
+
+	    <if><not>
+            <isset property="image.name"/>
+        </not>
+        <then>
+            <fail message="Required property 'image.name' is not set." />
+        </then>
+		</if>
+
+		<if>
+    		<isset property="stage.name"/>
+			<then>
+				<condition property="stageConfigured" else="false">
+					<and>
+						<isset property="stage.name"/>
+						<!-- Validating db.type -->
+						<or>
+							<equals arg1="development" arg2="${stage.name}" casesensitive="true" trim="true" />
+							<equals arg1="test" arg2="${stage.name}" casesensitive="true" trim="true"/>
+							<equals arg1="prelive" arg2="${stage.name}" casesensitive="true" trim="true"/>
+							<equals arg1="live" arg2="${stage.name}" casesensitive="true" trim="true"/>							
+						</or>
+					</and>
+			   </condition>	
+
+				<if>
+					<equals arg1="${stageConfigured}" arg2="false"/>
+					<then>
+							<fail message="Invalid value for stage.name parameter. Valid values are development,test,prelive,live."/>
+					</then>
+				</if>
+			   
+				<if>
+					<not>
+						<isset property="subdomain.name"/>
+					</not>
+					<then>
+						<fail message="Required property 'subdomain.name' is not set." />
+					</then>
+					<else>
+						<property name="repository.name" value="${subdomain.name}/${stage.name}"/>
+					</else>				
+				</if>
+			   
+		    </then>
+			<else>
+				<if><not>
+					<isset property="repository.name"/>
+				</not>
+				<then>
+					<property name="repository.name" value="${user}"/>
+				</then>
+				</if>	
+			</else>
+    	</if>
+
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="login"/>
+			<arg value="-u"/>
+			<arg value="${user}"/>
+			<arg value="-p"/>
+			<arg value="${password}"/>
+			<arg value="${server}"/>
+		</exec>
+
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="tag"/>
+			<arg value="${image.name}"/>			
+			<arg value="${server}/${repository.name}/${image.name}"/>
+		</exec>
+		
+		<exec dir="${sag.home.dir}" executable="docker" failonerror="true">
+			<arg value="push"/>
+			<arg value="${server}/${repository.name}/${image.name}"/>
+		</exec>
+				
+	</target>
+	
+	<target name="getOS">
+        <condition property="is.windows">
+            <os family="windows"/>
+        </condition>
+        <condition property="is.unix">
+            <os family="unix"/>
+        </condition>
+    </target>
+
+    <target name="checkMicroservicesRuntime">
+        <condition property="isMicroservicesRuntime">
+            <available file="${sag.home.dir}/install/products/MSC.prop" type="file"/>
+        </condition>
+    </target>	
+	
+	<target name="updateDockerConfigFiles">
+		<antcall target="updateServerCnfFile" />
+		<antcall target="updateAuditConfigForDocker" />
+	</target>
+		
+	<target name="updateServerCnfFile">
+		<propertyfile
+		file="${docker.isHomeDir}/config/server.cnf"
+		comment="Default server.cnf file">
+				<entry  key="watt.server.homeDir" operation="del"/>
+				<entry  key="watt.server.terracotta.license.path" operation="del"/>
+				<entry  key="watt.security.KeystoreAndTruststore.defaultAliasCreated" value="false"/>
+				<entry  key="watt.server.compile" value="${javac.exe} -classpath {0} -d {1} {2}"/>
+			    <entry  key="watt.server.inetaddress" operation="del"/>
+		</propertyfile>
+	</target>
+	
+	<target name="updateAuditConfigForDocker">
+		<if>
+			<available file="${docker.isHomeDir}/config/auditing/AuditConfig.xml" type="file"/>
+			<then>
+		<auditConfig 
+			 auditConfigDir="${docker.isHomeDir}/config/auditing"
+			 auditConfigFile="AuditConfig.xml"
+			 dockerRootDir="${docker.rootDir}">
+		</auditConfig>
+			</then>
+		</if>
+	</target>	
+</project>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+    <record name="DEFAULT_XA_STORE" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="PERSISTENCEMODE">persistent</value>
+      <value name="NAME">XADefaultStore</value>
+      <record name="PROPERTIES" javaclass="com.wm.data.ISMemDataImpl">
+        <value name="fsdata.dbName">DefaultXAStore</value>
+        <value name="fsdata.dbGroup">XAStore</value>
+        <value name="fsdata.logGroup">XAStore</value>
+        <value name="fsdata.dbSize">10</value>
+        <value name="fsdata.logSize">1</value>
+        <value name="fsdata.dataMaxExtents">1000</value>
+        <value name="fsdata.indexMaxExtents">1000</value>
+        <value name="fsdata.indexThreshold">75</value>
+        <value name="fsdata.dataThreshold">75</value>
+        <value name="fsdata.avgBlockSize">400</value>
+        <value name="fsdata.blockDevice">RAF</value>
+        <value name="fsdata.fullConsistencyCheck">conditional</value>
+        <value name="failonopen">rename</value>
+        <value name="warnonopen">rename</value>
+      </record>
+      <record name="ENDPOINT" javaclass="com.wm.data.ISMemDataImpl">
+        <value name="NAME">XADefaultEndPoint</value>
+        <value name="MSGHISTORYTIME">0</value>
+        <record name="CONSUMER" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="NAME">XADefaultConsumer</value>
+          <value name="ACKMODE">client</value>
+          <value name="MSGHISTORYTIME">0</value>
+        </record>
+      </record>
+    </record>
+    <record name="UNRESOLVED_XA_STORE" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="PERSISTENCEMODE">persistent</value>
+      <value name="NAME">UnResolvedXAStore</value>
+      <record name="PROPERTIES" javaclass="com.wm.data.ISMemDataImpl">
+        <value name="fsdata.dbName">UnResolvedXAStore</value>
+        <value name="fsdata.dbGroup">XAStore</value>
+        <value name="fsdata.logGroup">XAStore</value>
+        <value name="fsdata.dbSize">35</value>
+        <value name="fsdata.logSize">1</value>
+        <value name="fsdata.dataMaxExtents">1000</value>
+        <value name="fsdata.indexMaxExtents">1000</value>
+        <value name="fsdata.indexThreshold">75</value>
+        <value name="fsdata.dataThreshold">75</value>
+        <value name="fsdata.avgBlockSize">400</value>
+        <value name="fsdata.blockDevice">RAF</value>
+        <value name="fsdata.fullConsistencyCheck">conditional</value>
+        <value name="failonopen">rename</value>
+        <value name="warnonopen">rename</value>
+      </record>
+      <record name="ENDPOINT" javaclass="com.wm.data.ISMemDataImpl">
+        <value name="NAME">UnresolvedXAEndPoint</value>
+        <value name="MSGHISTORYTIME">0</value>
+        <record name="CONSUMER" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="NAME">UnresolvedXAConsumer</value>
+          <value name="ACKMODE">client</value>
+          <value name="MSGHISTORYTIME">0</value>
+        </record>
+      </record>
+    </record>
+  </record>
+</IDataXMLCoder>

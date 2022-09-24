@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseConfiguration dbVendor="Tibero">
+<typeMapping>
+</typeMapping>
+<extTypeMapping>
+	<jdbcType name="TiberoCURSOR" code="-17" typeClassName="com.wm.adapter.wmjdbc.config.impl.TiberoCursorType">
+		<javaType name="OBJECT" />
+	</jdbcType>		
+</extTypeMapping>
+<columnTypeMapping>
+	<columnType nativeSqlType="CURSOR" jdbcTypeName="TiberoCURSOR" />
+	<columnType nativeSqlType="REF CURSOR" jdbcTypeName="TiberoCURSOR" />
+</columnTypeMapping>
+</databaseConfiguration>

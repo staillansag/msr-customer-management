@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file includes list of data files of layered products that will need to be migrated from Source IS to destination IS. 
+     If an entry represents a directory, then all the files (non recursive) under that directory will be candidate of
+     copying from source to destination IS. -->
+     
+<IDataXMLCoder version="1.0">
+	<record javaclass="com.wm.data.ISMemDataImpl">
+   		<record name="layeredProducts" javaclass="com.wm.data.ISMemDataImpl"> 
+
+      		<record name="WmCommunicate" javaclass="com.wm.data.ISMemDataImpl">
+      			 <value name="displayName">Communicate</value>
+			     <array name="configFiles" type="value" depth="1">
+			     	<value>config/config.xml</value>
+			     	<value>config/configEDAOrchestrator.xml</value>
+			     </array>
+      		</record>
+
+      		<record name="WmBusinessRules" javaclass="com.wm.data.ISMemDataImpl">
+      			 <value name="displayName">Business Rules</value>
+			     <array name="configFiles" type="value" depth="1">
+			     	<value>projects</value>
+			     </array>
+      		</record>
+			
+			<record name="WmPRT" javaclass="com.wm.data.ISMemDataImpl">
+      			 <value name="displayName">Process Engine</value>
+			     <array name="configFiles" type="value" depth="1">
+			     	<value>config/prt.cnf</value>
+			     </array>
+      		</record>
+			
+      		<record name="WmMonitor" javaclass="com.wm.data.ISMemDataImpl">
+      			<value name="displayName">Monitor</value>
+        		<array name="configFiles" type="value" depth="1">
+          			<value>config/monitor.cnf</value>
+          		</array>
+      		</record>
+      		
+      		<record name="WmOptimize" javaclass="com.wm.data.ISMemDataImpl">
+      			<value name="displayName">Optimize</value>
+        		<array name="configFiles" type="value" depth="1">
+          			<value>config/WmOptimize.properties</value>
+          		</array>
+      		</record>
+      		
+      		<record name="WmEDIINT" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">EDIINT</value>
+			    <array name="configFiles" type="value" depth="1">
+			    	<value>config/properties.cnf</value>
+			    </array>
+			</record>
+			                                                
+			<record name="WmEDI" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">EDI</value>
+			    <array name="configFiles" type="value" depth="1">
+			    	<value>config/properties.cnf</value>
+			    	<value>config/format.xml</value>
+			    </array>
+			</record>
+			                                                
+			<record name="WmACH" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">ACH</value>
+			    <array name="configFiles" type="value" depth="1">
+			    	<value>config/config.xml</value>
+			    </array>
+			</record>
+			                                                
+			<record name="Wm1SYNC" javaclass="com.wm.data.ISMemDataImpl">
+			 	<value name="displayName">1SYNC</value>
+			    <array name="configFiles" type="value" depth="1">
+			    	<value>config/config.cnf</value>
+			    </array>
+			</record>
+			 
+			<record name="WmJDBCAdapter" javaclass="com.wm.data.ISMemDataImpl">
+			  	<value name="displayName">JDBC Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/clusterProperties.cnf</value>
+					<value>code/jars</value>
+					<value>code/jars/static</value>
+				</array>
+			</record>
+
+			<record name="WmMQAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Websphere MQ Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+					<value>code/jars/static</value>
+				</array>
+			</record>
+
+			<record name="WmSalesforceAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Salesforce Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+				</array>
+			</record>
+
+			<record name="WmSAP" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">SAP Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>txStore</value>
+					<value>code/jars</value>
+					<value>code/jars/static</value>
+					<value>ns/wm/sap/internal/ls/routingListener/node.ndf</value>
+					<value>logs</value>
+					<value>../../lib/sapjco3.dll</value>
+					<value>../../lib/libsapjco3.so</value>
+					<value>../../lib/libsapjco3.sl</value>
+					<value>../../lib/libsapjco3.jnilib</value>
+					<value>../../lib/libicudata34.a</value>
+					<value>../../lib/libicui18n34.a</value>
+					<value>../../lib/libicuuc34.a</value>
+					<value>../../lib/libpathextension.so</value>
+					<value>../../lib/os4apilib.so</value>
+				</array>
+		    </record>
+
+			<record name="WmEJBAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">EJB Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmPeopleSoftAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Peoplesoft Enterprise Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmSoperaAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Sopera Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmTuxedoAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Tuxedo Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmRemedyAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Remedy Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmLotusNotesAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Lotus Notes Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmSiebelAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Siebel Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+					<value>resources</value>
+				</array>
+			</record>
+
+			<record name="PSFT_E1_Adapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Peoplesoft EnterpriseOne Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>ns/connection</value>
+					<value>code/resources/EnterpriseOne</value>
+					<value>code/resources/E1_Reliable_Events</value>
+					<value>code/resources/E1_Guaranteed_Events</value>
+				</array>
+			</record>
+
+			<record name="WmOAAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Oracle Applications Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmAS400" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">AS/400 Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/as400.cnf</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmJmsAdapter" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">JMS Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+					<value>code/jars</value>
+				</array>
+			</record>
+
+			<record name="WmXI" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">SAP XI Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>store</value>
+					<value>code/jars</value>
+					<value>config</value>
+				</array>
+			</record>
+
+			<record name="WmMarketConnect" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">CommerceOne OnRamp Adapter</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>code/jars</value>
+					<value>config/config.xml</value>
+				</array>
+			</record>
+						
+			<record name="WmxCBL" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">CommerceOne OnRamp Adapter xCBL</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>schema</value>
+				</array>
+			</record>
+			
+			<record name="WmMFT" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">ActiveTransfer</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/properties.cnf</value>
+					<value>config/WebClientConfig.cnf</value>
+					<value>config/security.cnf</value>
+					<value>config/ExistingUserEmailContent.txt</value>
+					<value>config/NewUserEmailContent.txt</value>
+				</array>
+			</record>
+			
+			<record name="WmebXML" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">ebXML Module</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+				</array>
+			</record>
+						
+			<record name="WmRosettaNet" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">RosettaNet Module</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+				</array>
+			</record>
+						
+			<record name="WmChem" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Chem Module</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+				</array>
+			</record>
+						
+			<record name="WmPapinet" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Papinet Module</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config</value>
+				</array>
+			</record>
+			
+			<record name="WmFIN" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">WmFIN</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/config.env</value>
+					<value>config/CU.dat</value>
+					<value>config/fintransport.cnf</value>
+					<value>config/properties.cnf</value>
+					<value>config/wmcasmf.cnf</value>
+				</array>
+			</record>
+			
+			<record name="WmSWIFTNetClient" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">WmSWIFTNetClient</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/env.cnf</value>
+					<value>config/snl.cnf</value>
+					<value>config/rmiconfig.properties</value>
+				</array>
+			</record>
+			
+			<record name="WmSWIFTNetServer" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">WmSWIFTNetServer</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/connect.cnf</value>
+					<value>config/env.cnf</value>
+					<value>config/rmiconfig.properties</value>
+					<value>config/snl.cnf</value>
+				</array>
+			</record>
+			
+			<record name="WmEDIforTN" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">EDI Module Trading Networks</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>ns/EDIFFSchema</value>
+				</array>
+			</record>
+			
+			<record name="WmFlatFile" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">FlatFile</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/ff.cnf</value>
+					<value>config/nsplugins.cnf</value>
+					<value>config/sefparse.cnf</value>
+					<value>config/properties.cnf</value>
+					<value>config/ICS4X12.SEF</value>
+					<value>config/UNICSO.SEF</value>
+				</array>
+			</record>
+			
+			<record name="WmHL7" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">HL7</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/listeners.cnf</value>
+				</array>
+			</record>
+			
+			<record name="WmDeployer" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Deployer</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/deployer.cnf</value>
+					<value>regex:.*WmDeployer/config/plugin/.+/.*</value>
+			        	<value>config/repository</value>
+					<value>config/TargetServers</value>
+					<value>persist/projects</value>
+					<value>pub/projects</value>
+				</array>
+			</record>
+			
+			<record name="WmTaskClient" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Task Client Support</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/taskclient.properties</value>
+				</array>
+			</record>
+
+			<record name="WmTaskEngine" javaclass="com.wm.data.ISMemDataImpl"> 
+				<value name="displayName">Task Engine</value> 
+				<array name="configFiles" type="value" depth="1"> 
+					<value>config</value> 
+				</array> 
+			</record>
+			
+			<record name="WmTaskAssets" javaclass="com.wm.data.ISMemDataImpl"> 
+				<value name="displayName">Task Engine Assets</value> 
+				<array name="configFiles" type="value" depth="1"> 
+					<value>resources</value> 
+				</array> 
+			</record>			
+
+			<record name="WmTaskDesigner" javaclass="com.wm.data.ISMemDataImpl"> 
+				<value name="displayName">Task Designer Projects</value> 
+				<array name="configFiles" type="value" depth="1"> 
+					<value>config</value> 
+					<value>resources</value> 
+				</array> 
+			</record>			
+			
+			<record name="WmMobileSupport" javaclass="com.wm.data.ISMemDataImpl">
+			 	<value name="displayName">Mobile Support</value>
+			    <array name="configFiles" type="value" depth="1">
+				    <value>config/mobileSyncComponents.cnf</value>
+			    	<value>config/mobileApp.cnf</value>
+			    </array>
+			</record>
+			
+			<record name="WmDotNet" javaclass="com.wm.data.ISMemDataImpl">
+			 	<value name="displayName">webMethods Package for Microsoft .NET</value>
+			    <array name="configFiles" type="value" depth="1">
+			    	<value>../../../../../DotNetHost/wmSystem.exe.config</value>
+			    </array>
+			</record>
+			
+			<record name="WmDBO" javaclass="com.wm.data.ISMemDataImpl">
+				<value name="displayName">Dynamic Business Orchestrator</value>
+				<array name="configFiles" type="value" depth="1">
+					<value>config/config.prop</value>
+					<value>config/provision.cfg</value>
+				</array>
+			</record>
+
+		</record>
+  	</record>
+</IDataXMLCoder>
+

@@ -1,0 +1,54 @@
+# To build this test example with Java 1.1 VM, you will have
+# to make following changes:
+# (1) Change JDKDIR on line 25 to reflect the location of your
+#     JDK 1.1 VM
+# (2) Change CPPFLAGS on line 29 to reflect the location of the
+#     required JDK header files and build options
+# (3) Change line 37, 38 to reflect the location of the required
+#     JDK libraries.
+#     For JDK 1.1, the name of the JDK library is libjava.sl
+#     and resides on
+#       $(JDKDIR)/lib/i686/native_threads
+#     For JDK 1.2, the name was changed to libjvm.so and resides
+#     on
+#       $(JDKDIR)/jre/lib/PA_RISC/classic
+#     So make appropriate changes when you link the required JDK
+#     libraries on line 37,38 to:
+#    -L$(JDKDIR)/lib/i686/native_threads -ljava -lpthread
+
+APP_ROOT = ..
+INC_ROOT = $(APP_ROOT)/include
+LIB_ROOT = $(APP_ROOT)/lib
+
+COPT = -g -D_REENTRANT
+JOPT =
+JDKDIR = /usr/java/jdk1.5.0_15
+CC = g++
+WMDIR = /opt/softwareag/webMethods8
+
+CPPFLAGS = $(COPT) $(JOPT) -I$(JDKDIR)/include \
+	-I$(JDKDIR)/include/linux \
+	-I$(INC_ROOT)
+
+all: test
+
+runtest:
+	LD_LIBRARY_PATH=/usr/lib:$(WMDIR)/IntegrationServer/sdk/cpp/lib:$(JDKDIR)/jre/lib/i386:$(JDKDIR)/jre/lib/i386/native_threads:$(JDKDIR)/jre/lib/i386/client:$(LD_LIBRARY_PATH) \
+	CLASSPATH=$(JDKDIR)/jre/lib/rt.jar:$(JDKDIR)/lib/tools.jar:$(WMDIR)/common/lib/wm-isclient.jar:$(WMDIR)/common/lib/glassfish/gf.javax.mail.jar:$(WMDIR)/IntegrationServer/lib/wm-isserver.jar:$(CLASSPATH) \
+	./examples
+
+test: test.o
+	$(CC) -o examples test.o \
+	-L$(JDKDIR)/jre/lib/i386/native_threads -lhpi -lpthread \
+	-L$(JDKDIR)/jre/lib/i386/client -ljvm \
+	-L$(LIB_ROOT) -lwmjni
+
+clean:
+	rm -f *.o core examples
+
+.SUFFIXES: .cpp .o
+
+%.o: %.cpp
+	$(CC) $(CPPFLAGS) -c $<
+
+test.o: test.cpp

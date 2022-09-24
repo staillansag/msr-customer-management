@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.data.ISMemDataImpl">
+    <record name="Diskspace" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.DiskspaceHealthIndicator</value>
+      <value name="name">Diskspace</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        <record name="threshold" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="value">10</value>
+          <value name="displayName">diskspaceThreshold</value>
+        </record>
+      </record>
+    </record>
+    <record name="ServiceThread" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.ServiceThreadHealthIndicator</value>
+      <value name="name">ServiceThread</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        <record name="threshold" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="value">10</value>
+          <value name="displayName">serviceThreadThreshold</value>
+        </record>
+      </record>
+    </record>
+    <record name="Memory" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.MemoryHealthIndicator</value>
+      <value name="name">Memory</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        <record name="threshold" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="value">10</value>
+          <value name="displayName">memoryThreshold</value>
+        </record>
+      </record>
+    </record>
+    <record name="JDBC" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.JDBCHealthIndicator</value>
+      <value name="name">JDBC</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>
+    <record name="RemoteServers" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.RemoteServerHealthIndicator</value>
+      <value name="name">RemoteServers</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>
+    <record name="Sessions" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.SessionHealthIndicator</value>
+      <value name="name">Sessions</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        <record name="threshold" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="value">85</value>
+          <value name="displayName">sessionsThreshold</value>
+        </record>
+      </record>
+    </record>
+    <record name="JNDIAliases" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.JNDIAliasHealthIndicator</value>
+      <value name="name">JNDIAliases</value>
+      <value name="enabled">false</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>
+    <record name="JMS" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.JMSHealthIndicator</value>
+      <value name="name">JMS</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>
+    <record name="UMAliases" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.UMAliasHealthIndicator</value>
+      <value name="name">UMAliases</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>
+    <record name="SFTPServers" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.SFTPServerHealthIndicator</value>
+      <value name="name">SFTPServers</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>		
+    <record name="Adapters" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.wm.pkg.art.health.Indicators</value>
+      <value name="name">Adapters</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+      </record>
+    </record>	
+    <record name="Cluster" javaclass="com.wm.data.ISMemDataImpl">
+      <value name="classname">com.softwareag.is.health.indicators.ClusterHealthIndicator</value>
+      <value name="name">Cluster</value>
+      <value name="enabled">true</value>
+      <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        <record name="threshold" javaclass="com.wm.data.ISMemDataImpl">
+          <value name="value">2</value>
+          <value name="displayName">clusterNodesThreshold</value>
+        </record>
+      </record>
+    </record>	
+  </record>
+</IDataXMLCoder>

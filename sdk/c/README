@@ -1,0 +1,418 @@
+   webMethods C Software Development Kit
+   _____________________________________
+
+   The webMethods C/SDK makes it possible to port the webMethods C libraries to
+   a wide variety of standard platforms.  The C API is implemented via JNI 
+   wrappers and therefore requires that a JDK be available for the target 
+   platform.
+   
+   The C/SDK includes the source for the webMethods C libraries, Makefiles for 
+   the supported platforms, a test program to validate the port, and this 
+   porting instructional file.  
+
+   Full C support for a given platform includes the following:
+
+      1. C API headers and libraries - built and validated.
+
+      2. Code generation for clients and services - update templates and 
+      configuration.  
+
+   Building the C API libraries
+   ----------------------------
+
+   Follow these general steps to build the C libraries for a new platform:
+
+      1. Ensure that all criteria for a platform to receive support is met: 
+      
+             *  Must have access to a kernel-threaded version of the Java JDK 
+	        1.1 (JDK 1.1.7 or later - required by the Java Native Interface)
+             *  The Operating System must provide support for kernel threads.
+
+      2. Pick a prefix - commonly 3 characters - for your platform so that the 
+      new libraries can be distinguished from libraries for other platforms 
+      (e.g. for Unixware use uxw).  See the existing files in <ServerDir>\lib 
+      or <DeveloperDir>\lib.  This prefix may also be used as the 'gen-type' 
+      when setting up code generation for the new platform. 
+      
+      3. Update the API Makefile in build\, the tester Makefile in src\, and the
+      toplevel Makefile to correctly build the libraries for your platform.  
+      Start with one of the supported Makefiles for a platform similar to yours;
+      modify the target prefix for all the generated files.  Make sure to set 
+      the Makefile's JDK and other platform-specific path settings to match 
+      your installation.  
+
+      4.  Modify all appropriate environment variables:
+	    * Add the JDK library directory and the webMethods library
+              directory to the LD_LIBRARY_PATH environment variable
+	    * Add the webMethods wm-isclient.jar and generic java 
+	      classes to the CLASSPATH environment variable.
+
+          For example, if the JDK directory is /usr/local/java/jdk1.2.2, the
+          machines architecture is i386, and the webMethods directory is
+          /usr/local/webmethods, the following environment variables would
+          be set accordingly:
+
+	  LD_LIBRARY_PATH=/usr/local/java/jdk1.2.2/jre/lib/i386:/usr/local/
+	  java/jdk1.2.2/jre/lib/i386/native_threads:/usr/local/java/jdk1.2.2/
+	  jre/lib/i386/classic:/usr/local/lib:/usr/lib:/lib:/usr/local/
+	  webmethods/lib:$LD_LIBRARY_PATH
+
+          CLASSPATH=$CLASSPATH:.:/usr/local/webmethods/common/lib/wm-isclient.jar:/usr/local/
+          java/jdk1.2.2/jre/lib/rt.jar
+ 
+
+      5.  Make sure that all paths are correctly specified in the
+      Makefiles, then build the libraries and run the tester by issuing the 
+      command, at the top-level: 
+
+	 If running a Windows-based platform: 
+	    % nmake win 
+
+	 If running a Unix-like platform:
+	    % ln -sf build/Makefile.myplatform build/Makefile; 
+	             (e.g Makefile.lnx for linux)
+
+	    % ./build.sh
+	    
+      This will try to build the libraries, build the small tester client, and
+      run the tester.
+
+      If the tester works correctly, an output after the library build output 
+      will be produced, outputting the length of the string 'webMethods':
+
+             ---- BEGIN TEST ----
+             Successful connection made with server
+
+             inString = 'webMethods'
+
+              ********* Successful invoke **********
+          
+              ************* OUTPUTS ****************
+
+             Output should be 10, the length of 'webMethods'
+             Output = 10
+
+             We got the correct output!
+
+             Success!  Congratulations!
+      
+             ---- END TEST ----
+      
+      Please note that the tester program is setup to use a server located at
+      localhost:5555.  If the server is located at any other location, change
+      tester.c appropriately, and rebuild.  Also, make sure all environment
+      variables are set appropriately; use the above, and the file 
+      environment_settings as a reference. 
+
+      5. Once validated, install the libraries into <ServerDir>\lib and <DeveloperDir>\lib.
+	 
+
+   Extending code generation
+   -------------------------
+
+      In order to support code generation for the target platform, templates 
+      must be supplied for all generated client and service files, and the 
+      new platform must be included in the codegen configuration file 
+      [<ServerDir>\config\codegen.cnf].  The codegen configuration file
+      is not automatically packaged with the Server; to create the
+      <ServerDir>\config\codegen.cnf file and directory, one must not only
+      run the Server once, but also run the Developer with the Server, and
+      try to generate some sample client code.  See the Developer's
+      reference manual for further details on this process.  This file is
+      used to store all of the information on platform name, shorthand
+      name, and template location.  (NOTE: in this configuration file, the 
+      template file is assumed to be located in
+      <PackageDir>\WmRoot\templates\code, so if you want to make a
+      separate template file that is not located in that directory,
+      specify it's path relative to the above directory).  It is
+      recommended that one follows the existing model for specifying
+      system configuration, basically copying the configuration settings
+      for one platform, but remembering to change the appropriate
+      system-type and template-file locations.  For a visual reference,
+      see below for an example codegen.cnf file with the DEC platform.
+
+      C client code generation extension
+      ----------------------------------
+
+      For C clients there are 3 template files, and they generate a
+      generic README file, a service-specific makefile, and a
+      service-specific source file. Service-specific means that the
+      generated file varies from service to service, whereas the
+      generic README is the same for all services.  While one can create
+      their own template files, it is recommended that one simply follows
+      the current model in the C client template files.  Unless there are
+      any odd C caveats for the platform, the template for makefile
+      generation, (c_ClientMake), should be the only template file that
+      needs editing, as the C client source is generic for every
+      platform, and the README is not a building necessity.
+
+      The standard c-client template files are 
+      (in <PackageDir>\WmRoot\templates\code):
+
+          - c_ClientMain   : client source
+          - c_ClientReadme : client readme
+          - c_ClientMake   : client makefile
+
+      The basic steps for extending C client codegen are as follows:
+  
+          - Modify the codegen.cnf file, as mentioned above
+          - Modify the c_ClientMake template file to add a new code
+	    generation case for your platform.  For DEC, one would add:
+ 
+              %case dec%
+              CC=dec_cc
+              ...
+          
+          - Start the Developer  
+          - Select a service for which a client is desired
+          - Generate a client from which to call the Server, implemented
+            in C for your new platform
+          - 3 file will have been generated: CReadme.txt, foo.c, foo.mak
+            (if the service is called foo)
+          - Follow the CReadme.txt and compile the client.  Enjoy!  
+
+      C service code generation extension
+      -----------------------------------  
+
+      For C services there is a makefile, a source file, and three 
+      java files for declaring the service as a native C method, loading
+      the service, and calling the service in java.  The five template
+      files for the above files are named as follows:
+
+          - c_SvrImpl      : service implementation
+          - c_SvrLoad      : java file for loading the service lib
+          - c_SvrMake      : service makefile
+          - c_SvrNative    : java file for the java declaration of the
+                             wrapped c-service
+          - c_SvrSvc       : java file for the actual service, which
+                             simply calls the wrapped c-service
+       
+      For most, the only template file that will need modification is the
+      c_SvrMake template file, as that creates the Makefile in a switch
+      statement based on platform type.  As described above for c-client
+      code generation, add the platform case following the model set by
+      the other default platforms.  Again, one can choose to create their
+      own template files that serve the purposes outlined above, but it is
+      recommended simply to add ones platform to those templates that need
+      modification.  If one chooses to create their own template files,
+      one must make sure to note that in the codegen.cnf file.
+      
+      Though C-service generation is covered in the Developer docs, here
+      is a quick overview of the things one must do to create a C-service:
+      
+           - Start the Integration Server
+           - Start the Developer
+           - Add a new package that will contain all of your C-services.
+             This is important because problems arise when C-services are
+             added to packages that also contain purely java services.
+           - In the new package, create a new interface
+           - Under this new interface, create a new service specification,
+             making sure to have inputs and outputs, as NULL inputs and
+             outputs will cause a service exception!  Make sure to save
+             the specification before going on to the next step
+           - Create a new C-service in the interface, generating for the
+             new platform to which the C libraries have already been
+             ported, and of which the template files and code generation
+             configuration files have been correctly modified.
+      
+      If the above steps have been followed correctly, a C-service
+      has been generated from the template files.  The generated files
+      have been placed in <PackageDir>\MyPackage\code\source, if MyPackage
+      was created above.  However, there are a few more steps to bring
+      the C-service to a usable state:
+
+           - Edit the newly generated makefile, modifying the Server
+             directory and the JDK directory, if needed.  Save the
+             makefile, whether modified or not, to MyInterface.mak, if
+             MyInterface is the interface created above.  Saving it to
+             this new name ensures that future code generation will not
+             replace already modified files.
+           - Edit the newly generated c-file, adding any extra needed
+             logic to the file, and saving the file, whether modified or
+             not, to MyServiceImpl.c, if MyService is the name of the
+             service created above. This new name is for the reason
+             described above.
+           - Create a directory above the current directory, in
+             <PackageDir>\MyPackage\code, called lib.  This is for
+             compilation output, and is where the Server expects to find
+             the generated library.
+           - Make the c-service using the above makefile.  Usually this
+             requires the option of -f MyInterface.mak.  Make sure the
+             location of the ported C libraries is in the LD_LIBRARY_PATH
+             environment variable.
+           
+      If the above steps have been followed correctly, and all environment
+      settings are correct, a new c-service will have been built, and a
+      library will have been placed in <PackageDir>\MyPackage\code\lib.
+      It is necessary to restart the Server now, which will allow the
+      Server to natively load the generated library, and the service to be
+      "in service".
+
+      Though it is covered in the Developer manual, as the instructions
+      above are, here is a quick explanation of calling c-services from
+      other c-services, and services in general.  A c-service is not
+      recognized by any other service as such; the c-service is wrapped to
+      make it have a java interface, and make it appear to be an java
+      service to any other service.  Thus, to call it, one needs to call
+      it as one calls a java service.  In regards to calling it from a
+      c-service, it is best not to attempt to call it from the C
+      implementation file, because it is excessively cumbersome. Instead,
+      in the Developer, one can highlight the c-service from which one 
+      desires to call another c-service, click on the "Source" tab, and
+      add a quick line of java code to call the service.  
+
+      While all above descriptions of template modification and
+      utilization will be sufficient for most, templates are much more
+      extensible than they appear to be when viewed in their default form. 
+      When writing templates, the following inputs are available for use
+      with the template processor:
+     
+      For each service:
+        svcName - service name
+        jniSvcName - service name mangled for JNI c-signature
+        ifcName - interface name
+        literalIfcName - unmapped interface name
+        jniIfcName - interface name mangled for JNI c-signature
+        ifcNodeName - last element of interface name
+        fullSvcName - complete NSName for service
+        pkgName - package name
+        inputRec - input record
+        inputRecName - input record name
+        literalInputRecName - unmapped input record name
+        outputRec - output record
+        outputRecName - output record name
+        literalOutputRecName - unmapped output record name
+        records - all records used for input or output
+        svrHomeDir - Server home directory
+      
+      For each record:
+        name - record name
+        literalName - unmapped record name
+        fields - all of the record's contained fields
+      
+      For each field:
+        name - field name
+        literalName - unmapped field name
+        fieldType - {str, strarray, strtable, rec, recarray, obj}
+      
+      For each 'rec' field:
+        bindToRec - name of record that defines field
+        literalBindToRec - unmapped name of record that defines field
+    
+      Note that, unlike the per-service files, the auxiliary (aux) files are 
+      only processed once, and not for each service.  Therefore, only global 
+      information is available when processing the template. This includes 
+      'platform' {win,hpx,sol,lnx} and serverHost and ServerPort which indicate
+      the address of the Server which is generating the code and presumably the
+      target of the invocation when generating client code.
+	 
+      Also note that svcNames are presumed to be valid as the system prevents 
+      the creation of interface or service node names that contain invalid 
+      characters or reserved words.  Other variables that may contain illegal 
+      names or characters (from the point of view of the local file system or 
+      target languages) have a 'literal' variant where the non-literal instance
+      is mapped to a 'safe' version of the literal value.
+      
+      Further documentation on template tags is located in 
+      <DeveloperDir>/doc/onlinehelp/REF_Template*, and in 
+      <ServerDir>/packages/WmRoot/pub/doc/OnlineHelp/REF_Template*. 
+
+      Once the template files are brought to satisfactory completion, the 
+      new platform and its associated template files needs to be specified in
+      <ServerDir>/config/codegen.cnf.  For example, to add support for platform
+      'DEC' with the template files in the templates directory of 'MyPkg', add
+      the following information to the sections as indicated:
+
+        In the "clientTypes" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="type_key">c_DEC</value>
+            <value name="type_description">C/C++ for DEC</value>
+            <value name="type_platform">DEC</value>
+          </record>
+
+        In the "imTypes" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="type_key">c_DEC</value>
+            <value name="type_description">C/C++ for DEC</value>
+            <value name="type_platform">DEC</value>
+          </record>
+
+        In the "client_templates" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_src">	
+            	/packages/MyPkg/templates/MyClientTemplate_Main
+            </value>
+            <value name="template_dest">%service%.c</value>
+            <value name="template_per_svc_flag">true</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/MyClientTemplate_Readme
+            </value>
+            <value name="template_dest">CReadme.txt</value>
+            <value name="template_per_svc_flag">false</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/MyClientTemplate_Make
+            </value>
+            <value name="template_dest">%service%.mak</value>
+            <value name="template_per_svc_flag">true</value>
+          </record>
+
+        In the "im_templates" array:
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_subtype">java_svc</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/c_SvrSvc_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_subtype">java_shared</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/c_SvrLoad_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_subtype">java_shared</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/c_SvrNative_DEC
+            </value>
+            <value name="template_dest">n/a</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_subtype">native</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/c_SvrMake_DEC
+            </value>
+            <value name="template_dest">%service%.mak</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
+            <value name="template_type">c_DEC</value>
+            <value name="template_subtype">native</value>
+            <value name="template_src">
+            	/packages/MyPkg/templates/c_SvrImpl_DEC
+            </value>
+            <value name="template_dest">%service%.c</value>
+          </record>  
+     
+	  Note that for Service code generation, the Developer will attempt to
+          highlight the selection for the actual server platform.  This requires
+          that the type_description string matches "C/C++ for <platform>" where
+          <platform> is the os.name property for the platform.  
+
+          Restart the Server to use the new configuration information and test 
+	  the generated files to validate the correctness of your templates.  
+	
+ 
+	   
+

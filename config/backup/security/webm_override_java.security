@@ -1,0 +1,12 @@
+#
+# webMethods Integration Server is overriding JVM parameter jdk.tls.disabledAlgorithms 
+# because these are controlled by watt.net.jsse.client.disabledProtocols and watt.net.jsse.server.disabledProtocols.
+#
+jdk.tls.disabledAlgorithms=SSLv3, TLSv1, RC4, DES, MD5withRSA, \
+    DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+    include jdk.disabled.namedCurves
+
+# The original value of this property appears as shown below in the java.security file.
+#jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, \
+#    DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+#    include jdk.disabled.namedCurves

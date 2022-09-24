@@ -1,0 +1,36 @@
+# Set line 5 to reflect the location of your JVM
+# Set Java2 = false when compiling with Java 1.1 VM
+JAVA2 = true
+
+JDKDIR    = C:\Progra~1\Java\jdk1.5.0_12
+LIBDIR    = C:\webMethods8\common\lib
+CC        = cl
+INCLUDES  = $(LIBDIR)
+
+!IF "$(JAVA2)" == "true"
+LIBS      = .;$(LIBDIR);$(JDKDIR)\jre\bin\classic;$(JDKDIR)\jre\bin;$(PATH)
+!ELSE
+LIBS      = .;$(LIBDIR);$(JDKDIR)\bin;$(PATH)
+!ENDIF
+
+CFLAGS = -DWIN32 -I$(JDKDIR)\include -I$(JDKDIR)\include\win32 \
+           -I$(INCLUDES)
+
+all: tester
+
+tester: tester.c
+	$(CC) $(CFLAGS) tester.c /Zi /o tester \
+                   /MT $(LIBDIR)\..\..\IntegrationServer\lib\wmJNI.lib $(LIBDIR)\..\..\IntegrationServer\lib\wmJNIc.lib
+
+runtest: tester
+	SET JAVADIR=C:\Progra~1\Java\jdk1.5.0_12
+	SET PATH=%PATH%;%JAVADIR%\jre\bin\client;$(LIBDIR)\..\..\IntegrationServer\lib
+	SET IS_DIR=
+	SET CLASSPATH=%CLASSPATH%;.;$(JDKDIR)\lib\classes.zip;$(LIBDIR)\wm-isclient.jar;$(LIBDIR)\glassfish\gf.javax.mail.jar
+	.\tester.exe
+clean:
+	del tester.obj
+	del tester.exe
+	del *.pdb *.ilk
+
+

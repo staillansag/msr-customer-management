@@ -1,0 +1,115 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>Add subscriber</title><link rel="Prev" href="IS_Packages_CreateRelScrn.html" title="Previous" /><link rel="Next" href="IS_Packages_UpdateRemoveSubsScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Packages_AddSubsScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="plofEmJO62x6rpw_002b2rTO3Tw" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Packages_AddSubsScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_Packages.html#wwconnect_header">Packages</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/IS_Packages_PublishingPkgsScrn.html#wwconnect_header">Publishing</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">Add subscriber</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0EQZVR" class="Heading_2">Add subscriber</div><div id="wwID0EQ2VR" class="Body">Use the Add Subscriber page to add a subscriber to a package that your server publishes. A subscriber is another <span class="ph">webMethods Integration Server</span> that your server publishes one or more packages to.</div><div id="wwID0E12VR" class="Important"><span class="Bold">Important:<br /></span>The subscribing server must be running when you add a subscriber. Your server will connect to it during this process.</div><div id="wwID0EX3VR" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Return to Publishing</span> to return to the list of available releases.</div><div id="wwID0EX4VR" class="Definition_Term">Packages</div><div id="wwID0E34VR" class="Definition_Description">Lists the names of packages on the <span class="ph">webMethods Integration Server</span>. To add a subscriber to a package, select the package from this list.</div><div id="wwID0EL5VR" class="Definition_Term">Host Name</div><div id="wwID0EQ5VR" class="Definition_Description">Specifies the domain name or numeric IP address of the <span class="ph">webMethods Integration Server</span> that will subscribe to the package specified in <span class="uicontrol">Packages</span>.</div><div id="wwID0ED6VR" class="Definition_Term">Host Port</div><div id="wwID0EI6VR" class="Definition_Description">Specifies the port number on which the subscribing server expects packages to be published. If you do not know what port this is, contact the administrator of the subscribing server.</div><div id="wwID0ES6VR" class="Definition_Term">Transport</div><div id="wwID0EX6VR" class="Definition_Description">Specifies the transport protocol that your server will use to publish this package to the subscribing server. Select <span class="uicontrol">HTTP</span> or <span class="uicontrol">HTTPS</span> from the list. Make sure the protocol you specify matches the type of listener that the subscriber has assigned to the port specified in <span class="uicontrol">Host Port</span>.</div><div id="wwID0EIAWR" class="Note_1"><span class="Bold">Note:<br /></span>When this server uses HTTPS to connect to the subscribing server to publish a package, it presents its default certificate (specified on the 
+    <a href="../is-onlinehelp/IS_Security_SecurityCertificatesScrn.html#wwID0EHCDS"
+   
+     title="Certificates"
+    ><span class="heading-no-quotes">Certificates</span></a>).</div><div id="wwID0ENBWR" class="Definition_Term">Remote User Name</div><div id="wwID0ESBWR" class="Definition_Description">Specifies the user name that your server will use to log on to the subscriber's <span class="ph">webMethods Integration Server</span> to publish this package. This user name must be a member of the Replicators ACL on the subscribing server. If you do not know this name, contact the administrator of the subscribing server.</div><div id="wwID0EBCWR" class="Definition_Term">Remote Password</div><div id="wwID0EGCWR" class="Definition_Description">Specifies the password for the user specified in <span class="uicontrol">Remote Password</span>. If you do not know this password, contact the administrator of the subscribing server.</div><div id="wwID0EVCWR" class="Definition_Term">Notification Email</div><div id="wwID0E1CWR" class="Definition_Description">Optional. Specifies the e-mail address of the user who will be notified when you create a release of this package. (To use this option, you must also set the <span class="uicontrol">SMTP Server</span> option on the 
+    <a href="../is-onlinehelp/IS_Settings_ResourcesScrn.html#wwID0EQ2TT"
+   
+     title="Resources"
+    ><span class="heading-no-quotes">Resources </span></a> to specify the address of the SMTP server that your server will use to deliver e-mail messages.)</div><div id="wwID0EAEWR" class="title">Related Topics</div><div id="wwID0EEEWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_PublishingPkgsScrn.html#wwID0ECLUR"
+   
+     title="Publishing"
+    ><span class="Link_Text">Publishing</span></a></div><div id="wwID0EQEWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_CreateDelRelsScrn.html#wwID0ECVUR"
+   
+     title="Create and delete releases"
+    ><span class="Link_Text">Create and delete releases</span></a></div><div id="wwID0E3EWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_CreateRelScrn.html#wwID0EI5UR"
+   
+     title="Create release"
+    ><span class="Link_Text">Create release</span></a></div><div id="wwID0EIFWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_UpdateRemoveSubsScrn.html#wwID0ECHWR"
+   
+     title="Update and remove subscriber"
+    ><span class="Link_Text">Update and remove subscriber</span></a></div><div id="wwID0EUFWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_EditSubsScrn.html#wwID0E6PWR"
+   
+     title="Edit subscriber"
+    ><span class="Link_Text">Edit subscriber</span></a></div><div id="wwID0EAGWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_SubscribingScrn.html#wwID0ER2WR"
+   
+     title="Subscribing"
+    ><span class="Link_Text">Subscribing</span></a></div><div id="wwID0EMGWR" class="heading">
+    <a href="../is-onlinehelp/IS_Packages_MngmtScrn.html#wwID0EGJNR"
+   
+     title="Management"
+    ><span class="Link_Text">Management</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>

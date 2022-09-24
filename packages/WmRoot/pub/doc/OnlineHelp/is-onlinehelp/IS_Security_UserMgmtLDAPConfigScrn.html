@@ -1,0 +1,123 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>LDAP Configuration</title><link rel="Prev" href="IS_Security_UnlockUserScrn.html" title="Previous" /><link rel="Next" href="IS_Security_LDAPdirectoryScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Security_UserMgmtLDAPConfigScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="pb_002be4R9wFChNj85l5dfs5mQ" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Security_UserMgmtLDAPConfigScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_Security.html#wwconnect_header">Security</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/IS_Security_UsersAndGroupsScrn.html#wwconnect_header">User management</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">LDAP Configuration</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0EKYDT" class="Heading_2">LDAP Configuration</div><div id="wwID0ETZDT" class="Body">Use the LDAP Configuration page to configure the server to access user account and group information from an external directory. You can configure the server to use Lightweight Directory Access Protocol (LDAP).</div><div id="wwID0E5ZDT" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Return to User management</span> to return to the list of groups and users that are currently defined on your server.</div><div id="wwID0EV1DT" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Edit LDAP Configuration</span> to configure an external directory server or change the current settings. The current configuration is displayed on the <span class="uicontrol">LDAP Configuration</span> section.</div><div id="wwID0ED3DT" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Add LDAP Directory</span> to add multiple LDAP servers. The current list of LDAP directories are displayed with the option to delete a URL if it needs to be removed. This option is only displayed when the <span class="uicontrol">Provider</span> field is set to <span class="uicontrol">LDAP</span>.</div><div id="wwID0EL4DT" class="Section_Title"><span class="ph">  </span> <span class="ph">  </span> <span class="ph">  </span>LDAP Configuration</div><div id="wwID0ER5DT" class="Body">To open the LDAP Configuration page, click <span class="uicontrol">Edit LDAP Configuration.</span> Choose a <span class="uicontrol">Provider</span> to specify the external directory that you want to use.</div><div id="wwID0EH6DT" class="Definition_Term">Provider</div><div id="wwID0EM6DT" class="Definition_Description">Specifies the type of external directory server, if any, that this server uses for user account and group information. Choose <span class="uicontrol">Local</span> or <span class="uicontrol">LDAP</span>.  Only one feature can be enabled at a time. The server issues a prompt to verify that you want to change the setting. Click <span class="uicontrol">OK</span>. Note that LDAP and CDS parameters are exclusive of each other - when CDS is enabled (Local), LDAP is disabled and vice versa. The remaining parameters on this page will vary depending on which provider you use. See the sections below on LDAP Settings for specific descriptions.</div><div id="wwID0ERAET" class="Definition_Term">Cache Size (Number of Users)</div><div id="wwID0EWAET" class="Definition_Description">Specifies the maximum number of LDAP users the <span class="ph">Integration Server</span> can keep in memory in the user cache. The default is 10.</div><div id="wwID0EABET" class="Definition_Description">Once the limit is reached, the <span class="ph">Integration Server</span> selects users for removal from the cache based on how long they have been idle. As a result, activity can extend the time a user remains in the cache.</div><div id="wwID0EKBET" class="Definition_Description">As a general rule, specify 5-10% of the number of users in your LDAP system. However, if only a few sessions are ever logged on simultaneously, set the cache size to be the same as the number of simultaneous sessions.</div><div id="wwID0EUBET" class="Definition_Term">Credential Time-to-Live (Minutes)</div><div id="wwID0EZBET" class="Definition_Description">Shows the number of minutes an LDAP user's credentials (user ID and password) can remain in the credential cache before being purged. The default is 60 minutes.</div><div id="wwID0E5BET" class="Definition_Description">When a user first attempts to log in, the <span class="ph">Integration Server</span> creates a user object and checks the user's credentials against the LDAP directory. The <span class="ph">Integration Server</span> stores the credentials so that subsequent requests to authenticate will be made against the cached credentials, not the LDAP directory. For security reasons, you can control the length of time these cached credentials are valid.</div><div id="wwID0ERCET" class="Definition_Term">Save Configuration</div><div id="wwID0EWCET" class="Definition_Description">Save the changes that you specified. Your changes will take effect when you restart the server.</div><div id="wwID0EHDET" class="title">Related Topics</div><div id="wwID0ELDET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_LDAPdirectoryScrn.html#wwID0EYHET"
+   
+     title="Add LDAP Directory"
+    ><span class="Link_Text">Add LDAP Directory</span></a></div><div id="wwID0EXDET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_ACLsScrn.html#wwID0EMICS"
+   
+     title="ACLs"
+    ><span class="Link_Text">ACLs</span></a></div><div id="wwID0EDEET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddRemoveUsersScrn.html#wwID0EOM4S"
+   
+     title="Add and Remove Users"
+    ><span class="Link_Text">Add and Remove Users</span></a></div><div id="wwID0EPEET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddRemoveOpenIDProviderUsersScrn.html#wwID0E154S"
+   
+     title="Add and Remove OpenID Provider Users"
+    ><span class="Link_Text">Add and Remove OpenID Provider Users</span></a></div><div id="wwID0E2EET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddRemoveOpenIDProviderUserClaims.html#wwID0ESL5S"
+   
+     title="Add and Remove OpenID Provider User Claims"
+    ><span class="Link_Text">Add and Remove OpenID Provider User Claims</span></a></div><div id="wwID0EHFET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddOpenIDProviderUserIdTokenClaims.html#wwID0EY15S"
+   
+     title="Add OpenID Provider User ID Token Claims"
+    ><span class="Link_Text">Add OpenID Provider User ID Token Claims</span></a></div><div id="wwID0ETFET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddOpenIDProviderUserInfoClaims.html#wwID0E4F6S"
+   
+     title="Add OpenID Provider UserInfo Token Claims"
+    ><span class="Link_Text">Add OpenID Provider UserInfo Token Claims</span></a></div><div id="wwID0E6FET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_AddRemoveGroupsScrn.html#wwID0ECR6S"
+   
+     title="Add and Remove Groups"
+    ><span class="Link_Text">Add and Remove Groups</span></a></div><div id="wwID0ELGET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_EnableDisableUsersScrn.html#wwID0E656S"
+   
+     title="Enable and Disable Users"
+    ><span class="Link_Text">Enable and Disable Users</span></a></div><div id="wwID0EXGET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_PasswordRestrictScrn.html#wwID0E3JAT"
+   
+     title="Password Restrictions"
+    ><span class="Link_Text">Password Restrictions</span></a></div><div id="wwID0EDHET" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Security_UserMgmtLDAPConfigScrn.html#wwID0EKYDT"
+   
+     title="LDAP Configuration"
+    ><span class="Link_Text">LDAP Configuration</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>

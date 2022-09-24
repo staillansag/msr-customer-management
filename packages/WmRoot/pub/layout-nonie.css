@@ -1,0 +1,7 @@
+.bottom {
+  height: auto;
+}
+
+.contentframe {
+  width: calc(100% - 250px);
+}

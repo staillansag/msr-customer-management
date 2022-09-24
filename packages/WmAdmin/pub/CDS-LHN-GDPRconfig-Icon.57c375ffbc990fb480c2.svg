@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CDS-LHN-GDPRconfig-24x24</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CDS-LHN-Icons---#333333---SAME-SIZED-24x24" transform="translate(0.000000, -248.000000)" fill="#333333" fill-rule="nonzero">
+            <g id="LHN-CDS-Icons" transform="translate(0.000000, 8.000000)">
+                <g id="CDS-LHN-GDPRconfig-24x24" transform="translate(0.000000, 240.000000)">
+                    <path d="M0,0 L0,5 L17,5 L17,0 L0,0 Z M0,7 L0,13 L10,13 L10,11.699219 L17,8.587891 L17,7 L0,7 Z M18.3181818,11 L13,13.3636364 L13,16.9090909 C13,21.5359091 16.8054545,23.6962727 18.3181818,24 C19.8309091,23.6962727 23.6363636,21.5359091 23.6363636,16.9090909 L23.6363636,13.3636364 L18.3181818,11 Z M0,15 L0,21 L11.005859,21 C10.398859,19.6896 10,18.0972 10,16.2 L10,15 L0,15 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

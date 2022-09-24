@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<clusterProps>
+  <listeners>
+    <runtimeModeLimit>standby</runtimeModeLimit>
+  </listeners>
+  <pollingNotifications>
+    <runtimeModeLimit>standby</runtimeModeLimit>
+    <callbackScheme>1</callbackScheme>
+    <template className="com.wm.adapter.wmjdbc.notifications.InsertNotification">
+      <runtimeModeLimit>standby</runtimeModeLimit>
+      <callbackScheme>1</callbackScheme>
+    </template>
+  </pollingNotifications>
+  <listenerNotifications>
+    <callbackScheme>1</callbackScheme>
+  </listenerNotifications>
+</clusterProps>

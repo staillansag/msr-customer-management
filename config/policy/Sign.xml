@@ -1,0 +1,34 @@
+<Policy xmlns="http://www.webmethods.com/2007/07/policy" Id="Digital Signature">
+
+	<SecurityPolicy xmlns="http://www.webmethods.com/2007/01/policy/security">
+
+		<InboundSecurity>
+		
+			<Timestamp
+				EnforceExpiration="true"/>
+
+			<Signature 
+				Usage="Required"
+				AllowExpiredCerts="false"
+				AuthenticateWithSigningCert="false"
+				RequireSignedBody="true"
+				ValidateSigningCert="true"/>
+
+		</InboundSecurity>
+		
+		
+		<OutboundSecurity>
+		
+			<Timestamp
+				TimeToLiveInSeconds="300"
+				IncludeMilliseconds="True"/>
+
+			<Signature 
+				TokenReferenceType="Direct" 
+				IncludeCertPath="true"/>
+				
+		</OutboundSecurity>
+		
+	</SecurityPolicy>
+
+</Policy>

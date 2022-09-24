@@ -1,0 +1,95 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>Service usage</title><link rel="Prev" href="IS_Server_CreateTaskScrn.html" title="Previous" /><link rel="Next" href="IS_Settings_QuiescePortConfigScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Server_ServiceUsageScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="piQOOGt1Lk6FGCV3UQHui5A" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Server_ServiceUsageScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_Server.html#wwconnect_header"> Server</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">Service usage</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0E11EO" class="Heading_1">Service usage</div><div id="wwID0EG5EO" class="Body">Use the Service usage page to view statistics for services that the <span class="ph">webMethods Integration Server</span> has executed since it was last started. This screen also includes information about cache usage, so you can monitor the effectiveness of your cache settings.</div><div id="wwID0EW5EO" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>  Click <span class="uicontrol">Reset Server Cache</span> to clear the cache for all services.</div><div id="wwID0E56EO" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>  Select <span class="uicontrol">Show running services on top</span> to move all currently running services to the top of the service list. (Deselect it to restore the list to alphabetical order.) Running services are identified by a number in brackets, at the right of the service name.</div><div id="wwID0EPBFO" class="Section_Title">Service</div><div id="wwID0EUBFO" class="Body">The fields in this section display the list of services executed since the <span class="ph">Integration Server</span> was started.</div><div id="wwID0EGCFO" class="Definition_Term">Name</div><div id="wwID0ELCFO" class="Definition_Description">Displays the name of the service. A bracketed number to the right of the service name identifies how many instances of the service, if any, are currently running.</div><div id="wwID0EVCFO" class="Definition_Term">Count</div><div id="wwID0E1CFO" class="Definition_Description">Displays the number of times that the service has executed since the server was last started.</div><div id="wwID0EEDFO" class="Definition_Term">Last Ran</div><div id="wwID0EJDFO" class="Definition_Description">Displays the date and time the service was last executed.</div><div id="wwID0ETDFO" class="Definition_Term">Cached</div><div id="wwID0EYDFO" class="Definition_Description">Indicates whether the service's caching option is enabled. To enable/disable the cache setting for a service, you use <span class="ph">Software AG Designer</span>.</div><div id="wwID0EOEFO" class="Definition_Term">Prefetched</div><div id="wwID0ETEFO" class="Definition_Description">  Indicates whether the service's prefetch option (for caching) is enabled. To enable/disable the prefetch setting for a service, you use <span class="ph">Software AG Designer</span>.</div><div id="wwID0ETFFO" class="Definition_Term">Circuit Breaker Enabled</div><div id="wwID0EYFFO" class="Definition_Description">Indicates whether the service's circuit breaker option is enabled.</div><div id="wwID0EHGFO" class="Section_Title">Cache and Prefetch Information</div><div id="wwID0EMGFO" class="Body">The fields in this section display information about cache utilization for those services that are currently using cache.</div><div id="wwID0EZGFO" class="Definition_Term">Name</div><div id="wwID0E5GFO" class="Definition_Description">Displays the name of the service.</div><div id="wwID0EIHFO" class="Definition_Term">Last Cache Hit</div><div id="wwID0ENHFO" class="Definition_Description">Displays the date and time that a cached result for this service was last accessed (hit).</div><div id="wwID0EXHFO" class="Definition_Term">Cache Hits</div><div id="wwID0E3HFO" class="Definition_Description">Displays the total number of times that a cached result for this service has been accessed (hit).</div><div id="wwID0EGIFO" class="Definition_Term">Cache Hits/Total Count</div><div id="wwID0ELIFO" class="Definition_Description">Displays the percentage of service requests that have been fulfilled by retrieving the results from cache.</div><div id="wwID0EVIFO" class="Definition_Term">Cache Entries</div><div id="wwID0E1IFO" class="Definition_Description">Displays the number of active cache entries for the service.</div><div id="wwID0EEJFO" class="Definition_Term">Cache Expires</div><div id="wwID0EJJFO" class="Definition_Description">Displays the number of expired cache entries for the service.</div><div id="wwID0ETJFO" class="Definition_Term">Last Prefetch</div><div id="wwID0EYJFO" class="Definition_Description">Displays the date and time that the server last prefetched and cached the results for the service.</div><div id="wwID0E4JFO" class="Note_1"><span class="Bold">Note:<br /></span>The cache may not be refreshed at the exact time specified in <span class="uicontrol">Cache Expires</span>. It may vary from 0 to 15 seconds, according to the cache sweeper thread. Select watt.server.cache.flushMins setting on the  to enable the display of the actual cache refresh time on the 
+    <a href="../is-onlinehelp/IS_Settings_ExtendedScrn.html#wwID0ETEIU"
+   
+     title="Extended settings"
+    ><span class="heading-no-quotes">Extended settings</span></a>.</div><div id="wwID0ELLFO" class="Definition_Term">Total Prefetches</div><div id="wwID0EQLFO" class="Definition_Description">Displays the total number of times the server has prefetched and cached the results for the service.</div><div id="wwID0E1LFO" class="Definition_Term">Recent Prefetch</div><div id="wwID0E6LFO" class="Definition_Description">Displays the total number of times the server has prefetched and cached the results for the service in the last poll interval. (The poll interval is set to 10 minutes on most servers.)</div><div id="wwID0EOMFO" class="Section_Title">Circuit Breaker Information</div><div id="wwID0ETMFO" class="Body"><span class="ph">Integration Server</span> gathers circuit breaker statistics for each service with a configured circuit breaker.</div><div id="wwID0E4MFO" class="Note"><span class="Bold">Note:<br /></span>The circuit breaker feature is available by default for a service that resides on a <span class="ph">Microservices Runtime</span>. To use the circuit breaker feature with <span class="ph">Integration Server</span>, your <span class="ph">Integration Server</span> must have additional licensing.</div><div id="wwID0E6NFO" class="Note"><span class="Bold">Note:<br /></span>If a circuit breaker is not configured for any service, the <span class="uicontrol">Circuit Breaker Information</span> table displays the message “No Services with a Circuit Breaker Enabled”.</div><div id="wwID0EBPFO" class="Definition_Term">Name</div><div id="wwID0EGPFO" class="Definition_Description">Name of the service for which a circuit breaker is configured.</div><div id="wwID0EQPFO" class="Definition_Term">State</div><div id="wwID0EVPFO" class="Definition_Description">The state of the circuit. The circuit state can be one of the following:</div><div id="wwID0EAQFO" class="List_2"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Closed. The service executes.</div><div id="wwID0ETQFO" class="List_2"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Open. The service does not execute. Instead, depending on the circuit breaker configuration, the service returns an exception or executes an alternative service.</div><div id="wwID0EGRFO" class="List_2"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Half-Open. The first request for this service since the circuit state changes to half-open results in service execution. All other requests wait. If the service executes successfully, the circuit is closed and waiting requests execute. If the service ends with a failure exception, the circuit is re-opened.</div><div id="wwID0EASFO" class="Definition_Term">Open Time</div><div id="wwID0EFSFO" class="Definition_Description">Time at which circuit breaker last set the circuit state to open.</div><div id="wwID0EPSFO" class="Definition_Term">Half-Open Time</div><div id="wwID0EUSFO" class="Definition_Description">Time at which circuit breaker last set the circuit state to half-open.</div><div id="wwID0E5SFO" class="Definition_Term">Closed Time</div><div id="wwID0EDTFO" class="Definition_Description">Time at which the circuit breaker last set the circuit state to closed.</div><div id="wwID0ENTFO" class="Definition_Term">Open Count</div><div id="wwID0ESTFO" class="Definition_Description">Number of times that circuit breaker set the circuit state to open since <span class="ph">Integration Server</span> started</div><div id="wwID0EBUFO" class="Definition_Term">Request Count</div><div id="wwID0EGUFO" class="Definition_Description">Number of incoming requests for the service since the circuit breaker changed the circuit state to open.</div><div id="wwID0EXUFO" class="title">Related Topics</div><div id="wwID0E2UFO" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Server_SrvrStatsScrn.html#wwID0E4HBK"
+   
+     title="Statistics"
+    ><span class="Link_Text">Statistics</span></a></div><div id="wwID0EHVFO" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Server_SrvrSchedScrn.html#wwID0EBGCO"
+   
+     title="Scheduling"
+    ><span class="Link_Text">Scheduling</span></a></div><div id="wwID0ETVFO" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Server_ShutdownRestartScrn.html#wwID0ETDAI"
+   
+     title="Shut down or restart"
+    ><span class="Link_Text">Shut down or restart</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>

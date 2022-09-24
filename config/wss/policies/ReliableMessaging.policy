@@ -1,0 +1,10 @@
+  <!--
+    This WS-RM policy expects messages to confirm to WS-Reliable Messaging specification 
+  -->
+
+<wsp:Policy Name="Reliable Messaging" wsu:Id="ReliableMessaging" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+	<wsrmp:RMAssertion xmlns:wsrmp="http://docs.oasis-open.org/ws-rx/wsrmp/200702" wsp:Optional="false">
+		<wsp:Policy/>
+    </wsrmp:RMAssertion>
+</wsp:Policy>

@@ -1,0 +1,87 @@
+<!DOCTYPE html ><html xml:lang="en" lang="en" data-highlight-require-whitespace="true" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>Remote servers</title><link rel="Prev" href="IS_Settings_SFTP_UserAliasSettings_Edit.html" title="Previous" /><link rel="Next" href="IS_Settings_CreateRemoteSvrAliasScrn.html" title="Next" /><link rel="StyleSheet" href="css/_is_admin_help.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/skin.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/social.css" type="text/css" media="all" /><link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" /><!--[if IE 7]><link rel="StyleSheet" href="css/_is_admin_help_IE7.css" type="text/css" media="all" /><![endif]--><link rel="StyleSheet" href="css/print.css" type="text/css" media="print" /><script type="text/javascript">
+    'use strict';
+
+    var redirect_url, page_hash;
+
+    if ((window === window.top) && (window.navigator.userAgent.indexOf('bot/') === -1)) {
+        // Redirect
+        //
+        redirect_url = "../index.html#page/is-onlinehelp/IS_Settings_RemoteServersScrn.html";
+        if (window.document.location.hash.length > 1) {
+            // Sanitize and append it
+            //
+            page_hash = window.document.location.hash.substring(1);
+            page_hash = page_hash.replace(/[\\><:;"]|%5C|%3C|%3E|%3A|%3B|%22/gi, '');
+            redirect_url += '#' + page_hash;
+        }
+        window.document.location.replace(redirect_url);
+    }
+</script><script type="text/javascript" src="scripts/common.js"></script><script type="text/javascript" src="scripts/page.js"></script><script type="text/javascript" src="scripts/search-client.js"></script><script type="text/javascript" src="scripts/unidata.js"></script><script type="text/javascript" src="scripts/unibreak.js"></script></head><body id="poimiefgNt7RlmRCMTSOxdw" class="ww_skin_page_body" onload="Page.OnLoad('../index.html#page/is-onlinehelp/IS_Settings_RemoteServersScrn.html');"><header id="wwconnect_header"><!-- Produkt Name und Version in Breadcrumbs SQ --><div class="ww_skin_breadcrumbs"><span>Integration Server</span>&nbsp;10.11 |
+		     <span class="ww_skin_breadcrumbs_parent"><a href="../is-onlinehelp/Menu_ExternalServer.html#wwconnect_header"> External servers</a></span><span class="ww_skin_breadcrumbs_divider"> | </span><span class="ww_skin_breadcrumbs_current">Remote servers</span></div><div class="ww_skin_page_toolbar"><a class="ww_behavior_print ww_skin ww_skin_print" title="Print" href="#">&nbsp;</a></div></header><div id="wwID0E53JO" class="Heading_1">Remote servers</div><div class="WebWorks_MiniTOC"><div class="WebWorks_MiniTOC_Heading">&nbsp;</div><dl class="WebWorks_MiniTOC_List"><dd><div class="WebWorks_MiniTOC_Entry"><a class="WebWorks_MiniTOC_Link" href="../is-onlinehelp/IS_Settings_CreateRemoteSvrAliasScrn.html#wwconnect_header">Create alias</a></div></dd><dd><div class="WebWorks_MiniTOC_Entry"><a class="WebWorks_MiniTOC_Link" href="../is-onlinehelp/IS_Settings_EditRemoteSvrAliasScrn.html#wwconnect_header">Edit alias</a></div></dd></dl></div><div id="wwID0E16JO" class="Body">Use the Remote servers page to view the list of aliases that your server defines for other <span class="ph">webMethods Integration Server</span>s. An alias is a named set of connection parameters that describe how to access another <span class="ph">webMethods Integration Server</span>. You use an alias when you invoke a service through the pub.remote:invoke and pub.remote.gd:* services, when you use multiple certificates, and when you use the publish/subscribe features to replicate packages between servers.</div><div id="wwID0EMAKO" class="List_1"><span class="WebWorks_Number" style="width: 18pt"><span><img src="chapterTOC_bullet.png" alt="*" border="0" width="10" height="10" /></span></span>Click <span class="uicontrol">Create Remote Server Alias</span> to create a new alias.</div><div id="wwID0EKBKO" class="Definition_Term">Remote Servers List</div><div id="wwID0EUBKO" class="Definition_Description">Displays the aliases that are defined on your server.</div><div id="wwID0E6BKO" class="Definition_Term">Alias</div><div id="wwID0EJCKO" class="Definition_Description">Displays the alias name.</div><div id="wwID0EUCKO" class="Definition_Term">Host</div><div id="wwID0E5CKO" class="Definition_Description">Displays the host name or IP address of the remote server represented by this alias.</div><div id="wwID0EJDKO" class="Definition_Term">Port</div><div id="wwID0ETDKO" class="Definition_Description">Displays the port number that is used by the remote server specified by this alias.</div><div id="wwID0E5DKO" class="Definition_Term">User</div><div id="wwID0EIEKO" class="Definition_Description">Displays the user name that is used when a service on the remote server specified by this alias is invoked.</div><div id="wwID0ETEKO" class="Definition_Term">SSL</div><div id="wwID0E4EKO" class="Definition_Description">Whether you want your server to connect to the remote server using Secure Sockets Layer (SSL). If you want to use SSL, select <span class="uicontrol">yes</span>; otherwise, select <span class="uicontrol">no</span>. If you select <span class="uicontrol">yes</span>, the remote server must be configured to listen for incoming HTTPS requests.</div><div id="wwID0EVFKO" class="Definition_Term">Execute ACL</div><div id="wwID0E6FKO" class="Definition_Description">Displays the name of the ACL on your server that protects access to this alias. A client that attempts to invoke a service on the remote server must be authorized to use the alias in addition to the remote service. Choose the name of an ACL from the drop-down menu which provides the following choices: Administrator, Anonymous, Default, Developer, Internal, Replicator.</div><div id="wwID0EKGKO" class="Definition_Term">Keep Alive Conns</div><div id="wwID0EUGKO" class="Definition_Description">Sets the default number of client keep alive connections to retain for a given target endpoint. If not specified, five keep alive connections are retained. This field specifies the maximum number of client connections that should be retained for any given remote host. In other words, this is not a maximum number of connections that can be established, but a limit on the number of inactive client connections to retain for reuse.</div><div id="wwID0E6GKO" class="Definition_Term">Timeout</div><div id="wwID0EJHKO" class="Definition_Description">Displays the length of time (in minutes) that your server maintains an idle connection to a remote server. This value will cause the connection to be retained for possible reuse until it times out. If the specified keep alive timeout value expires, the connection will close and the HTTP Listener will attempt to create a new one.</div><div id="wwID0EUHKO" class="Definition_Term">Test</div><div id="wwID0E5HKO" class="Definition_Description">Tests the remote server alias connection as it is configured.</div><div id="wwID0EJIKO" class="Definition_Term">Delete</div><div id="wwID0ETIKO" class="Definition_Description">Deletes the remote server alias from <span class="ph">Integration Server</span>.</div><div id="wwID0EKJKO" class="title">Related Topics</div><div id="wwID0EOJKO" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_CreateRemoteSvrAliasScrn.html#wwID0EQKKO"
+   
+     title="Create alias"
+    ><span class="Link_Text">Create alias</span></a></div><div id="wwID0E1JKO" class="heading-no-quotes">
+    <a href="../is-onlinehelp/IS_Settings_EditRemoteSvrAliasScrn.html#wwID0EU2KO"
+   
+     title="Edit alias"
+    ><span class="Link_Text">Edit alias</span></a></div><footer><!-- Related Topics --><!--                --><!-- Disqus --><!--        --><!-- Google Translation --><!--                    --><!-- SQ insert Footer --><br /><hr style="border:1px solid; border-color: #1776BF; " /><!-- FRWE: Why is the font family information hard-coded?? --><div style="font-family: 'Roboto', Sans-Serif; font-size: 10px; margin-top: 6px; margin-bottom: 6px; text-align: center;"><a href="http://www.softwareag.com/licenses">Copyright © 2007-2021&nbsp;Software AG, Darmstadt, Germany and/or Software AG USA, Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors</a></div><!-- SQ insert Date 
+	 <div style="text-align: center; font-weight: bold;" wwpage:content="pub-date">January 1, 2015</div> --><!-- old Footer 2016
+	  <div class="footer">Copyright &#169; <span wwpage:content="sag:product-copyrfirst"></span>, <span wwpage:content="sag:organization-copyrholder"></span>, <a href="http://sag.com/" wwpage:attribute-href="sag:organization-url" wwpage:content="sag:organization-url">http://sag.com/</a>
+   --><!-- SQ Variablen --><!-- Copyright Test --><!--	  <div style="text-decoration: underline">Copyright Import Test:</div>
+	  <wwpage:Import wwpage:content-from-file="Copyright/copyright_en.asp" />
+	  <br></br>--><!--
+	  <!-\- SQ Variables - Information from xresources -\->
+	  <div style="text-decoration: underline">From xresources:</div>
+	  <div>sag:organization-id == <span wwpage:content="sag:organization-id"></span></div>
+	  <div>sag:organization-name == <span wwpage:content="sag:organization-name"></span></div>
+	  <div>sag:organization-copyrholder == <span wwpage:content="sag:organization-copyrholder"></span></div>
+	  <div>sag:organization-url == <span wwpage:content="sag:organization-url"></span></div>
+	  
+	  <div>sag:family-id == <span wwpage:content="sag:family-id"></span></div>
+	  <div>sag:family-name == <span wwpage:content="sag:family-name"></span></div>
+	  <div>sag:family-organization == <span wwpage:content="sag:family-organization"></span></div>
+	  
+	  <div>sag:product-id == <span wwpage:content="sag:product-id"></span></div>
+	  <div>sag:product-name == <span wwpage:content="sag:product-name"></span></div>
+	  <div>sag:product-copyrfirst == <span wwpage:content="sag:product-copyrfirst"></span></div>
+	  <div>sag:product-family == <span wwpage:content="sag:product-family"></span></div>
+	  
+	  <!-\- SQ Variables - Values from DITA-Map and Keymap-\->
+	  <br></br>
+	  <div style="text-decoration: underline">From DITA/Book-Map:</div>
+	  <div>ProdInfo Prodname == <span wwpage:replace="wwvars:ProdInfoProdName"></span></div>
+	  <div>ProdInfo Mod First == <span wwpage:replace="wwvars:ProdInfoModFirst"></span></div>
+	  <div>ProdInfo Mod Last == <span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>ProdInfo Rel First == <span wwpage:replace="wwvars:ProdInfoRelFirst"></span></div>
+	  <div>ProdInfo Rel Last == <span wwpage:replace="wwvars:ProdInfoRelLast"></span></div>
+	  <div>ProdInfo Vers First == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span></div>
+	  <div>ProdInfo Vers Last == <span wwpage:replace="wwvars:ProdInfoVersLast"></span></div>
+	  <div>ProdInfo vrm vers.rel.mod == <span wwpage:replace="wwvars:ProdInfoVersFirst"></span>.<span wwpage:replace="wwvars:ProdInfoRelLast"></span>.<span wwpage:replace="wwvars:ProdInfoModLast"></span></div>
+	  <div>BookID PartNo == <span wwpage:replace="wwvars:BookPartNo"></span></div>
+	  <div>othermeta release-version == <span wwpage:replace="wwvars:ReleaseVersion"></span></div>
+	  <div>othermeta release-date == <span wwpage:replace="wwvars:ReleaseDate"></span></div>
+	  <div>othermeta release-edition == <span wwpage:replace="wwvars:ReleaseEdition"></span></div>
+	  <div>othermeta product == <span wwpage:replace="wwvars:Product"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">From x_runtime/keymap.ditamap:</div>
+	  <div>sag:product-shortname == <span wwpage:replace="wwvars:sag:product-shortname"></span></div>
+	  <div>sag:product-longname == <span wwpage:replace="wwvars:sag:product-longname"></span></div>
+	  <div>versionAdd == <span wwpage:replace="wwvars:versionAdd"></span></div>
+	  <div>yearFYLY == <span wwpage:replace="wwvars:yearFYLY"></span></div>
+	  <div>fingerprint == <span wwpage:replace="wwvars:fingerprint"></span></div>
+	  <div>sag:CopyrightDeclaration == <span wwpage:replace="wwvars:sag:CopyrightDeclaration"></span></div>
+	  <div>pdfReleaseDate == <span wwpage:replace="wwvars:pdfReleaseDate"></span></div>
+	  <div>documentID == <span wwpage:replace="wwvars:documentID"></span></div>
+	  <br></br>
+	  <div style="text-decoration: underline">Reserve:</div>
+	  <div>organization == <span wwpage:content="organization"></span></div>
+	  <div>product-name == <span wwpage:content="product-name"></span></div>
+	  <div>copyright-first == <span wwpage:content="copyright-first"></span></div>
+	  <div>copyright-last == <span wwpage:content="copyright-last"></span></div>
+	  <div>copyright-first-b == <span wwpage:content="wwvars:copyright-first-b"></span></div>
+	  <div>copyright-last-b == <span wwpage:content="copyright-last-b"></span></div>
+	  <div>doc-id-one == <span wwpage:content="doc-id-one"></span></div>
+	  <div>doc-id-two == <span wwpage:content="doc-id-two"></span></div>  
+	  <div>Published == <span wwpage:content="pub-date"></span></div>
+	  --></footer></body></html>
