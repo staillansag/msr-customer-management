@@ -1,28 +1,28 @@
 .tc.custom.log4j2.properties
-./XAStore
-./bin
-./cacheStore
-./conf
+/XAStore
+/bin
+/cacheStore
+/conf
 
-./config
-!./config/integrationlive/*
+/config
+!/config/integrationlive/*
 
-./db
-./docker
-./logs
-./monitorRepo
-./replicate
-./sdk
-./support
-./updateReadmes
-./updates
-./userFtpRoot
-./web
+/db
+/docker
+/logs
+/monitorRepo
+/replicate
+/sdk
+/support
+/updateReadmes
+/updates
+/userFtpRoot
+/web
 
-./packages/Wm*
-./packages/Default
-!./packages/WmJDBCAdapter
+/packages/Wm*
+/packages/Default
+!/packages/WmJDBCAdapter
 
-./lib
-!./lib/jars/dd-cjdbc.jar
+/lib
+!/lib/jars/dd-cjdbc.jar
 
