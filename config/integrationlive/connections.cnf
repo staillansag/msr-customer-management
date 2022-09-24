@@ -2,5 +2,33 @@
 
 <IDataXMLCoder version="1.0">
   <record javaclass="com.wm.data.ISMemDataImpl">
+    <array name="IntegrationLiveConnections" type="record" depth="1">
+      <record javaclass="com.wm.data.ISMemDataImpl">
+        <value name="tenantAlias">default</value>
+        <value name="lastUploadedTimeStr"></value>
+        <jboolean name="uploadPending">true</jboolean>
+        <value name="aliasName">default</value>
+        <value name="description">Default</value>
+        <value name="stage">stage00</value>
+        <value name="stageDisplay">Development</value>
+        <value name="realmUrls"></value>
+        <value name="onPremiseHosts"></value>
+        <null name="filter"/>
+        <number name="windowSize" type="java.lang.Integer">5</number>
+        <number name="retry" type="java.lang.Long">5</number>
+        <value name="runAsUser">Administrator</value>
+        <jboolean name="isEnabled">true</jboolean>
+        <record name="properties" javaclass="com.wm.data.ISMemDataImpl">
+        </record>
+        <number name="lastUploadedTime" type="java.lang.Long">0</number>
+        <number name="lastSavedTime" type="java.lang.Long">1664011188052</number>
+        <number name="timeToLive" type="java.lang.Long">60000</number>
+        <number name="timeToLiveCache" type="java.lang.Long">60</number>
+        <value name="keyStoreAlias"></value>
+        <null name="keyAlias"/>
+        <value name="trustStoreAlias"></value>
+      </record>
+    </array>
+    <number name="lastSavedTime" type="java.lang.Long">1664011188053</number>
   </record>
 </IDataXMLCoder>
