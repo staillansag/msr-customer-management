@@ -1,1 +1,0 @@
-    out.use(cpp%value svcName%(in.getIData()));

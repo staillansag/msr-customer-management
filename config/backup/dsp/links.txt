@@ -1,8 +1,0 @@
-<link rel="preload" href="/WmRoot/fonts/Roboto-Light.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-LightItalic.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-Regular.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-RegularItalic.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-Medium.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-MediumItalic.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-Bold.woff" as="font" type="font/woff2" crossorigin >
-<link rel="preload" href="/WmRoot/fonts/Roboto-BoldItalic.woff" as="font" type="font/woff2" crossorigin >

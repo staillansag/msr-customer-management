@@ -1,2 +1,0 @@
-native static IData cpp%value svcName%(IData in);
-	

@@ -1,9 +1,0 @@
-{
-    "apis" : [
-        {
-            "productName" : "adapterRuntime",
-            "displayName" : "Adapter Runtime",
-            "packageName" : "com.wm.adapters.common"
-        }
-    ]
-}
