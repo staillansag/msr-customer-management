@@ -27,3 +27,5 @@ The config-map.yaml file provided in this project already includes these changes
 Here we follow another tutorial by Bill Wilson: https://devopscube.com/setup-grafana-kubernetes/
 
 ### Update of the Kubernetes deployment descriptors for our microservice
+
+ ![Kubernetes Architecture](https://github.com/stephane-sttlab/sagdemo/blob/main/Sagdemo_KubernetesArchitecture.png)
