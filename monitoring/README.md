@@ -14,10 +14,16 @@ We follow this excellent tutorial written by Bibin Wilson: https://devopscube.co
 
 We get a fully working Prometheus that is already capable of discovering the pods that need to be scraped.
 
-This is thanks to the configuration applied in the config-map.yaml file.
+When you check the config-map.yaml file, in the "kubernetes-pods" scraping job there's a relabel configuration that makes it possible to activate scraping using the prometheus.io/scrape: "true" annotation.
 
-There's a job name kubernetes-pods which scraps Kubernetes objects with the pod role. 
-We just need to activate the scraping using the prometheus.io/scrape: "true" annotation in the pod specification.
+However since the MSR and the microgateway are deployed together a pod (side car deployment), we need to modify this Prometheus configuration to make it capable of scraping several containers in a pod.
 
-However since the MSR and the microgateway are deployed together in pods (side car deployment), we need to modify the Prometheus configuration to make it capable of scraping several containers in a pod.
 The solution is provided in this github code snippet: https://gist.github.com/bakins/5bf7d4e719f36c1c555d81134d8887eb
+
+The config-map.yaml file provided in this project already includes these changes. You just need to specify the metrics ports for each container using a port named "metrics". 
+
+### Grafana installation and configuration
+
+Here we follow another tutorial by Bill Wilson: https://devopscube.com/setup-grafana-kubernetes/
+
+### Update of the Kubernetes deployment descriptors for our microservice
