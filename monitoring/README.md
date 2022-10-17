@@ -33,3 +33,9 @@ We also need to specify the metrics port for each container of the pod (by defau
 
  ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-configuration_1.png)
  ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-configuration_2.png)
+ 
+### Display of report in Grafana
+
+Import the ![JSON report definition](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/msr-mcgw-report.json) in Grafana to view some of the captured metrics.
+
+
