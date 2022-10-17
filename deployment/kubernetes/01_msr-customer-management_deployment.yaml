@@ -67,6 +67,9 @@ spec:
       - image: staillansag/msr-customer-management:latest
         imagePullPolicy: Always
         name: customer-management-msr
+        ports:
+        - name: metrics
+          containerPort: 5555
         volumeMounts:
         - mountPath: "/tmp/license"
           name: licenses
@@ -98,9 +101,6 @@ spec:
             secretKeyRef:
               name: intadmin-password
               key: password
-        ports:
-        - name: metrics
-          containerPort: 5555
         livenessProbe:
           tcpSocket:
             port: 5555
