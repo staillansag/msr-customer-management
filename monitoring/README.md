@@ -36,6 +36,6 @@ We also need to specify the metrics port for each container of the pod (by defau
  
 ### Display of report in Grafana
 
-Import the ![JSON report definition](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/msr-mcgw-report.json) in Grafana to view some of the captured metrics.
+Import the [JSON report definition](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/msr-mcgw-report.json) in Grafana to view some of the captured metrics.
 
 
