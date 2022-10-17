@@ -5,7 +5,7 @@
     <record name="default" javaclass="com.wm.data.ISMemDataImpl">
       <value name="alias">default</value>
       <jboolean name="isEnabled">true</jboolean>
-      <value name="username">intadmin</value>
+      <value name="username">hybridconn</value>
       <value name="pswdHandle">wm.is.admin.ilive.intadmin.default</value>
       <value name="iLiveURL">https://presalesemeadev.int-aws-de.webmethods.io</value>
       <value name="umURL">nhps://um.int-aws-de.webmethods.io:443//stage00-um-svc-http.ic-1001-1012/</value>
