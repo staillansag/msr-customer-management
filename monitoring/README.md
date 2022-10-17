@@ -39,3 +39,5 @@ We also need to specify the metrics port for each container of the pod (by defau
 Import the [JSON report definition](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/msr-mcgw-report.json) in Grafana to view some of the captured metrics.
 
 ## Management of applicative logs using Fluentd and Elastic Search
+
+More to come...
