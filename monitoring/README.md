@@ -33,4 +33,3 @@ We also need to specify the metrics port for each container of the pod (by defau
 
  ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-config_1.png)
  ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-config_2.png)
-
