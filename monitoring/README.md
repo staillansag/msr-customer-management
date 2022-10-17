@@ -28,4 +28,8 @@ Here we follow another tutorial by Bill Wilson: https://devopscube.com/setup-gra
 
 ### Update of the Kubernetes deployment descriptors for our microservice
 
- ![Kubernetes Architecture](https://github.com/stephane-sttlab/sagdemo/blob/main/Sagdemo_KubernetesArchitecture.png)
+We need to activate the scraping of metrics using the prometheus.io/scrape: "true" annotation.
+We also need to specify the metrics port for each container of the pod (by default: 5555 for the MSR, 9090 for the microgateway.)
+
+ ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-config_1.png)
+ ![Pod configuration part 1](https://github.com/staillansag/msr-customer-management/blob/main/monitoring/prometheus-pod-config_2.png)
