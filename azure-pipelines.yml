@@ -24,7 +24,9 @@ steps:
   displayName: 'Download ACR SP credentials'
   inputs:
     secureFile: 'acr.sp.credentials.sh'
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'qa.env'
+  displayName: 'Download test environment file'
 
 - script: ./buildScripts/04.build.sh
-  displayName: 'Build'
-
