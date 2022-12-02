@@ -1,17 +1,6 @@
-# Template to customise msc based image
-#
+ARG __from_img
 
-FROM softwareag/webmethods-microservicesruntime:10.11.0.2
-LABEL MAINTAINER="" \
-	DESCRIPTION="Customer Management microservice" \
-	COMMENT="Customer Management microservice based on MSR" \
-	CUSTOM="true" \
-	SAG="true" \
-	BUILD=build-msc \
-	BUILD-TEMPLATE="MSR Slim 10.11" \
-	TYPE="Micro Service"
-#user root
-
+FROM ${__from_img}
 
 # define exposed ports
 
@@ -26,8 +15,7 @@ USER sagadmin
 
 # files to be added to based image (includes configuration and package)
 
-	ADD --chown=sagadmin ./packages/CustomerManagement /opt/softwareag/IntegrationServer/packages/CustomerManagement
-	ADD --chown=sagadmin ./packages/WmJDBCAdapter /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter
-	ADD --chown=sagadmin ./lib/jars/dd-cjdbc.jar /opt/softwareag/common/lib/ext/dd-cjdbc.jar
-	ADD --chown=sagadmin ./application.properties /opt/softwareag/IntegrationServer/application.properties
-
+ADD --chown=sagadmin ./packages/CustomerManagement /opt/softwareag/IntegrationServer/packages/CustomerManagement
+ADD --chown=sagadmin ./packages/WmJDBCAdapter /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter
+ADD --chown=sagadmin ./lib/jars/postgresql-42.5.1.jar /opt/softwareag/common/lib/ext/postgresql-42.5.1.jar
+ADD --chown=sagadmin ./properties/msr.properties /opt/softwareag/IntegrationServer/application.properties
