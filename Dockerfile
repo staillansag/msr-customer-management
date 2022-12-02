@@ -17,5 +17,5 @@ USER sagadmin
 
 ADD --chown=sagadmin ./packages/CustomerManagement /opt/softwareag/IntegrationServer/packages/CustomerManagement
 ADD --chown=sagadmin ./packages/WmJDBCAdapter /opt/softwareag/IntegrationServer/packages/WmJDBCAdapter
-ADD --chown=sagadmin ./lib/jars/postgresql-42.5.1.jar /opt/softwareag/common/lib/ext/postgresql-42.5.1.jar
+ADD --chown=sagadmin ./lib/jars/postgresql-42.5.1.jar /opt/softwareag/lib/jars/postgresql-42.5.1.jar
 ADD --chown=sagadmin ./application.properties /opt/softwareag/IntegrationServer/application.properties
