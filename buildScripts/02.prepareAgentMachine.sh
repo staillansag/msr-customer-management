@@ -6,3 +6,6 @@ sudo apt-get update -qq
 sudo apt-get install -y ca-certificates curl gnupg2 fuse-overlayfs
 sudo apt-get -qq -y install buildah
 
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
