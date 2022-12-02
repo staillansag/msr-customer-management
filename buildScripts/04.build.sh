@@ -34,6 +34,8 @@ sudo docker build \
 
 echo "Checking env file"
 pwd
+ls -l
+echo "Env file: ${DOCKERENV_SECUREFILEPATH}"
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 

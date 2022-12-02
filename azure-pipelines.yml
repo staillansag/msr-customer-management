@@ -24,6 +24,7 @@ steps:
   displayName: 'Download ACR SP credentials'
   inputs:
     secureFile: 'acr.sp.credentials.sh'
+
 - task: DownloadSecureFile@1
   name: dockerEnv
   inputs:
