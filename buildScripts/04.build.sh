@@ -34,9 +34,20 @@ sudo docker build \
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
 sudo docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}"
-sleep 120
-sudo docker ps
-sudo docker logs $(sudo docker ps -q)
+
+max_retry=10
+counter=0
+until $(curl http://localhost:5555)
+do
+   sleep 10
+   [[ counter -eq $max_retry ]] && echo "Docker container did not start" && exit 1
+   echo "Trying again to access MSR admin URL. Try #$counter"
+   ((counter++))
+done
+
+curl --location --request GET 'http://localhost:5555/customer-management/customers' \
+--header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=' || exit 4 
+
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
