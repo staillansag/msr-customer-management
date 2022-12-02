@@ -19,15 +19,9 @@ echo "Dumping environment for demo purposes"
 env | sort
 
 echo "Logging in to repository ${MY_AZ_ACR_URL}"
-#buildah login -u "${AZ_ACR_SP_ID}" -p "${AZ_ACR_SP_SECRET}" "${MY_AZ_ACR_URL}"  || exit 3
 sudo docker login -u "${AZ_ACR_SP_ID}" -p "${AZ_ACR_SP_SECRET}" "${MY_AZ_ACR_URL}"  || exit 3
 
 echo "Building tag ${OUR_SERVICE_TAG_BASE}"
-#buildah bud \
-#  --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
-#  --format docker \
-#  -t "${OUR_SERVICE_TAG_BASE}" || exit 4
-
 sudo docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
@@ -45,9 +39,9 @@ do
    ((counter++))
 done
 
-curl --location --request GET 'http://localhost:5555/customer-management/customers' \
---header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=' || exit 4 
-
+echo "Basic sanity check of the generated docker image"
+curl -s -o /dev/null --location --request GET 'http://localhost:5555/customer-management/customers' \
+--header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=a' && echo "Test passed" || exit 4 
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
