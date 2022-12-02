@@ -32,10 +32,11 @@ sudo docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
-echo "Checking env file"
-pwd
-ls -l
-echo "Env file: ${DOCKERENV_SECUREFILEPATH}"
+echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
+sudo docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}"
+sleep 120
+sudo docker ps
+sudo docker logs $(sudo docker ps -q)
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
