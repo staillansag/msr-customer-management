@@ -36,11 +36,11 @@ echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
 sudo docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}"
 
 max_retry=10
-counter=0
-until $(curl http://localhost:5555)
+counter=1
+until curl -s -o /dev/null http://localhost:6555
 do
    sleep 10
-   [[ counter -eq $max_retry ]] && echo "Docker container did not start" && exit 1
+   [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
    echo "Trying again to access MSR admin URL. Try #$counter"
    ((counter++))
 done
