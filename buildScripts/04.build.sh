@@ -28,7 +28,7 @@ echo "Building tag ${OUR_SERVICE_TAG_BASE}"
 #  --format docker \
 #  -t "${OUR_SERVICE_TAG_BASE}" || exit 4
 
-docker build \
+sudo docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
