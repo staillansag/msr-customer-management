@@ -32,9 +32,8 @@ sudo docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
-echo "Listing files"
-ls -l
-
+echo "Checking env file"
+ls -l $(dockerEnv.secureFilePath)
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
