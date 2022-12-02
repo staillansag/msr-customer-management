@@ -37,7 +37,7 @@ sudo docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOC
 
 max_retry=10
 counter=1
-until curl -s -o /dev/null http://localhost:6555
+until curl -s -o /dev/null http://localhost:5555
 do
    sleep 10
    [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
