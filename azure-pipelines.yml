@@ -16,7 +16,7 @@ steps:
   displayName: 'Set job variables'
 
 - script: ./buildScripts/02.prepareAgentMachine.sh
-  displayName: 'Install buildah'
+  displayName: 'Install docker'
 
 # Service Principal Credentials
 - task: DownloadSecureFile@1
@@ -25,8 +25,10 @@ steps:
   inputs:
     secureFile: 'acr.sp.credentials.sh'
 - task: DownloadSecureFile@1
+  name: dockerEnv
   inputs:
     secureFile: 'qa.env'
   displayName: 'Download test environment file'
 
 - script: ./buildScripts/04.build.sh
+  displayName: 'Build'
