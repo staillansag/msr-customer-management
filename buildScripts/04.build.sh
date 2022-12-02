@@ -20,7 +20,7 @@ env | sort
 
 echo "Logging in to repository ${MY_AZ_ACR_URL}"
 buildah login -u "${AZ_ACR_SP_ID}" -p "${AZ_ACR_SP_SECRET}" "${MY_AZ_ACR_URL}"  || exit 3
-docker login -u "${AZ_ACR_SP_ID}" -p "${AZ_ACR_SP_SECRET}" "${MY_AZ_ACR_URL}"  || exit 3
+sudo docker login -u "${AZ_ACR_SP_ID}" -p "${AZ_ACR_SP_SECRET}" "${MY_AZ_ACR_URL}"  || exit 3
 
 echo "Building tag ${OUR_SERVICE_TAG_BASE}"
 buildah bud \
@@ -31,20 +31,20 @@ buildah bud \
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
 echo "Tagging ${OUR_SERVICE_TAG_BASE} to ${crtTag}"
-docker tag "${OUR_SERVICE_TAG_BASE}" "${crtTag}"
+sudo docker tag "${OUR_SERVICE_TAG_BASE}" "${crtTag}"
 
 echo "==================> BUILD_REASON = ${BUILD_REASON}"
 
 echo "Pushing tag ${crtTag}"
-docker push "${crtTag}"
+sudo docker push "${crtTag}"
 
 if [[ "${BUILD_SOURCEBRANCHNAME}" == "main" ]]; then
   echo "Pushing tag ${OUR_SERVICE_TAG_BASE}"
-  docker  push "${OUR_SERVICE_TAG_BASE}"
+  sudo docker  push "${OUR_SERVICE_TAG_BASE}"
 fi
 
 echo "Logging out"
 buildah logout "${MY_AZ_ACR_URL}"
-docker logout "${MY_AZ_ACR_URL}"
+sudo docker logout "${MY_AZ_ACR_URL}"
 
 echo "Push completed"
