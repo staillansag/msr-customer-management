@@ -25,9 +25,6 @@ steps:
 - script: chmod u+x ./buildScripts/*.sh
   displayName: "Grant shell execution permissions"
 
-- script: ./buildScripts/setEnv.sh
-  displayName: 'Set global variables'
-
 - script: ./buildScripts/01.setJobInitialVariables.sh
   displayName: 'Set job variables'
 

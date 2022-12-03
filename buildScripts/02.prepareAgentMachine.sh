@@ -1,4 +1,7 @@
-echo "Docker install"i
+#!/bin/bash
+. ./buildScripts/setEnv.sh
+
+echo "Docker install"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
@@ -16,9 +19,6 @@ kubectl get nodes || exit 1
 
 echo "Creating K8S secret to connect to the SAG Docker registry"
 kubectl create secret docker-registry sagregcred --docker-server=sagcr.azurecr.io --docker-username="${SAG_ACR_SP_ID}" --docker-password="${SAG_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRESS}"
-echo "SAG_ACR_SP_ID = ${SAG_ACR_SP_ID}"
-echo "SAG_ACR_SP_SECRET = ${SAG_ACR_SP_SECRET}"
-echo "MY_EMAIL_ADDRESS = ${MY_EMAIL_ADDRESS}"
 
 echo "Creating K8S secret to connect to the stt Docker registry"
 kubectl create secret docker-registry sttregcred --docker-server="${MY_AZ_ACR_URL}" --docker-username="${AZ_ACR_SP_ID}" --docker-password="${AZ_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRES}"
