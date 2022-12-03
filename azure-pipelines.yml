@@ -12,6 +12,12 @@ steps:
 - script: chmod u+x ./buildScripts/*.sh
   displayName: "Grant shell execution permissions"
 
+- task: DownloadSecureFile@1
+  name: kubectlConfig
+  displayName: 'Download kubectl config'
+  inputs:
+    secureFile: 'config-aks.yml'
+
 - script: ./buildScripts/01.setJobInitialVariables.sh
   displayName: 'Set job variables'
 
