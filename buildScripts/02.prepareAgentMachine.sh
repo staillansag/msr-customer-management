@@ -1,6 +1,8 @@
 #!/bin/bash
 . ./buildScripts/setEnv.sh
 
+env
+
 echo "Docker install"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
