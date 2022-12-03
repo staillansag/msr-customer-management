@@ -11,9 +11,6 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl || exit 1
 
 kubectl version --client || exit 1
 
-echo "Checking kubectl config file"
-ls -l "${KUBECTLCONFIG_SECUREFILEPATH}"
+sudo cp "${KUBECTLCONFIG_SECUREFILEPATH}" ~/.kube/config
 
-echo "Display location of kubectl config"
-sudo echo "${KUBECONFIG}"
-
+sudo kubectl get nodes
