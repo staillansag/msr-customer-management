@@ -55,5 +55,5 @@ sudo apt install -y npm
 npm -v || exit 1
 
 echo "Installing newman"
-npm install -g newman
+sudo npm install -g newman
 newman -v || exit 1
