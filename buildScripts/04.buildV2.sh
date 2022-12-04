@@ -27,7 +27,7 @@ docker build \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
-dockerId=$(docker run -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
+dockerId=$(docker run -dp 5555:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
 
 max_retry=10
 counter=1
