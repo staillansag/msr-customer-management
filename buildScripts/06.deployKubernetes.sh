@@ -1,6 +1,10 @@
  #!/bin/bash
 . ./buildScripts/setEnv.sh
 
+echo "Getting the ID of the current revision, in case we have to rollback to it"
+rollbackRevision=$(kubectl rollout history deployment/customer-management -o jsonpath='{.metadata.generation}')
+echo "##vso[task.setvariable variable=ROLLBACK_REVISION;]${rollbackRevision}"
+
 imageTag="${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
 echo "Deploying new microservice image"

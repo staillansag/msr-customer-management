@@ -32,16 +32,28 @@ cp "${KUBECTLCONFIG_SECUREFILEPATH}" ~/.kube/config
 
 kubectl get nodes || exit 1
 
-echo "Creating K8S secret to connect to the SAG Docker registry"
-kubectl create secret docker-registry sagregcred --docker-server=sagcr.azurecr.io --docker-username="${SAG_ACR_SP_ID}" --docker-password="${SAG_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRESS}"
+#echo "Creating K8S secret to connect to the SAG Docker registry"
+#kubectl create secret docker-registry sagregcred --docker-server=sagcr.azurecr.io --docker-username="${SAG_ACR_SP_ID}" --docker-password="${SAG_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRESS}"
 
-echo "Creating K8S secret to connect to the stt Docker registry"
-kubectl create secret docker-registry sttregcred --docker-server="${MY_AZ_ACR_URL}" --docker-username="${AZ_ACR_SP_ID}" --docker-password="${AZ_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRES}"
+#echo "Creating K8S secret to connect to the stt Docker registry"
+#kubectl create secret docker-registry sttregcred --docker-server="${MY_AZ_ACR_URL}" --docker-username="${AZ_ACR_SP_ID}" --docker-password="${AZ_ACR_SP_SECRET}" --docker-email="${MY_EMAIL_ADDRES}"
 
-echo "Getting kubernetes secrets..."
-if [ ! -f "${KUBERNETESSECRETS_SECUREFILEPATH}" ]; then
-  echo "Secure file path not present: ${KUBERNETESSECRETS_SECUREFILEPATH}"
-  exit 1
-fi
+#echo "Getting kubernetes secrets..."
+#if [ ! -f "${KUBERNETESSECRETS_SECUREFILEPATH}" ]; then
+#  echo "Secure file path not present: ${KUBERNETESSECRETS_SECUREFILEPATH}"
+#  exit 1
+#fi
 
-kubectl apply -f "${KUBERNETESSECRETS_SECUREFILEPATH}"
+#kubectl apply -f "${KUBERNETESSECRETS_SECUREFILEPATH}"
+
+echo "Installing nodejs"
+sudo apt install nodejs
+node -v || exit 1
+
+echo "Installing npm"
+sudo apt install npm
+npm -v || exit 1
+
+echo "Installing newman"
+npm install -g newman
+newman -v || exit 1
