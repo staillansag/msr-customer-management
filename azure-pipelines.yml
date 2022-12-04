@@ -5,8 +5,7 @@ trigger:
   - feature*
 
 pool:
-  name: WmDevOpsAgentsPool
-  vmImage: Canonical:0001-com-ubuntu-confidential-vm-focal:20_04-lts-gen2:latest
+  name: Default
 
 steps:
 
@@ -28,8 +27,8 @@ steps:
 - script: ./buildScripts/01.setJobInitialVariables.sh
   displayName: 'Set job variables'
 
-- script: ./buildScripts/02.prepareAgentMachine.sh
-  displayName: 'Install docker'
+- script: ./buildScripts/02.prepareAgentMachineV2.sh
+  displayName: 'Prepare agent'
 
 # Service Principal Credentials
 - task: DownloadSecureFile@1
