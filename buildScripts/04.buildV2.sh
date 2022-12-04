@@ -29,19 +29,19 @@ docker build \
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
 docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}"
 
-#max_retry=10
-#counter=1
-#until curl -s -o /dev/null http://localhost:5555
-#do
-#   sleep 10
-#   [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
-#   echo "Trying again to access MSR admin URL. Try #$counter"
-#   ((counter++))
-#done
+max_retry=10
+counter=1
+until curl -s -o /dev/null http://localhost:5555
+do
+   sleep 10
+   [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
+   echo "Trying again to access MSR admin URL. Try #$counter"
+   ((counter++))
+done
 
-#echo "Basic sanity check of the generated docker image"
-#curl -s -o /dev/null --location --request GET 'http://localhost:5555/customer-management/customers' \
-#--header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=a' && echo "Test passed" || exit 4 
+echo "Basic sanity check of the generated docker image"
+curl -s -o /dev/null --location --request GET 'http://localhost:5555/customer-management/customers' \
+--header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=a' && echo "Test passed" || exit 4 
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
 
