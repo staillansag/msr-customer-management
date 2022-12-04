@@ -47,11 +47,11 @@ kubectl get nodes || exit 1
 #kubectl apply -f "${KUBERNETESSECRETS_SECUREFILEPATH}"
 
 echo "Installing nodejs"
-sudo apt install nodejs
+sudo apt install -y nodejs
 node -v || exit 1
 
 echo "Installing npm"
-sudo apt install npm
+sudo apt install -y npm
 npm -v || exit 1
 
 echo "Installing newman"
