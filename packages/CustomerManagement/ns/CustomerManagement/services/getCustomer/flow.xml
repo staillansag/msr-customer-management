@@ -694,6 +694,18 @@
         <value name="is_global">false</value>
         <array name="rec_fields" type="record" depth="1">
           <record javaclass="com.wm.util.Values">
+            <value name="node_type">unknown</value>
+            <value name="node_subtype">unknown</value>
+            <value name="is_public">false</value>
+            <value name="field_name">nbSelected</value>
+            <value name="field_type">object</value>
+            <value name="field_dim">0</value>
+            <value name="wrapper_type">java.lang.Integer</value>
+            <value name="nillable">true</value>
+            <value name="form_qualified">false</value>
+            <value name="is_global">false</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
             <value name="node_type">record</value>
             <value name="node_subtype">unknown</value>
             <value name="is_public">false</value>
@@ -720,7 +732,7 @@
                 <value name="node_type">unknown</value>
                 <value name="node_subtype">unknown</value>
                 <value name="is_public">false</value>
-                <value name="field_name">lastName</value>
+                <value name="field_name">lastname</value>
                 <value name="field_type">string</value>
                 <value name="field_dim">0</value>
                 <value name="nillable">true</value>
@@ -731,7 +743,7 @@
                 <value name="node_type">unknown</value>
                 <value name="node_subtype">unknown</value>
                 <value name="is_public">false</value>
-                <value name="field_name">firstName</value>
+                <value name="field_name">firstname</value>
                 <value name="field_type">string</value>
                 <value name="field_dim">0</value>
                 <value name="nillable">true</value>
@@ -742,7 +754,7 @@
                 <value name="node_type">unknown</value>
                 <value name="node_subtype">unknown</value>
                 <value name="is_public">false</value>
-                <value name="field_name">birthDate</value>
+                <value name="field_name">birthdate</value>
                 <value name="field_type">string</value>
                 <value name="field_dim">0</value>
                 <value name="nillable">true</value>
@@ -763,18 +775,6 @@
             </array>
             <value name="modifiable">true</value>
           </record>
-          <record javaclass="com.wm.util.Values">
-            <value name="node_type">unknown</value>
-            <value name="node_subtype">unknown</value>
-            <value name="is_public">false</value>
-            <value name="field_name">nbSelected</value>
-            <value name="field_type">object</value>
-            <value name="field_dim">0</value>
-            <value name="wrapper_type">java.lang.Integer</value>
-            <value name="nillable">true</value>
-            <value name="form_qualified">false</value>
-            <value name="is_global">false</value>
-          </record>
         </array>
         <value name="modifiable">true</value>
       </record>
@@ -789,16 +789,16 @@
 <MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/id;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/id;1;0">
 </MAPCOPY>
 
-<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/lastName;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/lastName;1;0">
-</MAPCOPY>
-
-<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/firstName;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/firstName;1;0">
-</MAPCOPY>
-
-<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/birthDate;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/birthDate;1;0">
-</MAPCOPY>
-
 <MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/status;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/status;1;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/lastname;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/lastName;1;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/firstname;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/firstName;1;0">
+</MAPCOPY>
+
+<MAPCOPY FROM="/selectCustomerByIdOutput;2;0/results;2;1/birthdate;1;0" TO="/customer;4;0;CustomerManagement.doc:customerCanonical/birthDate;1;0">
 </MAPCOPY>
 </MAP>
 
@@ -1146,6 +1146,18 @@
         <value name="is_global">false</value>
         <array name="rec_fields" type="record" depth="1">
           <record javaclass="com.wm.util.Values">
+            <value name="node_type">unknown</value>
+            <value name="node_subtype">unknown</value>
+            <value name="is_public">false</value>
+            <value name="field_name">nbSelected</value>
+            <value name="field_type">object</value>
+            <value name="field_dim">0</value>
+            <value name="wrapper_type">java.lang.Integer</value>
+            <value name="nillable">true</value>
+            <value name="form_qualified">false</value>
+            <value name="is_global">false</value>
+          </record>
+          <record javaclass="com.wm.util.Values">
             <value name="node_type">record</value>
             <value name="node_subtype">unknown</value>
             <value name="is_public">false</value>
@@ -1159,18 +1171,6 @@
             <array name="rec_fields" type="record" depth="1">
             </array>
             <value name="modifiable">true</value>
-          </record>
-          <record javaclass="com.wm.util.Values">
-            <value name="node_type">unknown</value>
-            <value name="node_subtype">unknown</value>
-            <value name="is_public">false</value>
-            <value name="field_name">nbSelected</value>
-            <value name="field_type">object</value>
-            <value name="field_dim">0</value>
-            <value name="wrapper_type">java.lang.Integer</value>
-            <value name="nillable">true</value>
-            <value name="form_qualified">false</value>
-            <value name="is_global">false</value>
           </record>
         </array>
         <value name="modifiable">true</value>
