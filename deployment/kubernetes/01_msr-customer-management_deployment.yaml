@@ -30,14 +30,20 @@ spec:
           containerPort: 9090
         env:
         - name: mcgw_api_gateway_url
-          value: https://presalesemeadev.apigw-aw-eu.webmethods.io/rest/apigateway
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: apiGatewayUrl
         - name: mcgw_api_gateway_user
-          value: apimanager
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: apiGatewayUser
         - name: mcgw_api_gateway_password
           valueFrom:
             secretKeyRef:
-              name: apimanager-password
-              key: password
+              name: environment-secrets
+              key: apiGatewayPassword
         - name: mcgw_downloads_apis
           value: CustomersAPI
         - name: mcgw_ports_http
@@ -78,29 +84,50 @@ spec:
         - name: DATASOURCE_CLASS
           value: org.postgresql.ds.PGSimpleDataSource
         - name: DB_USER
-          value: pguser
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: databaseUser
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mssql-password
-              key: password
+              name: environment-secrets
+              key: databasePassword
         - name: DB_SERVERNAME
-          value: sttpostgres.postgres.database.azure.com
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: databaseServerName        
         - name: DB_PORT
-          value: '5432'
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: databaseServerPort    
         - name: DB_NAME
-          value: sandbox
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: databaseName    
         - name: MSR_URL
-          value: customers.sttlab.eu
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: domainName
         - name: IO_INT_URL
-          value: https://presalesemeadev.int-aws-de.webmethods.io
+          valueFrom:
+            configMapKeyRef:
+              name: environment-config
+              key: wmioIntegrationUrl
         - name: IO_INT_USER
-          value: intadmin
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: wmioIntegrationUser
         - name: IO_INT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: intadmin-password
-              key: password
+              name: environment-secrets
+              key: wmioIntegrationPassword
         livenessProbe:
           tcpSocket:
             port: 5555

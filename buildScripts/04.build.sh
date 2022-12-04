@@ -63,7 +63,3 @@ echo "Logging out"
 sudo docker logout "${MY_AZ_ACR_URL}"
 
 echo "Push completed"
-
-kubectl apply -f ./deployment/kubernetes
-
-
