@@ -5,7 +5,7 @@ metadata:
     app: customer-management
   name: customer-management
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
       type: RollingUpdate
       rollingUpdate:
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: customer-management-mcgw
-        image: sagcr.azurecr.io/microgateway:10.11
+        image: sagcr.azurecr.io/microgateway:10.15
         ports:
         - name: metrics
           containerPort: 9090
@@ -64,7 +64,7 @@ spec:
             port: 9090
           initialDelaySeconds: 5
           periodSeconds: 10
-      - image: staillansag/msr-customer-management:latest
+      - image: azdevopssttacr.azurecr.io/msr-customer-management:latest
         imagePullPolicy: Always
         name: customer-management-msr
         ports:
@@ -76,22 +76,22 @@ spec:
           readOnly: true
         env:
         - name: DATASOURCE_CLASS
-          value: com.wm.dd.jdbcx.sqlserver.SQLServerDataSource
+          value: org.postgresql.ds.PGSimpleDataSource
         - name: DB_USER
-          value: sa
+          value: pguser
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mssql-password
               key: password
         - name: DB_SERVERNAME
-          value: sqledge
+          value: sttpostgres.postgres.database.azure.com
         - name: DB_PORT
-          value: '1433'
+          value: '5432'
         - name: DB_NAME
-          value: db
+          value: sandbox
         - name: MSR_URL
-          value: wm.sttlab.eu:11090
+          value: customers.sttlab.eu
         - name: IO_INT_URL
           value: https://presalesemeadev.int-aws-de.webmethods.io
         - name: IO_INT_USER
@@ -117,5 +117,6 @@ spec:
         secret:
           secretName: licenses
       imagePullSecrets:
-      - name: regcred
+      - name: sagregcred
+      - name: sttregcred
 

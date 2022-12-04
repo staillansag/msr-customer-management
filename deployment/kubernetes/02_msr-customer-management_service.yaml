@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: customer-management
   annotations:
-    service.beta.kubernetes.io/azure-dns-label-name: sttlabcustomer
+    service.beta.kubernetes.io/azure-dns-label-name: sttcustomer
   labels:
     name: customer-management
 spec:
