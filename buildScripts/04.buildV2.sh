@@ -27,7 +27,7 @@ docker build \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
-docker run --name msr-customer-management -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}"
+dockerId=$(docker run -dp 5555:5555 -d --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
 
 max_retry=10
 counter=1
@@ -62,3 +62,7 @@ echo "Logging out"
 docker logout "${MY_AZ_ACR_URL}"
 
 echo "Push completed"
+
+echo "Cleaning docker container"
+docker stop ${dockerId}
+docker rm ${dockerId}
