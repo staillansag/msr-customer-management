@@ -43,7 +43,7 @@ steps:
     secureFile: 'qa.env'
   displayName: 'Download test environment file'
 
-- script: ./buildScripts/04.build.sh
+- script: ./buildScripts/04.buildV2.sh
   displayName: 'Build'
 
 - script: ./buildScripts/06.deployKubernetes.sh
