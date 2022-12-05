@@ -13,9 +13,11 @@ sed 's/customer\-management\:latest/customer\-management\:'${imageTag}'/g' ./dep
 echo "Deploying service (in case it does not already exist)"
 kubectl apply -f ./deployment/kubernetes/02_msr-customer-management_service.yaml || exit 6
 
+echo "Deploying ingress (in case it does not already exist)"
+kubectl apply -f ./deployment/kubernetes/99_ingress.yaml || exit 6
+
 echo "Waiting for deployment to complete"
 kubectl rollout status deployment customer-management --timeout=300s && echo "Deployment complete" || exit 6
 
-echo "Checking service (by making a call to the microgateway metrics endpoint)"
-externalIP=$(kubectl get service/customer-management -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-curl -s -o /dev/null --location --request GET "http://${externalIP}/metrics" && echo "Service is up" || exit 6
+echo "Checking service readiness (by making a call to the microgateway metrics endpoint)"
+curl -s -o /dev/null --location --request GET "https://customers.sttlab.eu/metrics" && echo "Service is up" || exit 6
