@@ -48,3 +48,6 @@ steps:
 
 - script: ./buildScripts/06.deployKubernetes.sh
   displayName: 'Deploy to Kubernetes'
+
+- script: ./buildScripts/88.automatedTests.sh
+  displayName: 'Run automated tests'
