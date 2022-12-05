@@ -9,11 +9,11 @@ pool:
 
 stages:
 
-- stage: Preparation
+- stage: Build
 
   jobs:
 
-  - job: PrepareAgent
+  - job: BuildImage
 
     steps:
     - task: DownloadSecureFile@1
@@ -21,18 +21,6 @@ stages:
       displayName: 'Download kubectl config'
       inputs:
         secureFile: 'config-aks.yml'
-
-    - task: DownloadSecureFile@1
-      name: kubernetesSecrets
-      displayName: 'Download kubernetes secrets'
-      inputs:
-        secureFile: 'kubernetes-secrets.yaml'
-
-    - task: DownloadSecureFile@1
-      name: postmanEnvironmentProd
-      displayName: 'Download Postman Prod environment file'
-      inputs:
-        secureFile: 'CustomerManagement-prod.postman_environment.json'
 
     - task: DownloadSecureFile@1
       displayName: 'Download test environment file'
@@ -55,18 +43,6 @@ stages:
     - script: ./buildScripts/02.prepareAgentMachineV2.sh
       displayName: 'Prepare agent'
 
-- stage: Build
-  dependsOn: Preparation
-
-  jobs:
-
-  - job: BuildImage
-
-    steps:
-
-    - script: chmod u+x ./buildScripts/*.sh
-      displayName: "Grant shell execution permissions"
-
     - script: ./buildScripts/04.build.sh
       displayName: 'Build and push image'
 
@@ -79,6 +55,12 @@ stages:
 
     steps:  
 
+    - task: DownloadSecureFile@1
+      name: kubernetesSecrets
+      displayName: 'Download kubernetes secrets'
+      inputs:
+        secureFile: 'kubernetes-secrets.yaml'
+
     - script: chmod u+x ./buildScripts/*.sh
       displayName: "Grant shell execution permissions"
 
@@ -89,6 +71,12 @@ stages:
     dependsOn: DeployKubernetes
 
     steps:
+
+    - task: DownloadSecureFile@1
+      name: postmanEnvironmentProd
+      displayName: 'Download Postman Prod environment file'
+      inputs:
+        secureFile: 'CustomerManagement-prod.postman_environment.json'
 
     - script: chmod u+x ./buildScripts/*.sh
       displayName: "Grant shell execution permissions"
@@ -108,5 +96,9 @@ stages:
       )
 
     steps:
+
+    - script: chmod u+x ./buildScripts/*.sh
+      displayName: "Grant shell execution permissions"
+
     - script: ./buildScripts/90.rollbackKubernetesDeployment.sh
       displayName: 'Rollback Kubernetes deployment'
