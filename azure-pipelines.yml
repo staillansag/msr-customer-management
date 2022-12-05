@@ -7,53 +7,94 @@ trigger:
 pool:
   name: Default
 
-steps:
+stages:
 
-- task: DownloadSecureFile@1
-  name: kubectlConfig
-  displayName: 'Download kubectl config'
-  inputs:
-    secureFile: 'config-aks.yml'
+- stage: Preparation
 
-- task: DownloadSecureFile@1
-  name: kubernetesSecrets
-  displayName: 'Download kubernetes secrets'
-  inputs:
-    secureFile: 'kubernetes-secrets.yaml'
+  jobs:
 
-- task: DownloadSecureFile@1
-  name: postmanEnvironmentProd
-  displayName: 'Download Postman Prod environment file'
-  inputs:
-    secureFile: 'CustomerManagement-prod.postman_environment.json'
+  - job: PrepareAgent
 
-- script: chmod u+x ./buildScripts/*.sh
-  displayName: "Grant shell execution permissions"
+    steps:
+    - task: DownloadSecureFile@1
+      name: kubectlConfig
+      displayName: 'Download kubectl config'
+      inputs:
+        secureFile: 'config-aks.yml'
 
-- script: ./buildScripts/01.setJobInitialVariables.sh
-  displayName: 'Set job variables'
+    - task: DownloadSecureFile@1
+      name: kubernetesSecrets
+      displayName: 'Download kubernetes secrets'
+      inputs:
+        secureFile: 'kubernetes-secrets.yaml'
 
-- script: ./buildScripts/02.prepareAgentMachineV2.sh
-  displayName: 'Prepare agent'
+    - task: DownloadSecureFile@1
+      name: postmanEnvironmentProd
+      displayName: 'Download Postman Prod environment file'
+      inputs:
+        secureFile: 'CustomerManagement-prod.postman_environment.json'
 
-# Service Principal Credentials
-- task: DownloadSecureFile@1
-  name: ACRSPCredentials
-  displayName: 'Download ACR SP credentials'
-  inputs:
-    secureFile: 'acr.sp.credentials.sh'
+    - task: DownloadSecureFile@1
+      displayName: 'Download test environment file'
+      name: dockerEnv
+      inputs:
+        secureFile: 'qa.env'  
 
-- task: DownloadSecureFile@1
-  name: dockerEnv
-  inputs:
-    secureFile: 'qa.env'
-  displayName: 'Download test environment file'
+    - task: DownloadSecureFile@1
+      name: ACRSPCredentials
+      displayName: 'Download ACR SP credentials'
+      inputs:
+        secureFile: 'acr.sp.credentials.sh'
 
-- script: ./buildScripts/04.buildV2.sh
-  displayName: 'Build'
+    - script: chmod u+x ./buildScripts/*.sh
+      displayName: "Grant shell execution permissions"
 
-- script: ./buildScripts/06.deployKubernetes.sh
-  displayName: 'Deploy to Kubernetes'
+    - script: ./buildScripts/01.setJobInitialVariables.sh
+      displayName: 'Set job variables'
 
-- script: ./buildScripts/88.automatedTests.sh
-  displayName: 'Run automated tests'
+    - script: ./buildScripts/02.prepareAgentMachineV2.sh
+      displayName: 'Prepare agent'
+
+- stage: Build
+  dependsOn: Preparation
+
+  jobs:
+
+  - job: BuildImage
+
+    steps:
+    - script: ./buildScripts/04.build.sh
+      displayName: 'Build and push image'
+
+- stage: Deploy
+  dependsOn: Build
+
+  jobs:
+
+  - job: DeployKubernetes
+
+    steps:      
+    - script: ./buildScripts/06.deployKubernetes.sh
+      displayName: 'Deploy image to Kubernetes'
+
+  - job: AutomatedTestsProd
+    dependsOn: DeployKubernetes
+
+    steps:
+    - script: ./buildScripts/88.automatedTests.sh
+      displayName: 'Perform automated tests'
+
+  - job: RollbackKubernetesDeployment
+    dependsOn: 
+    - DeployKubernetes
+    - AutomatedTestsProd
+    condition: |
+      or
+      (
+        eq(dependencies.DeployKubernetes.result, 'Failed'),
+        eq(dependencies.AutomatedTestsProd.result, 'Failed')
+      )
+
+    steps:
+    - script: ./buildScripts/90.rollbackKubernetesDeployment.sh
+      displayName: 'Rollback Kubernetes deployment'
