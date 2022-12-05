@@ -43,7 +43,7 @@ stages:
     - script: ./buildScripts/02.prepareAgentMachineV2.sh
       displayName: 'Prepare agent'
 
-    - script: ./buildScripts/04.build.sh
+    - script: ./buildScripts/04.buildV2.sh
       displayName: 'Build and push image'
 
 - stage: Deploy
