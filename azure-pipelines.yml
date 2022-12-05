@@ -21,6 +21,12 @@ steps:
   inputs:
     secureFile: 'kubernetes-secrets.yaml'
 
+- task: DownloadSecureFile@1
+  name: postmanEnvironmentProd
+  displayName: 'Download Postman Prod environment file'
+  inputs:
+    secureFile: 'CustomerManagement-prod.postman_environment.json'
+
 - script: chmod u+x ./buildScripts/*.sh
   displayName: "Grant shell execution permissions"
 

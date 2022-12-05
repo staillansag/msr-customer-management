@@ -1,4 +1,10 @@
  #!/bin/bash
+
+echo "Getting Postman environment file for Production environment..."
+if [ ! -f "${POSTMANENVIRONMENTPROD_SECUREFILEPATH}" ]; then
+  echo "Secure file path not present: ${POSTMANENVIRONMENTPROD_SECUREFILEPATH}"
+  exit 1
+fi
  
  newman run ./test/newman/CustomerManagement.postman_collection.json \
-    -e ./test/newman/CustomerManagement-prod.postman_environment.json || exit 8
+    -e ${POSTMANENVIRONMENTPROD_SECUREFILEPATH} || exit 8
