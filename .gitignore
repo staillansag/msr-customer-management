@@ -1,3 +1,5 @@
+.env
+
 .tc.custom.log4j2.properties
 XAStore
 bin
