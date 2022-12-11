@@ -34,7 +34,7 @@ dockerId=$(docker run --name ${dockerHostName} -dp 50000:5555 -d --network sag -
 echo "Checking availability of http://${dockerHostName}:50000"
 max_retry=10
 counter=1
-until curl http://${dockerHostName}:5555
+until curl http://${dockerHostName}:50000
 do
    sleep 10
    [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
