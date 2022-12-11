@@ -34,7 +34,7 @@ dockerId=$(docker run --name ${dockerHostName} -d --network sag --env-file ${DOC
 echo "Checking availability of http://${dockerHostName}:5555"
 max_retry=10
 counter=1
-until curl http://${dockerHostName}:5555
+until curl -s http://${dockerHostName}:5555
 do
    sleep 10
    [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
@@ -43,7 +43,7 @@ do
 done
 
 echo "Basic sanity check of the generated docker image"
-curl -s -o /dev/null --location --request GET 'http://msr-customer-management-test:5555/customer-management/customers' \
+curl -s -o /dev/null --location --request GET "http://${dockerHostName}:5555/customer-management/customers" \
 --header 'Authorization: Basic QWRtaW5pc3RyYXRvcjptYW5hZ2U=a' && echo "Test passed" || exit 4 
 
 crtTag="${OUR_SERVICE_TAG_BASE}:${OUR_SERVICE_MAJOR_VERSION}.${OUR_SERVICE_MINOR_VERSION}.${BUILD_BUILDID}"
