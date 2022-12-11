@@ -26,15 +26,15 @@ docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
-nameSuffix=$(date +%s)
+dockerHostName=$(cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 1)
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
 dockerId=$(docker run --name msr-cm-${nameSuffix} -dp 5555:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
 
-echo "Checking availability of http://msr-cm-${nameSuffix}:5555"
+echo "Checking availability of http://${dockerHostName}:5555"
 max_retry=10
 counter=1
-until curl http://msr-customer-management-${nameSuffix}:5555
+until curl http://${dockerHostName}:5555
 do
    sleep 10
    [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
