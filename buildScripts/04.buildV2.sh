@@ -26,10 +26,10 @@ docker build \
   --build-arg __from_img=${AZ_BASE_IMAGE_TAG} \
   -t "${OUR_SERVICE_TAG_BASE}" . || exit 4
 
-dockerHostName=$(cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 1)
+dockerHostName=$(cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 1 | tr '[:upper:]' '[:lower:]')
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
-dockerId=$(docker run --name msr-cm-${nameSuffix} -dp 5555:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
+dockerId=$(docker run --name ${nameSuffix} -dp 5555:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
 
 echo "Checking availability of http://${dockerHostName}:5555"
 max_retry=10
