@@ -29,9 +29,9 @@ docker build \
 dockerHostName=$(cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 1 | tr '[:upper:]' '[:lower:]')
 
 echo "Environment file for testing: ${DOCKERENV_SECUREFILEPATH}"
-dockerId=$(docker run --name ${dockerHostName} -dp 5555:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
+dockerId=$(docker run --name ${dockerHostName} -dp 50000:5555 -d --network sag --env-file ${DOCKERENV_SECUREFILEPATH} "${OUR_SERVICE_TAG_BASE}")
 
-echo "Checking availability of http://${dockerHostName}:5555"
+echo "Checking availability of http://${dockerHostName}:50000"
 max_retry=10
 counter=1
 until curl http://${dockerHostName}:5555
