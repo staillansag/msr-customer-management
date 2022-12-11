@@ -34,7 +34,7 @@ dockerId=$(docker run --name msr-customer-management-${nameSuffix} -dp 5555:5555
 echo "Checking availability of http://msr-customer-management-${nameSuffix}:5555"
 max_retry=10
 counter=1
-until curl -s -o /dev/null http://msr-customer-management-${nameSuffix}:5555
+until curl http://msr-customer-management-${nameSuffix}:5555
 do
    sleep 10
    [[ counter -gt $max_retry ]] && echo "Docker container did not start" && exit 1
