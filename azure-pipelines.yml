@@ -34,13 +34,19 @@ stages:
       inputs:
         secureFile: 'acr.sp.credentials.sh'
 
+    - task: DownloadSecureFile@1
+      name: AzureSPCredentials
+      displayName: 'Download Azure SP credentials'
+      inputs:
+        secureFile: 'azure.sp.credentials.sh'
+
     - script: chmod u+x ./buildScripts/*.sh
       displayName: "Grant shell execution permissions"
 
     - script: ./buildScripts/01.setJobInitialVariables.sh
       displayName: 'Set job variables'
 
-    - script: ./buildScripts/02.prepareAgentMachineV2.sh
+    - script: ./buildScripts/02.prepareAgentMachineV3.sh
       displayName: 'Prepare agent'
 
     - script: ./buildScripts/04.buildV2.sh

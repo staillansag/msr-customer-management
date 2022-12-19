@@ -11,3 +11,6 @@ export OUR_SERVICE_TAG_BASE="${MY_AZ_ACR_URL}/${AZ_ACR_REPO_NAME}"
 export OUR_SERVICE_MAJOR_VERSION="0"
 export OUR_SERVICE_MINOR_VERSION="0"
 export MY_EMAIL_ADDRESS="stephane.tailland@softwareag.com"
+
+export CLUSTER_NAME=sttaks
+export RESOURCE_GROUP=aks_rg

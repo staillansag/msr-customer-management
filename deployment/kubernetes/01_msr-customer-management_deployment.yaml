@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: customer-management-mcgw
-        image: sagcr.azurecr.io/microgateway:10.15
+        image: azdevopssttacr.azurecr.io/microgateway:10.15.0.0.1
         ports:
         - name: metrics
           containerPort: 9090
@@ -145,5 +145,5 @@ spec:
           secretName: licenses
       imagePullSecrets:
       - name: sagregcred
-      - name: sttregcred
+      - name: acrregcred
 

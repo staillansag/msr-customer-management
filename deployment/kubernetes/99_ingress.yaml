@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - customers.sttlab.eu
-    secretName: sttlab-eu-tls
+    secretName: aks-tls
   rules:
   - host: "customers.sttlab.eu"
     http:
