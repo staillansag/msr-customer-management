@@ -113,6 +113,5 @@
       </record>
     </array>
     <value name="modifiable">true</value>
-    <value name="LOCK_REQUIRED">true</value>
   </record>
 </Values>
