@@ -14,7 +14,7 @@ echo "Deploying msr service (in case it does not already exist)"
 kubectl apply -f ./deployment/kubernetes/02_msr-customer-management_service.yaml || exit 6
 
 echo "Deploying microgateway image"
-kubectl apply -f ./deployment/kubernetes/03_mcgw-customer-management_service.yaml || exit 6
+kubectl apply -f ./deployment/kubernetes/03_mcgw-customer-management_deployment.yaml || exit 6
 
 echo "Deploying microgateway service"
 kubectl apply -f ./deployment/kubernetes/04_mcgw-customer-management_service.yaml || exit 6
