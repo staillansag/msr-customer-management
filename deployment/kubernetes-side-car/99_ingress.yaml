@@ -18,6 +18,6 @@ spec:
           path: "/"
           backend:
             service:
-              name: mcgw-customer-management
+              name: customer-management
               port:
                 number: 80

@@ -70,7 +70,7 @@ stages:
     - script: chmod u+x ./buildScripts/*.sh
       displayName: "Grant shell execution permissions"
 
-    - script: ./buildScripts/06.deployKubernetes.sh
+    - script: ./buildScripts/06.deployKubernetesV2.sh
       displayName: 'Deploy image to Kubernetes'
 
   - job: AutomatedTestsProd
