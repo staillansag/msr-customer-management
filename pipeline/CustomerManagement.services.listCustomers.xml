@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IDataXMLCoder version="1.0">
+  <record javaclass="com.wm.util.Values">
+    <value name="lastName"></value>
+    <value name="firstName"></value>
+    <value name="status"></value>
+    <null name="birthDateFrom"/>
+    <null name="birthDateTo"/>
+    <value name="pageSize"></value>
+    <value name="pageNumber"></value>
+    <value name="fileName">CustomerManagement.services.listCustomers.xml</value>
+  </record>
+</IDataXMLCoder>
