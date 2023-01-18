@@ -7,6 +7,9 @@ trigger:
 pool:
   name: Default
 
+variables:
+  - group: customer-management-options
+
 stages:
 
 - stage: Build
