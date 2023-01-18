@@ -13,7 +13,7 @@ then
   echo "Postman environment file: ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}"
   cat ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}
 
-  newman run ./test/newman/CustomerManagement.postman_collection.json \
+  newman run ./test/newman/CustomerManagementMSR.postman_collection.json \
     -e ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH} || exit 8
 else
   echo "Getting Postman environment file for Production environment..."
