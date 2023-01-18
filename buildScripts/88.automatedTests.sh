@@ -10,9 +10,6 @@ then
     exit 1
   fi
 
-  echo "Postman environment file: ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}"
-  cat ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}
-
   newman run ./test/newman/CustomerManagementMSR.postman_collection.json \
     -e ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH} || exit 8
 else
