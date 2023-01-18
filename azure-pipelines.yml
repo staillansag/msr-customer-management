@@ -87,6 +87,12 @@ stages:
       inputs:
         secureFile: 'CustomerManagement-prod.postman_environment.json'
 
+    - task: DownloadSecureFile@1
+      name: postmanEnvironmentProdMsr
+      displayName: 'Download Postman Prod environment file for standalone MSR'
+      inputs:
+        secureFile: 'CustomerManagement-msr-prod.postman_environment.json'
+
     - script: chmod u+x ./buildScripts/*.sh
       displayName: "Grant shell execution permissions"
       
