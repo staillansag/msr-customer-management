@@ -2,13 +2,16 @@
 
  echo "Microgateway deployment skipped: ${SKIP_MICROGATEWAY}"
 
- if [ "${SKIP_MICROGATEWAY}" = "true" ]
+if [ "${SKIP_MICROGATEWAY}" = "true" ]
 then
   echo "Getting Postman environment file for Production environment (standalone MSR)..."
   if [ ! -f "${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}" ]; then
     echo "Secure file path not present: ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}"
     exit 1
   fi
+
+  echo "Postman environment file: ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}"
+  cat ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH}
 
   newman run ./test/newman/CustomerManagement.postman_collection.json \
     -e ${POSTMANENVIRONMENTPRODMSR_SECUREFILEPATH} || exit 8
