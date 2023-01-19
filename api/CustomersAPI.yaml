@@ -3,8 +3,8 @@ info:
   description: Customer management API to showcase microservices implementation using the webMethods stack
   version: '1.0'
   title: CustomersAPI
-host: presalesemeadev.apigw-aw-eu.webmethods.io
-basePath: /gateway/CustomersAPI/1.0
+host: customers.stlab.eu
+basePath: /customer-management
 schemes:
   - https
 consumes:
