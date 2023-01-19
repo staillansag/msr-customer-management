@@ -3,7 +3,7 @@ info:
   description: Customer management API to showcase microservices implementation using the webMethods stack
   version: '1.0'
   title: CustomersAPI
-host: customers.stlab.eu
+host: customers.sttlab.eu
 basePath: /customer-management
 schemes:
   - https
